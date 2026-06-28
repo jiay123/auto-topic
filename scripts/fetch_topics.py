@@ -1,5 +1,4 @@
 import requests
-import json
 import os
 import random
 from datetime import datetime
@@ -19,6 +18,133 @@ HEADERS = {
     "User-Agent": "auto-topic-bot"
 }
 
+TOPIC_MAP = {
+    "ai": "AI 工具",
+    "machine-learning": "機器學習",
+    "deep-learning": "深度學習",
+    "llm": "大語言模型",
+    "chatgpt": "ChatGPT",
+    "gpt": "GPT",
+    "nlp": "自然語言處理",
+    "computer-vision": "電腦視覺",
+    "python": "Python",
+    "javascript": "JavaScript",
+    "typescript": "TypeScript",
+    "rust": "Rust",
+    "go": "Go",
+    "react": "React",
+    "vue": "Vue",
+    "database": "資料庫",
+    "cli": "命令列工具",
+    "devops": "DevOps",
+    "docker": "Docker",
+    "kubernetes": "Kubernetes",
+    "testing": "測試工具",
+    "security": "安全工具",
+    "editor": "編輯器",
+    "ide": "IDE",
+    "vim": "Vim",
+    "terminal": "終端機",
+    "api": "API",
+    "graphql": "GraphQL",
+    "mobile": "行動開發",
+    "ios": "iOS",
+    "android": "Android",
+    "frontend": "前端",
+    "backend": "後端",
+    "fullstack": "全端",
+    "docs": "文件工具",
+    "blog": "部落格",
+    "cms": "內容管理",
+    "game": "遊戲",
+    "gui": "圖形介面",
+    "svg": "SVG",
+    "markdown": "Markdown",
+    "data": "資料科學",
+    "audio": "音訊",
+    "video": "影片",
+    "image": "圖片處理",
+    "design": "設計",
+    "css": "CSS",
+    "linux": "Linux",
+    "windows": "Windows",
+    "macos": "macOS",
+    "chrome": "Chrome 擴展",
+    "vscode": "VS Code 擴展",
+    "neovim": "Neovim",
+    "arxiv": "學術論文",
+    "cn": "中文專案",
+    "chinese": "中文專案",
+    "zh": "中文專案",
+}
+
+def get_chinese_tags(topics):
+    tags = []
+    for t in topics[:3]:
+        if t in TOPIC_MAP:
+            tags.append(TOPIC_MAP[t])
+    return "、".join(tags) if tags else ""
+
+def judge_project(repo):
+    score = 0
+    reasons = []
+    stars = repo["stars"]
+    topics = repo.get("topics", [])
+    desc = (repo["description"] or "").lower()
+    name = repo["name"].lower()
+
+    if stars >= 10000:
+        score += 3
+        reasons.append(f"⭐{stars/1000:.0f}K 超高人氣")
+    elif stars >= 5000:
+        score += 2
+        reasons.append(f"⭐{stars/1000:.0f}K 人氣高")
+    elif stars >= 1000:
+        score += 1
+        reasons.append(f"⭐{stars/1000:.1f}K 值得關注")
+    else:
+        reasons.append(f"⭐{stars} 新專案")
+
+    has_tools = any(t in topics or t in desc for t in ["cli", "tool", "devops", "docker", "api"])
+    has_ai = any(t in topics or t in desc for t in ["ai", "llm", "gpt", "machine-learning", "deep-learning"])
+    has_frontend = any(t in topics or t in desc for t in ["react", "vue", "frontend", "css", "ui"])
+    has_chinese = any(t in topics for t in ["cn", "chinese", "zh"])
+    has_chinese_name = any(c in name for c in ["zh", "cn", "chinese"])
+
+    if has_ai:
+        score += 2
+        reasons.append("AI 熱門賽道")
+    if has_tools:
+        score += 1
+        reasons.append("開發者實用工具")
+    if has_chinese or has_chinese_name:
+        score += 2
+        reasons.append("有中文支援")
+
+    if score >= 5:
+        level = "🔥 非常適合寫文章"
+    elif score >= 3:
+        level = "👍 可以考慮"
+    else:
+        level = "👀 普通，看你有沒有興趣"
+
+    return level, "、".join(reasons)
+
+def summarize_repo(repo):
+    desc = repo["description"] or ""
+    topics = repo.get("topics", [])
+    tags = get_chinese_tags(topics)
+
+    if not desc and not tags:
+        return "暫無詳細資訊"
+
+    parts = []
+    if tags:
+        parts.append(f"分類：{tags}")
+    if desc:
+        parts.append(f"簡介：{desc}")
+    return "。".join(parts)
+
 def fetch_trending():
     repos = []
     for cat in CATEGORIES:
@@ -36,6 +162,7 @@ def fetch_trending():
                         "lang": item["language"] or "未知",
                         "topics": item.get("topics", []),
                         "created": item["created_at"][:10],
+                        "updated": item["updated_at"][:10],
                     })
         except Exception as e:
             pass
@@ -60,20 +187,25 @@ def pick_top5(repos):
 
 def build_message(topics):
     now = datetime.now().strftime("%Y-%m-%d %H:%M")
-    title = f"今日選題推薦 {now}"
+    title = f"老賈，今天的 GitHub 選題來了"
 
-    lines = [f"# 老賈，以下是今天的 GitHub 選題\n"]
+    lines = [f"## 老賈早安！以下是你今天的 GitHub 選題\n"]
     for i, t in enumerate(topics, 1):
         stars_k = f"{t['stars'] / 1000:.1f}K" if t['stars'] >= 1000 else str(t['stars'])
-        lines.append(f"## {i}. {t['name']}")
-        lines.append(f"- ⭐ {stars_k} · {t['lang']}")
-        lines.append(f"- {t['description']}")
-        lines.append(f"- 鏈接：{t['url']}")
-        if t["topics"]:
-            lines.append(f"- 標籤：{' '.join(t['topics'][:5])}")
+        level, reason = judge_project(t)
+        summary = summarize_repo(t)
+
+        lines.append(f"### {i}. {t['name']}")
+        lines.append(f"⭐ {stars_k}　{t['lang']}　更新於 {t['updated']}")
+        lines.append(f"📝 {summary}")
+        lines.append(f"🏷 {level}")
+        lines.append(f"💡 {reason}")
+        lines.append(f"🔗 {t['url']}")
         lines.append("")
 
-    lines.append("\n---\n回覆我選擇的編號，我就開始寫文章！")
+    lines.append("---")
+    lines.append("直接回覆我編號，我就開始寫文章！")
+    lines.append("例如：回覆「3」代表選第三個專案。")
     return title, "\n".join(lines)
 
 def send_to_wechat(title, content):
