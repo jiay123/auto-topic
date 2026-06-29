@@ -1,12 +1,14 @@
-name: 每日選題推送
+name: 每日推送
 
 on:
   schedule:
     - cron: '0 1 * * 1-5'
+    - cron: '0 7 * * 1-5'
   workflow_dispatch:
 
 jobs:
-  fetch-and-push:
+  morning-topics:
+    if: ${{ github.event.schedule == '0 1 * * 1-5' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,5 +17,18 @@ jobs:
           python-version: '3.11'
       - run: pip install requests
       - run: python scripts/fetch_topics.py
+        env:
+          SENDKEY: ${{ secrets.SENDKEY }}
+
+  evening-tips:
+    if: ${{ github.event.schedule == '0 7 * * 1-5' || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - run: python scripts/fetch_evening_tip.py
         env:
           SENDKEY: ${{ secrets.SENDKEY }}
