@@ -1,19 +1,19 @@
-name: 每日選題推送
+name: 每日AI新闻快报
 
 on:
   schedule:
-    - cron: '0 1 * * 1-5'
+    - cron: '0 0 * * 1-5'
   workflow_dispatch:
 
 jobs:
-  fetch-and-push:
+  fetch-news:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install requests
-      - run: python scripts/fetch_topics.py
+      - run: pip install requests lxml
+      - run: python scripts/fetch_ai_news.py
         env:
           SENDKEY: ${{ secrets.SENDKEY }}
