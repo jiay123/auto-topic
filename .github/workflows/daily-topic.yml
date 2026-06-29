@@ -21,7 +21,7 @@ jobs:
           SENDKEY: ${{ secrets.SENDKEY }}
 
   evening-tips:
-    if: ${{ github.event.schedule == '0 7 * * 1-5' || github.event_name == 'workflow_dispatch' }}
+    if: ${{ github.event.schedule == '0 7 * * 1-5' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
