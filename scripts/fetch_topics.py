@@ -64,7 +64,7 @@ def load_state():
                 return json.load(f)
     except:
         pass
-    return {"featured": [], "last_date": ""}
+    return {"featured": [], "last_date": "", "morning_picks": []}
 
 
 def save_state(state):
@@ -110,13 +110,13 @@ def fetch_trending(exclude_names=None):
     return unique[:15]
 
 
-def pick_top5(repos, seed=None):
+def pick_top6(repos, seed=None):
     if seed is not None:
         random.seed(seed)
-    if len(repos) <= 5:
+    if len(repos) <= 6:
         return repos
-    top = repos[:3]
-    rest = repos[3:]
+    top = repos[:4]
+    rest = repos[4:]
     random.shuffle(rest)
     top += rest[:2]
     return top
@@ -238,10 +238,11 @@ def main():
         return
 
     seed = today_str.replace("-", "")
-    picked = pick_top5(repos, seed=int(seed))
+    picked = pick_top6(repos, seed=int(seed))
 
     state["featured"].extend([r["name"] for r in picked])
     state["featured"] = state["featured"][-30:]
+    state["morning_picks"] = picked
     save_state(state)
 
     title, content = build_message(picked)

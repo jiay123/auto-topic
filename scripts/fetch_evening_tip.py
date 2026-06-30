@@ -1,13 +1,12 @@
 import requests
 import os
 import base64
-import random
 import json
-from datetime import datetime, timedelta
+from datetime import datetime
 
 SENDKEY = os.environ.get("SENDKEY", "")
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
-STATE_FILE = "state_evening.json"
+MORNING_STATE_FILE = "state_topics.json"
 
 HEADERS = {
     "Accept": "application/vnd.github.v3+json",
@@ -16,30 +15,9 @@ HEADERS = {
 if GITHUB_TOKEN:
     HEADERS["Authorization"] = f"Bearer {GITHUB_TOKEN}"
 
-TOPIC_CN = {
-    "ai": "AI 工具", "machine-learning": "机器学习", "deep-learning": "深度学习",
-    "llm": "大语言模型", "chatgpt": "ChatGPT", "gpt": "GPT",
-    "nlp": "自然语言处理", "computer-vision": "计算机视觉",
-    "python": "Python", "javascript": "JavaScript", "typescript": "TypeScript",
-    "rust": "Rust", "go": "Go", "react": "React", "vue": "Vue",
-    "database": "数据库", "cli": "命令行工具", "devops": "DevOps",
-    "docker": "Docker", "kubernetes": "K8s", "testing": "测试工具",
-    "security": "安全工具", "editor": "编辑器", "api": "API",
-    "frontend": "前端", "backend": "后端", "mobile": "移动开发",
-    "ios": "iOS", "android": "Android", "game": "游戏开发",
-    "gui": "图形界面", "markdown": "Markdown", "data": "数据科学",
-    "audio": "音频", "video": "视频", "image": "图像处理",
-    "design": "设计工具", "css": "CSS", "linux": "Linux",
-    "windows": "Windows", "chrome": "Chrome 扩展", "vscode": "VS Code 扩展",
-    "neovim": "Neovim", "cn": "中文项目", "chinese": "中文项目",
-    "zh": "中文项目", "blog": "博客", "docs": "文档工具",
-    "cms": "内容管理", "svg": "SVG", "terminal": "终端",
-    "macos": "macOS", "vim": "Vim", "ide": "IDE",
-}
-
 FUNC_MAP = [
     (["ai", "llm", "gpt", "chatgpt", "machine-learning", "deep-learning", "neural"], "人工智能/大模型相关工具"),
-    (["cli", "command", "terminal", "shell"], "命令行工具，面向终端操作"),
+    (["cli", "command", "terminal", "shell"], "命令行工具"),
     (["database", "sql", "nosql", "redis", "postgres", "mysql"], "数据库/存储相关工具"),
     (["python", "javascript", "typescript", "rust", "go", "java"], "编程语言/开发框架"),
     (["devops", "docker", "kubernetes", "ci", "cd", "deploy"], "DevOps/部署运维工具"),
@@ -76,40 +54,34 @@ AUDIENCE_RULES = [
 ]
 
 
-def get_chinese_tags(topics):
-    tags = []
-    for t in topics[:3]:
-        if t in TOPIC_CN:
-            tags.append(TOPIC_CN[t])
-    return "、".join(tags) if tags else ""
-
-
-def get_dynamic_categories():
-    today = datetime.now()
-    week_ago = (today - timedelta(days=7)).strftime("%Y-%m-%d")
-    month_ago = (today - timedelta(days=30)).strftime("%Y-%m-%d")
-    return [
-        {"q": f"stars:>1000 pushed:>={week_ago}", "sort": "stars", "order": "desc"},
-        {"q": f"stars:>500 pushed:>={week_ago} topic:ai", "sort": "stars", "order": "desc"},
-        {"q": f"stars:>300 pushed:>={week_ago} topic:developer-tools", "sort": "stars", "order": "desc"},
-        {"q": f"stars:>200 pushed:>={week_ago}", "sort": "stars", "order": "desc"},
-        {"q": f"stars:>100 created:>={month_ago}", "sort": "stars", "order": "desc"},
-    ]
-
-
-def load_state():
+def load_morning_state():
     try:
-        if os.path.exists(STATE_FILE):
-            with open(STATE_FILE) as f:
-                return json.load(f)
+        if os.path.exists(MORNING_STATE_FILE):
+            with open(MORNING_STATE_FILE) as f:
+                state = json.load(f)
+                return state.get("morning_picks", [])
     except:
         pass
-    return {"featured": [], "last_date": ""}
+    return []
 
 
-def save_state(state):
-    with open(STATE_FILE, "w") as f:
-        json.dump(state, f)
+def fetch_readme(repo_full_name):
+    try:
+        url = f"https://api.github.com/repos/{repo_full_name}/readme"
+        r = requests.get(url, headers=HEADERS, timeout=10)
+        if r.status_code == 200:
+            content = r.json().get("content", "")
+            if content:
+                decoded = base64.b64decode(content).decode("utf-8", errors="ignore")
+                lines = decoded.split("\n")
+                meaningful = [l for l in lines if l.strip() and not l.startswith("#") and not l.startswith("!")]
+                for line in meaningful:
+                    clean = line.strip()
+                    if clean and len(clean) > 30 and not clean.startswith("[!"):
+                        return clean[:300]
+    except Exception:
+        pass
+    return ""
 
 
 def infer_function(description, topics, name):
@@ -137,112 +109,7 @@ def infer_audience(description, topics, name):
                 break
     if matched:
         return "、".join(list(dict.fromkeys(matched))[:4])
-    if any(t in ["chinese", "cn", "zh"] for t in topics):
-        return "中文用户/普通用户"
     return "开发者/技术爱好者"
-
-
-def fetch_readme(repo_full_name):
-    try:
-        url = f"https://api.github.com/repos/{repo_full_name}/readme"
-        r = requests.get(url, headers=HEADERS, timeout=10)
-        if r.status_code == 200:
-            content = r.json().get("content", "")
-            if content:
-                decoded = base64.b64decode(content).decode("utf-8", errors="ignore")
-                lines = decoded.split("\n")
-                meaningful = [l for l in lines if l.strip() and not l.startswith("#") and not l.startswith("!")]
-                for line in meaningful:
-                    clean = line.strip()
-                    if clean and len(clean) > 30 and not clean.startswith("[!"):
-                        return clean[:300]
-                return ""
-    except Exception:
-        return ""
-    return ""
-
-
-def build_detailed_intro(repo, readme_snippet):
-    stars_k = f"{repo['stars'] / 1000:.1f}K" if repo['stars'] >= 1000 else str(repo['stars'])
-    lang = repo["lang"] or "多语言"
-    desc = repo["description"] or ""
-    topics = repo.get("topics", [])
-    tags = get_chinese_tags(topics)
-    func = infer_function(desc, topics, repo["name"])
-    audience = infer_audience(desc, topics, repo["name"])
-
-    lines = [f"星 {stars_k} · {lang}{(' · ' + tags) if tags else ''}"]
-    if desc:
-        lines.append(f"📄 {desc}")
-    lines.append(f"🔧 功能分类：{func}")
-    lines.append(f"👥 适合人群：{audience}")
-
-    if readme_snippet:
-        lines.append(f"📖 项目简介：{readme_snippet}")
-
-    score_notes = []
-    if repo["stars"] >= 5000:
-        score_notes.append("超大爆款项目")
-    elif repo["stars"] >= 1000:
-        score_notes.append("热门项目")
-    if any(t in ["chinese", "cn", "zh"] for t in topics):
-        score_notes.append("有中文支持，对国内用户友好")
-    if any(t in ["cli", "tool", "app"] for t in topics):
-        score_notes.append("即装即用，门槛低")
-    if any(t in ["ai", "llm", "gpt"] for t in topics):
-        score_notes.append("AI 赛道，读者感兴趣")
-    if score_notes:
-        lines.append(f"💡 {'，'.join(score_notes)}")
-
-    return "\n".join(lines)
-
-
-def fetch_trending(exclude_names=None):
-    if exclude_names is None:
-        exclude_names = set()
-    cats = get_dynamic_categories()
-    repos = []
-    for cat in cats:
-        try:
-            url = f"https://api.github.com/search/repositories?q={cat['q']}&sort={cat['sort']}&order={cat['order']}&per_page=5"
-            r = requests.get(url, headers=HEADERS, timeout=15)
-            if r.status_code == 200:
-                items = r.json().get("items", [])
-                for item in items:
-                    name = item["full_name"]
-                    if name in exclude_names:
-                        continue
-                    repos.append({
-                        "name": name,
-                        "stars": item["stargazers_count"],
-                        "description": item["description"] or "",
-                        "url": item["html_url"],
-                        "lang": item["language"] or "",
-                        "topics": item.get("topics", []),
-                    })
-        except Exception:
-            pass
-
-    seen = set()
-    unique = []
-    for r in repos:
-        if r["name"] not in seen:
-            seen.add(r["name"])
-            unique.append(r)
-    unique.sort(key=lambda x: x["stars"], reverse=True)
-    return unique[:15]
-
-
-def pick_top5(repos, seed=None):
-    if seed is not None:
-        random.seed(seed)
-    if len(repos) <= 5:
-        return repos
-    top = repos[:3]
-    rest = repos[3:]
-    random.shuffle(rest)
-    top += rest[:2]
-    return top
 
 
 def score_project(repo):
@@ -265,12 +132,6 @@ def score_project(repo):
     return score
 
 
-def pick_best(repos):
-    scored = [(score_project(r), r) for r in repos]
-    scored.sort(key=lambda x: x[0], reverse=True)
-    return scored[0][1]
-
-
 def generate_writing_angle(repo):
     desc = (repo["description"] or "").lower()
     stars = repo["stars"]
@@ -287,39 +148,63 @@ def generate_writing_angle(repo):
     return "从'为什么这个项目能火'切入，先讲一个场景让读者觉得'对，我也有这个问题'，再介绍项目怎么解决。"
 
 
-def build_message(repos):
-    now = datetime.now().strftime("%Y-%m-%d %H:%M")
-    title = f"老贾，今天的详细选题来了（15:00）"
+def why_good_for_wechat(repo):
+    reasons = []
+    desc = (repo["description"] or "").lower()
+    topics = repo.get("topics", [])
+    stars = repo["stars"]
 
-    lines = [f"## 老贾下午好！以下是今天 GitHub 热门项目的详细中文介绍\n"]
-    lines.append(f"推送时间：{now}\n")
+    if any(t in ["ai", "llm", "gpt", "chat"] for t in topics) or "ai" in desc:
+        reasons.append("AI 话题自带流量，你的读者对这个最感兴趣")
+    if any(t in ["chinese", "cn", "zh"] for t in topics):
+        reasons.append("有中文支持，国内读者上手门槛低，文章实用性强")
+    if stars > 5000:
+        reasons.append("万星项目已有口碑，写它读者会觉得'这个东西很靠谱'")
+    if any(t in ["cli", "tool", "app"] for t in topics):
+        reasons.append("工具类文章好写、好读、好转发，是最适合公众号的品类")
+    if any(t in ["python", "javascript", "typescript"] for t in topics):
+        reasons.append("主流语言工具，覆盖面广，读者基数大")
 
-    for i, repo in enumerate(repos, 1):
+    if not reasons:
+        reasons.append("开源项目，有新鲜感，适合做'发现新工具'系列")
+
+    return "、".join(reasons[:3])
+
+
+def build_message(project1, project2):
+    title = "老贾，今天精选2个适合写公众号的开源项目"
+
+    lines = [f"## 老贾下午好！从今天6个选题里挑了2个最适合写公众号的\n"]
+
+    for idx, repo in enumerate([project1, project2], 1):
+        stars_k = f"{repo['stars'] / 1000:.1f}K" if repo['stars'] >= 1000 else str(repo['stars'])
         readme_snippet = fetch_readme(repo["name"])
-        intro = build_detailed_intro(repo, readme_snippet)
+        desc = repo["description"] or "暂无简介"
+        func = infer_function(desc, repo.get("topics", []), repo["name"])
+        audience = infer_audience(desc, repo.get("topics", []), repo["name"])
+        angle = generate_writing_angle(repo)
+        reason = why_good_for_wechat(repo)
 
         lines.append(f"---")
-        lines.append(f"### {i}. {repo['name']}")
-        lines.append(f"{intro}")
+        lines.append(f"### 项目{idx}. {repo['name']}")
+        lines.append(f"星 {stars_k} · {repo['lang'] or '多语言'}")
+        lines.append(f"")
+        lines.append(f"**功能：** {func}")
+        if readme_snippet:
+            lines.append(f"{readme_snippet}")
+        lines.append(f"")
+        lines.append(f"**适合人群：** {audience}")
+        lines.append(f"")
+        lines.append(f"**推荐理由：** {reason}")
+        lines.append(f"")
+        lines.append(f"**写作角度：** {angle}")
+        lines.append(f"")
         lines.append(f"🔗 {repo['url']}")
         lines.append("")
 
-    best = pick_best(repos)
-    stars_best = f"{best['stars'] / 1000:.1f}K" if best['stars'] >= 1000 else str(best['stars'])
-    angle = generate_writing_angle(best)
-    tags_best = get_chinese_tags(best.get("topics", []))
-
-    lines.append(f"---")
-    lines.append(f"### 推荐你写这个：{best['name']}")
-    lines.append(f"星 {stars_best} · {best['lang'] or '多语言'}{(' · ' + tags_best) if tags_best else ''}")
-    lines.append(f"{best['description'] or ''}")
-    lines.append("")
-    lines.append(f"**写作角度：** {angle}")
-    lines.append("")
-    lines.append(f"🔗 {best['url']}")
-    lines.append("")
     lines.append("---")
-    lines.append("回复「写」我马上动笔，回复「换一个」重新推荐。")
+    lines.append("回复「写1」或「写2」我马上动笔。")
+    lines.append("如果这两个都不想写，回复「换」我从剩下4个里再挑。")
 
     return title, "\n".join(lines)
 
@@ -339,30 +224,23 @@ def send_to_wechat(title, content):
 
 def main():
     today_str = datetime.now().strftime("%Y-%m-%d")
-    print(f"开始抓取 GitHub 热门项目，准备详细中文介绍 (日期: {today_str})...")
+    print(f"读取早上推送结果 (日期: {today_str})...")
 
-    state = load_state()
-    if state.get("last_date") != today_str:
-        state["featured"] = []
-        state["last_date"] = today_str
+    morning_picks = load_morning_state()
 
-    exclude_names = set(state.get("featured", []))
-    repos = fetch_trending(exclude_names)
-    print(f"抓取到 {len(repos)} 个项目")
-
-    if not repos:
-        send_to_wechat("选题抓取失败", "今天 GitHub API 没有返回数据，请稍后再试")
+    if not morning_picks or len(morning_picks) < 2:
+        print(f"未找到早上推送数据（{len(morning_picks) if morning_picks else 0} 条），跳过推送")
+        send_to_wechat("下午选题推送失败", "今天早上没有选题数据，无法精选。请手动选一个项目告诉我。")
         return
 
-    seed = today_str.replace("-", "") + "1"
-    picked = pick_top5(repos, seed=int(seed))
+    scored = [(score_project(r), r) for r in morning_picks]
+    scored.sort(key=lambda x: x[0], reverse=True)
 
-    state["featured"].extend([r["name"] for r in picked])
-    state["featured"] = state["featured"][-30:]
-    save_state(state)
+    project1 = scored[0][1]
+    project2 = scored[1][1]
 
-    print(f"精选 5 个项目，开始获取 README...")
-    title, content = build_message(picked)
+    print(f"精选 2 个项目：{project1['name']}、{project2['name']}")
+    title, content = build_message(project1, project2)
     send_to_wechat(title, content)
     print("推送完成")
 
