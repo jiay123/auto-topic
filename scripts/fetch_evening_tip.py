@@ -2,22 +2,19 @@ import requests
 import os
 import base64
 import random
-from datetime import datetime
+import json
+from datetime import datetime, timedelta
 
 SENDKEY = os.environ.get("SENDKEY", "")
-
-CATEGORIES = [
-    {"q": "stars:>1000 pushed:>2026-01-01", "sort": "stars", "order": "desc"},
-    {"q": "stars:>500 pushed:>2026-03-01 topic:ai", "sort": "stars", "order": "desc"},
-    {"q": "stars:>300 pushed:>2026-04-01 topic:developer-tools", "sort": "stars", "order": "desc"},
-    {"q": "stars:>200 pushed:>2026-05-01", "sort": "stars", "order": "desc"},
-    {"q": "stars:>100 pushed:>2026-06-01", "sort": "stars", "order": "desc"},
-]
+GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
+STATE_FILE = "state_evening.json"
 
 HEADERS = {
     "Accept": "application/vnd.github.v3+json",
     "User-Agent": "auto-topic-bot"
 }
+if GITHUB_TOKEN:
+    HEADERS["Authorization"] = f"Bearer {GITHUB_TOKEN}"
 
 TOPIC_CN = {
     "ai": "AI 工具", "machine-learning": "机器学习", "deep-learning": "深度学习",
@@ -40,12 +37,11 @@ TOPIC_CN = {
     "macos": "macOS", "vim": "Vim", "ide": "IDE",
 }
 
-# 功能关键词映射（英文关键词 → 中文功能描述）
 FUNC_MAP = [
     (["ai", "llm", "gpt", "chatgpt", "machine-learning", "deep-learning", "neural"], "人工智能/大模型相关工具"),
     (["cli", "command", "terminal", "shell"], "命令行工具，面向终端操作"),
     (["database", "sql", "nosql", "redis", "postgres", "mysql"], "数据库/存储相关工具"),
-    (["python", "javascript", "typescript", "rust", "go", "java", "c++", "ruby"], "编程语言/开发框架"),
+    (["python", "javascript", "typescript", "rust", "go", "java"], "编程语言/开发框架"),
     (["devops", "docker", "kubernetes", "ci", "cd", "deploy"], "DevOps/部署运维工具"),
     (["frontend", "react", "vue", "angular", "css", "html", "ui"], "前端/UI 开发工具"),
     (["backend", "api", "graphql", "rest", "server"], "后端/API 开发工具"),
@@ -59,15 +55,13 @@ FUNC_MAP = [
     (["mobile", "ios", "android", "flutter", "react-native", "swift"], "移动端开发工具"),
     (["game", "engine", "3d", "animation"], "游戏/3D 引擎"),
     (["blog", "cms", "static-site", "writing"], "博客/内容管理"),
-    (["email", "mail", "newsletter"], "邮件/通讯工具"),
     (["chat", "messaging", "bot", "slack", "discord"], "聊天/消息/机器人"),
     (["search", "index", "elastic", "algolia"], "搜索/索引工具"),
     (["monitor", "logging", "observability", "metrics"], "监控/可观测性"),
 ]
 
-# 用户群体推断规则
 AUDIENCE_RULES = [
-    (["python", "javascript", "typescript", "rust", "go", "java", "c++"], "程序员/开发者"),
+    (["python", "javascript", "typescript", "rust", "go", "java"], "程序员/开发者"),
     (["ai", "llm", "gpt", "machine-learning", "data", "deep-learning"], "AI 从业者/数据科学家"),
     (["frontend", "react", "vue", "css", "design", "ui"], "前端开发者/设计师"),
     (["devops", "docker", "kubernetes", "monitor", "deploy"], "运维/DevOps 工程师"),
@@ -90,6 +84,34 @@ def get_chinese_tags(topics):
     return "、".join(tags) if tags else ""
 
 
+def get_dynamic_categories():
+    today = datetime.now()
+    week_ago = (today - timedelta(days=7)).strftime("%Y-%m-%d")
+    month_ago = (today - timedelta(days=30)).strftime("%Y-%m-%d")
+    return [
+        {"q": f"stars:>1000 pushed:>={week_ago}", "sort": "stars", "order": "desc"},
+        {"q": f"stars:>500 pushed:>={week_ago} topic:ai", "sort": "stars", "order": "desc"},
+        {"q": f"stars:>300 pushed:>={week_ago} topic:developer-tools", "sort": "stars", "order": "desc"},
+        {"q": f"stars:>200 pushed:>={week_ago}", "sort": "stars", "order": "desc"},
+        {"q": f"stars:>100 created:>={month_ago}", "sort": "stars", "order": "desc"},
+    ]
+
+
+def load_state():
+    try:
+        if os.path.exists(STATE_FILE):
+            with open(STATE_FILE) as f:
+                return json.load(f)
+    except:
+        pass
+    return {"featured": [], "last_date": ""}
+
+
+def save_state(state):
+    with open(STATE_FILE, "w") as f:
+        json.dump(state, f)
+
+
 def infer_function(description, topics, name):
     desc_lower = (description or "").lower()
     name_lower = name.lower()
@@ -101,9 +123,6 @@ def infer_function(description, topics, name):
                 break
     if matched:
         return "、".join(matched[:3])
-    if description:
-        words = description.split()
-        return f"（基于描述判断）{' '.join(words[:8])}..."
     return "通用工具/框架"
 
 
@@ -145,26 +164,22 @@ def fetch_readme(repo_full_name):
 
 def build_detailed_intro(repo, readme_snippet):
     stars_k = f"{repo['stars'] / 1000:.1f}K" if repo['stars'] >= 1000 else str(repo['stars'])
-    lang = repo['language'] or "多语言"
+    lang = repo["lang"] or "多语言"
     desc = repo["description"] or ""
     topics = repo.get("topics", [])
     tags = get_chinese_tags(topics)
     func = infer_function(desc, topics, repo["name"])
     audience = infer_audience(desc, topics, repo["name"])
 
-    lines = [f"⭐ {stars_k} · {lang}{(' · ' + tags) if tags else ''}"]
-
+    lines = [f"星 {stars_k} · {lang}{(' · ' + tags) if tags else ''}"]
     if desc:
         lines.append(f"📄 {desc}")
-
     lines.append(f"🔧 功能分类：{func}")
-
     lines.append(f"👥 适合人群：{audience}")
 
     if readme_snippet:
         lines.append(f"📖 项目简介：{readme_snippet}")
 
-    # 实用性评分说明
     score_notes = []
     if repo["stars"] >= 5000:
         score_notes.append("超大爆款项目")
@@ -182,17 +197,23 @@ def build_detailed_intro(repo, readme_snippet):
     return "\n".join(lines)
 
 
-def fetch_trending():
+def fetch_trending(exclude_names=None):
+    if exclude_names is None:
+        exclude_names = set()
+    cats = get_dynamic_categories()
     repos = []
-    for cat in CATEGORIES:
+    for cat in cats:
         try:
             url = f"https://api.github.com/search/repositories?q={cat['q']}&sort={cat['sort']}&order={cat['order']}&per_page=5"
             r = requests.get(url, headers=HEADERS, timeout=15)
             if r.status_code == 200:
                 items = r.json().get("items", [])
                 for item in items:
+                    name = item["full_name"]
+                    if name in exclude_names:
+                        continue
                     repos.append({
-                        "name": item["full_name"],
+                        "name": name,
                         "stars": item["stargazers_count"],
                         "description": item["description"] or "",
                         "url": item["html_url"],
@@ -212,7 +233,9 @@ def fetch_trending():
     return unique[:15]
 
 
-def pick_top5(repos):
+def pick_top5(repos, seed=None):
+    if seed is not None:
+        random.seed(seed)
     if len(repos) <= 5:
         return repos
     top = repos[:3]
@@ -250,19 +273,18 @@ def pick_best(repos):
 
 def generate_writing_angle(repo):
     desc = (repo["description"] or "").lower()
-    name = repo["name"]
     stars = repo["stars"]
     topics = repo.get("topics", [])
 
     if "ai" in desc or "llm" in desc or any(t in ["ai", "llm", "gpt"] for t in topics):
-        return f"AI 工具是流量密码。从'普通人怎么用 AI 省钱/赚钱'切入，先抛痛点再给方案。"
+        return "AI 工具是流量密码。从'普通人怎么用 AI 省钱/赚钱'切入，先抛痛点再给方案。"
     if stars > 5000:
-        return f"万星项目有天然说服力。开头直接说'这个项目火了，但大多数人还不知道它能干啥'，制造信息差。"
+        return "万星项目有天然说服力。开头直接说'这个项目火了，但大多数人还不知道它能干啥'，制造信息差。"
     if any(t in ["chinese", "cn", "zh"] for t in topics):
-        return f"国产/中文项目读者有亲切感。从'国内开发者做了一个让全世界都在用的工具'切入。"
+        return "国产/中文项目读者有亲切感。从'国内开发者做了一个让全世界都在用的工具'切入。"
     if any(t in ["cli", "tool"] for t in topics):
-        return f"实用工具类文章最适合公众号。开头说'我找到一个神器，用了就回不去了'，重点写使用体验。"
-    return f"从'为什么这个项目能火'切入，先讲一个场景让读者觉得'对，我也有这个问题'，再介绍项目怎么解决。"
+        return "实用工具类文章最适合公众号。开头说'我找到一个神器，用了就回不去了'，重点写使用体验。"
+    return "从'为什么这个项目能火'切入，先讲一个场景让读者觉得'对，我也有这个问题'，再介绍项目怎么解决。"
 
 
 def build_message(repos):
@@ -273,7 +295,6 @@ def build_message(repos):
     lines.append(f"推送时间：{now}\n")
 
     for i, repo in enumerate(repos, 1):
-        stars_k = f"{repo['stars'] / 1000:.1f}K" if repo['stars'] >= 1000 else str(repo['stars'])
         readme_snippet = fetch_readme(repo["name"])
         intro = build_detailed_intro(repo, readme_snippet)
 
@@ -289,8 +310,8 @@ def build_message(repos):
     tags_best = get_chinese_tags(best.get("topics", []))
 
     lines.append(f"---")
-    lines.append(f"### 🏆 推荐你写这个：{best['name']}")
-    lines.append(f"⭐ {stars_best} · {best['lang'] or '多语言'}{(' · ' + tags_best) if tags_best else ''}")
+    lines.append(f"### 推荐你写这个：{best['name']}")
+    lines.append(f"星 {stars_best} · {best['lang'] or '多语言'}{(' · ' + tags_best) if tags_best else ''}")
     lines.append(f"{best['description'] or ''}")
     lines.append("")
     lines.append(f"**写作角度：** {angle}")
@@ -311,23 +332,36 @@ def send_to_wechat(title, content):
     data = {"title": title, "desp": content}
     try:
         r = requests.post(url, data=data, timeout=10)
-        print("推送结果:", r.text)
+        print("推送结果:", r.text[:200])
     except Exception as e:
         print("推送失败:", e)
 
 
 def main():
-    print("开始抓取 GitHub 热门项目，准备详细中文介绍...")
-    repos = fetch_trending()
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    print(f"开始抓取 GitHub 热门项目，准备详细中文介绍 (日期: {today_str})...")
+
+    state = load_state()
+    if state.get("last_date") != today_str:
+        state["featured"] = []
+        state["last_date"] = today_str
+
+    exclude_names = set(state.get("featured", []))
+    repos = fetch_trending(exclude_names)
     print(f"抓取到 {len(repos)} 个项目")
 
     if not repos:
         send_to_wechat("选题抓取失败", "今天 GitHub API 没有返回数据，请稍后再试")
         return
 
-    picked = pick_top5(repos)
-    print(f"精选 5 个项目，开始获取 README...")
+    seed = today_str.replace("-", "") + "1"
+    picked = pick_top5(repos, seed=int(seed))
 
+    state["featured"].extend([r["name"] for r in picked])
+    state["featured"] = state["featured"][-30:]
+    save_state(state)
+
+    print(f"精选 5 个项目，开始获取 README...")
     title, content = build_message(picked)
     send_to_wechat(title, content)
     print("推送完成")

@@ -15,6 +15,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - uses: actions/cache@v4
+        with:
+          path: state_topics.json
+          key: topics-state-${{ github.run_id }}
+          restore-keys: topics-state-
       - run: pip install requests
       - run: python scripts/fetch_topics.py
         env:
@@ -28,6 +33,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - uses: actions/cache@v4
+        with:
+          path: state_evening.json
+          key: evening-state-${{ github.run_id }}
+          restore-keys: evening-state-
       - run: pip install requests
       - run: python scripts/fetch_evening_tip.py
         env:
