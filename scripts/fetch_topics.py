@@ -4,16 +4,26 @@ import random
 import json
 from datetime import datetime, timedelta
 
+# 读取 SENDKEY：优先环境变量，其次 .env 文件
 SENDKEY = os.environ.get("SENDKEY", "")
-GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
+if not SENDKEY:
+    try:
+        with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env")) as f:
+            for line in f:
+                if line.startswith("SENDKEY="):
+                    SENDKEY = line.strip().split("=", 1)[1]
+                    break
+    except:
+        pass
+GH_TOKEN = os.environ.get("GH_TOKEN", "")
 STATE_FILE = "state_topics.json"
 
 HEADERS = {
     "Accept": "application/vnd.github.v3+json",
     "User-Agent": "auto-topic-bot"
 }
-if GITHUB_TOKEN:
-    HEADERS["Authorization"] = f"Bearer {GITHUB_TOKEN}"
+if GH_TOKEN:
+    HEADERS["Authorization"] = f"Bearer {GH_TOKEN}"
 
 TOPIC_MAP = {
     "ai": "AI 工具", "machine-learning": "机器学习", "deep-learning": "深度学习",
@@ -241,7 +251,7 @@ def main():
     picked = pick_top6(repos, seed=int(seed))
 
     state["featured"].extend([r["name"] for r in picked])
-    state["featured"] = state["featured"][-30:]
+    state["featured"] = state["featured"][-100:]
     state["morning_picks"] = picked
     save_state(state)
 

@@ -4,16 +4,24 @@ import base64
 import json
 from datetime import datetime
 
+# 读取 SENDKEY：优先环境变量，其次 .env 文件
 SENDKEY = os.environ.get("SENDKEY", "")
-GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
-MORNING_STATE_FILE = "state_topics.json"
-
+if not SENDKEY:
+    try:
+        with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env")) as f:
+            for line in f:
+                if line.startswith("SENDKEY="):
+                    SENDKEY = line.strip().split("=", 1)[1]
+                    break
+    except:
+        pass
+GH_TOKEN = os.environ.get("GH_TOKEN", "")
 HEADERS = {
     "Accept": "application/vnd.github.v3+json",
     "User-Agent": "auto-topic-bot"
 }
-if GITHUB_TOKEN:
-    HEADERS["Authorization"] = f"Bearer {GITHUB_TOKEN}"
+if GH_TOKEN:
+    HEADERS["Authorization"] = f"Bearer {GH_TOKEN}"
 
 FUNC_MAP = [
     (["ai", "llm", "gpt", "chatgpt", "machine-learning", "deep-learning", "neural"], "人工智能/大模型相关工具"),
