@@ -1,8 +1,7 @@
-name: 每日AI新闻快报
+# 已废弃，请使用 daily-push.yml
+name: 每日AI新闻快报 (旧)
 
 on:
-  schedule:
-    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
@@ -13,12 +12,5 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - uses: actions/cache@v4
-        with:
-          path: state_news.json
-          key: news-state-${{ github.run_id }}
-          restore-keys: news-state-
       - run: pip install requests
-      - run: python scripts/fetch_ai_news.py
-        env:
-          SENDKEY: ${{ secrets.SENDKEY }}
+      - run: echo "已废弃，请去 daily-push.yml 查看新流程"
