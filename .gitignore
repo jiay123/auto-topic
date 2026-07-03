@@ -1,0 +1,21 @@
+# 状态文件（缓存使用，不要提交）
+state_*.json
+
+# 本地测试文件
+_test_*.txt
+_test_*.py
+
+# bat脚本（本地Windows用，不上GitHub）
+*.bat
+
+# Python缓存
+__pycache__/
+*.pyc
+
+# 环境文件
+.env
+
+# 文档（本地维护）
+*.md
+!CLAUDE.md
+!.github/
