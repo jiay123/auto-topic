@@ -6,7 +6,7 @@
 import requests
 import os
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 
 def _get_sendkey():
     SENDKEY = os.environ.get("SENDKEY", "")
@@ -25,6 +25,7 @@ SENDKEY = _get_sendkey()
 
 
 GITHUB_STATE = os.path.join(os.path.dirname(__file__), "..", "state_github_projects.json")
+PICK_HISTORY = os.path.join(os.path.dirname(__file__), "..", "state_pick_history.json")  # 30天去重
 
 
 def _read_sendkey():
@@ -52,6 +53,27 @@ def load_today_projects():
     except:
         pass
     return []
+
+
+def load_pick_history():
+    """加载30天已选项目记录。"""
+    try:
+        if os.path.exists(PICK_HISTORY):
+            with open(PICK_HISTORY) as f:
+                return json.load(f)
+    except:
+        pass
+    return {"picked": [], "last_date": ""}
+
+
+def save_pick_history(history, picked_names, today):
+    """保存本次选题记录。"""
+    history["picked"].extend(picked_names)
+    # 只保留近30天
+    cutoff = (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d")
+    history["picked"] = [n for n in history["picked"] if n not in picked_names or True]
+    history["picked"] = history["picked"][-60:]  # 保留稍多一点
+    history["last_date"] = today
 
 
 def score_for_writing(repo):
@@ -219,6 +241,7 @@ def send_wechat(title, content):
 
 def main():
     print("正在选题...")
+    today = datetime.now().strftime("%Y-%m-%d")
     projects = load_today_projects()
 
     if not projects:
@@ -226,12 +249,30 @@ def main():
         send_wechat("选题失败", "早上 9:00 没有抓到 GitHub 项目，无法选题。\n请检查 09:00 推送是否成功。")
         return
 
+    # 30天去重
+    history = load_pick_history()
+    exclude = set(history.get("picked", []))
+    filtered = [p for p in projects if p.get("name") not in exclude]
+    if len(filtered) < 2:
+        filtered = projects  # 去重后不足2个就用全部
+
     # 评分排序
-    scored = [(score_for_writing(p)[0], p) for p in projects]
+    scored = [(score_for_writing(p)[0], p) for p in filtered]
     scored.sort(key=lambda x: x[0], reverse=True)
 
     best1 = scored[0][1]
     best2 = scored[1][1]
+
+    # 保存选题历史
+    saved_history = load_pick_history()
+    saved_history["picked"].extend([best1["name"], best2["name"]])
+    saved_history["picked"] = saved_history["picked"][-60:]
+    saved_history["last_date"] = today
+    try:
+        with open(PICK_HISTORY, "w") as f:
+            json.dump(saved_history, f)
+    except:
+        pass
 
     print(f"精选：{best1['name']}、{best2['name']}")
     title, content = build_message(best1, best2)

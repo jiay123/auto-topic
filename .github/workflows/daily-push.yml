@@ -2,8 +2,8 @@ name: 每日推送
 
 on:
   schedule:
-    # 08:00 北京时间 = 00:00 UTC
-    - cron: '0 0 * * *'
+    # 07:00 北京时间 = 23:00 UTC (前一天的UTC)
+    - cron: '0 23 * * *'
     # 09:00 北京时间 = 01:00 UTC
     - cron: '0 1 * * *'
     # 11:00 北京时间 = 03:00 UTC
@@ -16,14 +16,14 @@ on:
 
 jobs:
   ai-news:
-    if: ${{ github.event.schedule == '0 0 * * *' || github.event_name == 'workflow_dispatch' }}
+    if: ${{ github.event.schedule == '0 23 * * *' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install requests cryptography nacl
+      - run: pip install requests
       - run: python scripts/fetch_ai_news.py
         env:
           SENDKEY: ${{ secrets.SENDKEY }}
@@ -54,6 +54,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - uses: actions/cache@v4
+        with:
+          path: state_github_projects.json
+          key: github-projects-state
       - run: pip install requests
       - run: python scripts/fetch_article_pick.py
         env:
@@ -67,6 +71,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - uses: actions/cache@v4
+        with:
+          path: state_github_projects.json
+          key: github-projects-state
       - run: pip install requests
       - run: python scripts/fetch_planet_content.py
         env:

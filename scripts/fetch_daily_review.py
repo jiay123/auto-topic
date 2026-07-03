@@ -30,33 +30,44 @@ def _get_sendkey():
 
 
 SENDKEY = _get_sendkey()
-ROOT_DIR = r"D:\jithub最新項目"
+
+# 兼容本地和云端（GitHub Actions Ubuntu）路径
+_script_dir = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.dirname(_script_dir)  # auto-topic/
 PROGRESS_FILE = os.path.join(ROOT_DIR, "当前进度.md")
 ARCHIVE_DIR = os.path.join(ROOT_DIR, "进度存档")
 
 
 def cleanup_progress():
-    """进度文件只保留当天的，其他移到存档。"""
-    os.makedirs(ARCHIVE_DIR, exist_ok=True)
-    today = datetime.now().strftime("%Y-%m-%d")
-    today_prefix = f"当前进度-{today}"
-    moved = []
-    for fname in os.listdir(ROOT_DIR):
-        if not fname.startswith("当前进度-") or not fname.endswith(".md"):
-            continue
-        if today in fname:
-            continue
-        src = os.path.join(ROOT_DIR, fname)
-        dst = os.path.join(ARCHIVE_DIR, fname)
-        shutil.move(src, dst)
-        moved.append(fname)
-    return moved
+    """进度文件只保留当天的，其他移到存档（本地Windows有效，云端优雅跳过）。"""
+    try:
+        os.makedirs(ARCHIVE_DIR, exist_ok=True)
+        today = datetime.now().strftime("%Y-%m-%d")
+        today_prefix = f"当前进度-{today}"
+        moved = []
+        if not os.path.isdir(ROOT_DIR):
+            print("本地进度目录不存在，跳过归档")
+            return moved
+        for fname in os.listdir(ROOT_DIR):
+            if not fname.startswith("当前进度-") or not fname.endswith(".md"):
+                continue
+            if today in fname:
+                continue
+            src = os.path.join(ROOT_DIR, fname)
+            dst = os.path.join(ARCHIVE_DIR, fname)
+            shutil.move(src, dst)
+            moved.append(fname)
+        return moved
+    except Exception as e:
+        print(f"归档跳过: {e}")
+        return []
 
 
 def parse_progress():
-    """从当前进度.md提取：已完成、未完成、明日计划。"""
-    result = {"done": [], "undone": [], "next": [], "raw": ""}
+    """从当前进度.md提取：已完成、未完成、明日计划。云端无此文件时返回空。"""
+    result = {"done": [], "undone": [], "next": [], "cloud_mode": False, "raw": ""}
     if not os.path.exists(PROGRESS_FILE):
+        result["cloud_mode"] = True
         return result
 
     with open(PROGRESS_FILE, encoding="utf-8") as f:
@@ -97,6 +108,12 @@ def parse_progress():
 
 def generate_suggestion(parsed):
     """根据当天情况，生成小叮当建议。"""
+    if parsed.get("cloud_mode"):
+        return [
+            "今天推送全部完成。",
+            "明天早上7点见，记得在本地更新当前进度.md。",
+        ]
+
     suggestions = []
 
     done_count = len(parsed.get("done", []))
@@ -135,7 +152,9 @@ def build_message(parsed, archived, suggestions):
     # 今日完成
     lines.append("### ✅ 今日完成")
     done = parsed.get("done", [])
-    if done:
+    if parsed.get("cloud_mode"):
+        lines.append("  （云端模式，详细进度需在本地更新当前进度.md）")
+    elif done:
         for i, item in enumerate(done, 1):
             lines.append(f"  {i}. {item}")
     else:

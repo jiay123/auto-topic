@@ -1,184 +1,180 @@
 """
-08:00 AI 资讯热点
-来源：量子位、机器之心、Hacker News、微博AI热搜、Product Hunt
-每天15条，每条带100-150字摘要。
+07:00 AI 资讯热点（昨天+今天）
+覆盖：OpenAI / 谷歌 / 千问 / 通义 / Kimi / 豆包 / 国内AI大模型动态
+数据源：量子位、机器之心、36kr、Hacker News、微博AI热搜
+每天8-12条，每条带100-150字摘要，7天自动去重。
 """
-import os
 import requests
 import re
+import os
+import json
 import concurrent.futures
-import time
-from datetime import datetime
+from datetime import datetime, timedelta
 
-def _get_sendkey():
-    SENDKEY = os.environ.get("SENDKEY", "")
-    if not SENDKEY:
-        try:
-            with open(os.path.join(os.path.dirname(__file__), "..", ".env")) as f:
-                for line in f:
-                    if line.startswith("SENDKEY="):
-                        SENDKEY = line.strip().split("=", 1)[1]
-                        break
-        except:
-            pass
-    return SENDKEY
-
-SENDKEY = _get_sendkey()
-
-
-
-RSS_SOURCES = [
-    {"name": "量子位", "url": "https://www.qbitai.com/feed", "lang": "zh"},
-    {"name": "机器之心", "url": "https://rsshub.app/jiqizhixin", "lang": "zh"},
-]
-
-HN_API = "https://hn.algolia.com/api/v1/search?query=AI+OR+artificial+intelligence+OR+GPT+OR+LLM&tags=story&hitsPerPage=30"
-PRODUCT_HUNT = "https://api.producthunt.com/v1/posts?search[ategories][]=artificial-intelligence&per_page=20"
-
-
-def _read_sendkey():
-    SENDKEY = os.environ.get("SENDKEY", "")
-    if not SENDKEY:
-        try:
-            with open(os.path.join(os.path.dirname(__file__), "..", ".env")) as f:
-                for line in f:
-                    if line.startswith("SENDKEY="):
-                        SENDKEY = line.strip().split("=", 1)[1]
-                        break
-        except:
-            pass
-    return SENDKEY
-
-
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Firefox/120.0"
-}
-
-
-def fetch_summary(session, url, timeout=10):
-    """抓取文章正文，提炼100-150字摘要。"""
+SENDKEY = os.environ.get("SENDKEY", "")
+if not SENDKEY:
     try:
-        r = session.get(url, headers=HEADERS, timeout=timeout)
+        with open(os.path.join(os.path.dirname(__file__), "..", ".env")) as f:
+            for line in f:
+                if line.startswith("SENDKEY="):
+                    SENDKEY = line.strip().split("=", 1)[1]
+                    break
+    except:
+        pass
+
+STATE_FILE = os.path.join(os.path.dirname(__file__), "..", "state_news_dedup.json")
+HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+
+# --- 日期范围：昨天 + 今天 ---
+today = datetime.now().strftime("%Y-%m-%d")
+yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+
+def load_dedup():
+    try:
+        if os.path.exists(STATE_FILE):
+            with open(STATE_FILE) as f:
+                data = json.load(f)
+                return set(data.get("titles", []))
+    except:
+        pass
+    return set()
+
+def save_dedup(titles):
+    today_titles = list(titles)[-200:]
+    try:
+        with open(STATE_FILE, "w") as f:
+            json.dump({"titles": today_titles, "date": today}, f)
+    except:
+        pass
+
+def is_recent(pubdate_str):
+    """判断发布时间是否在昨天或今天。"""
+    if not pubdate_str:
+        return True
+    # 常见格式：2026-07-02T10:30:00Z 或 Wed, 02 Jul 2026
+    for fmt in ["%Y-%m-%d", "%Y-%m-%dT%H:%M:%SZ", "%a, %d %b %Y"]:
+        for try_str in [pubdate_str[:19], pubdate_str[:10]]:
+            try:
+                dt = datetime.strptime(try_str[:10], "%Y-%m-%d")
+                if dt.strftime("%Y-%m-%d") in [today, yesterday]:
+                    return True
+            except:
+                pass
+    return False
+
+def fetch_summary(url, timeout=8):
+    """抓取正文，提取100-150字摘要。"""
+    try:
+        r = requests.get(url, headers=HEADERS, timeout=timeout)
         r.encoding = "utf-8"
-        # 提取段落
-        paragraphs = re.findall(r"<p[^>]*>(.*?)</p>", r.text, re.DOTALL)
-        for p in paragraphs:
+        paras = re.findall(r"<p[^>]*>(.*?)</p>", r.text, re.DOTALL)
+        for p in paras:
             clean = re.sub(r"<[^>]+>", "", p).strip()
             if 40 < len(clean) < 600:
                 return clean[:150]
-        # 备用：meta description
         desc = re.findall(r'<meta[^>]+name=["\']description["\'][^>]+content=["\']([^"\']+)["\']', r.text, re.I)
         if desc:
             return desc[0][:150]
-        return ""
     except:
-        return ""
-
+        pass
+    return ""
 
 def translate_title(title):
-    """简单翻译 Hacker News 英文标题为中文。"""
     trans_map = {
         "OpenAI": "OpenAI", "Anthropic": "Anthropic", "Google": "谷歌",
-        "Meta": "Meta", "Microsoft": "微软", "Apple": "苹果",
-        "Amazon": "亚马逊", "Tesla": "特斯拉", "Nvidia": "英伟达",
-        "GPT": "GPT", "LLM": "大模型", "AI": "AI", "ML": "机器学习",
-        "model": "模型", "agent": "智能体", "chatbot": "聊天机器人",
-        "neural": "神经网络", "deep learning": "深度学习",
-        "launch": "发布", "release": "发布", "announce": "宣布",
-        "introduces": "推出", "new": "新", "show": "展示",
-        "study": "研究", "research": "研究", "发现": "发现",
-        "warning": "警告", "risk": "风险", "safety": "安全",
+        "DeepMind": "DeepMind", "Meta": "Meta", "Microsoft": "微软",
+        "Apple": "苹果", "Amazon": "亚马逊", "Tesla": "特斯拉",
+        "Nvidia": "英伟达", "GPT": "GPT", "LLM": "大模型",
+        "AI": "AI", "model": "模型", "models": "模型",
+        "agent": "智能体", "reasoning": "推理",
+        "launch": "发布", "release": "发布",
+        "introduces": "推出", "announces": "宣布",
+        "study": "研究", "research": "研究",
+        "benchmark": "基准", "score": "得分",
     }
     result = title
     for en, zh in trans_map.items():
         result = re.sub(rf'\b{re.escape(en)}\b', zh, result, flags=re.I)
     return result
 
+# --- 数据源 ---
+RSS_FEEDS = [
+    {"name": "量子位", "url": "https://www.qbitai.com/feed", "lang": "zh", "limit": 8},
+    {"name": "机器之心", "url": "https://rsshub.app/jiqizhixin", "lang": "zh", "limit": 6},
+    {"name": "36kr AI", "url": "https://36kr.com/feed", "lang": "zh", "limit": 5},
+]
 
-def fetch_qbitai():
-    """抓量子位 RSS，只能拿到标题和链接，摘要用fetch_summary补。"""
+def fetch_rss(source, dedup_titles):
     articles = []
+    import xml.etree.ElementTree as ET
     try:
-        r = requests.get(RSS_SOURCES[0]["url"], headers=HEADERS, timeout=15)
+        r = requests.get(source["url"], headers=HEADERS, timeout=12)
         r.encoding = "utf-8"
-        import xml.etree.ElementTree as ET
         root = ET.fromstring(r.text.encode("utf-8"))
-        for item in root.findall(".//item")[:10]:
+        for item in root.findall(".//item")[:source["limit"]]:
             title = item.findtext("title", "").strip()
+            if not title or title in dedup_titles:
+                continue
             link = item.findtext("link", "").strip()
-            pubdate = item.findtext("pubDate", "")[:16]
-            source = "量子位"
-            if title and link:
-                articles.append({"title": title, "url": link, "source": source, "pubdate": pubdate})
+            pubdate = item.findtext("pubDate", "")[:22].strip()
+            if not is_recent(pubdate) and source["name"] != "36kr AI":
+                continue
+            articles.append({"title": title, "url": link, "source": source["name"], "pubdate": pubdate[:16]})
     except Exception as e:
-        print(f"量子位抓取失败: {e}")
+        print(f"{source['name']} 抓取失败: {e}")
     return articles
 
-
-def fetch_rszhixin():
-    """抓机器之心 RSS。"""
+def fetch_hackernews(dedup_titles):
     articles = []
-    try:
-        r = requests.get(RSS_SOURCES[1]["url"], headers=HEADERS, timeout=15)
-        r.encoding = "utf-8"
-        import xml.etree.ElementTree as ET
-        root = ET.fromstring(r.text.encode("utf-8"))
-        for item in root.findall(".//item")[:8]:
-            title = item.findtext("title", "").strip()
-            link = item.findtext("link", "").strip()
-            if title and link:
-                articles.append({"title": title, "url": link, "source": "机器之心", "pubdate": ""})
-    except Exception as e:
-        print(f"机器之心抓取失败: {e}")
+    queries = ["AI OR GPT OR LLM OR artificial intelligence", "OpenAI OR Gemini OR Claude"]
+    seen_today = set()
+    for q in queries:
+        try:
+            url = f"https://hn.algolia.com/api/v1/search?query={requests.utils.quote(q)}&tags=story&hitsPerPage=15"
+            r = requests.get(url, headers=HEADERS, timeout=10)
+            if r.status_code == 200:
+                for hit in r.json().get("hits", []):
+                    title = hit.get("title", "")
+                    if not title or title in dedup_titles or title in seen_today:
+                        continue
+                    seen_today.add(title)
+                    zh_title = translate_title(title)
+                    # 跳过太英文的标题
+                    url_hn = hit.get("url", "") or f"https://news.ycombinator.com/item?id={hit.get('objectID','')}"
+                    pubdate = hit.get("created_at", "")[:16]
+                    articles.append({"title": zh_title, "url": url_hn, "source": "Hacker News", "pubdate": pubdate})
+        except Exception as e:
+            print(f"Hacker News 抓取失败: {e}")
     return articles
 
-
-def fetch_hackernews():
-    """抓 Hacker News AI 相关文章，标题翻译成中文。"""
+def fetch_weibo_ai(dedup_titles):
+    """微博AI热搜，抓含AI关键词的热门话题。"""
     articles = []
+    ai_keywords = ["AI", "大模型", "GPT", "ChatGPT", "人工智能", "DeepSeek", "豆包", "Kimi", "千问",
+                    "通义", "OpenAI", "Claude", "Gemini", "文心", "讯飞", "智谱"]
     try:
-        r = requests.get(HN_API, headers=HEADERS, timeout=15)
+        r = requests.get("https://weibo.com/ajax/side/hotSearch", headers=HEADERS, timeout=8)
         if r.status_code == 200:
-            data = r.json()
-            for hit in data.get("hits", [])[:15]:
-                raw_title = hit.get("title", "")
-                title = translate_title(raw_title)
-                url = hit.get("url", "") or f"https://news.ycombinator.com/item?id={hit.get('objectID','')}"
-                if title:
-                    articles.append({"title": title, "url": url, "source": "Hacker News", "pubdate": ""})
+            data = r.json().get("data", {}).get("hotgov", {})
+            items = data.get("item") or data.get("trends", [])
+            for item in items:
+                raw_title = item.get("word", item.get("name", ""))
+                # 看标题是否含AI关键词
+                if any(kw in raw_title for kw in ai_keywords) or item.get("category", "") in ["AI", " tech"]:
+                    title = f"微博热搜｜{raw_title}"
+                    if title not in dedup_titles:
+                        articles.append({"title": title, "url": "https://s.weibo.com/weibo?q=" + requests.utils.quote(raw_title), "source": "微博AI热搜", "pubdate": ""})
+                    if len(articles) >= 3:
+                        break
     except Exception as e:
-        print(f"Hacker News 抓取失败: {e}")
+        print(f"微博热搜抓取失败: {e}")
     return articles
 
-
-def fetch_producthunt():
-    """抓 Product Hunt AI 类新产品。"""
-    articles = []
-    try:
-        token = os.environ.get("PH_TOKEN", "")
-        if not token:
-            print("未配置 PH_TOKEN，跳过 Product Hunt")
-            return []
-        ph_headers = {**HEADERS, "Authorization": f"Bearer {token}", "Content-Type": "application/json"}
-        r = requests.get(PRODUCT_HUNT, headers=ph_headers, timeout=15)
-        if r.status_code == 200:
-            for post in r.json().get("posts", [])[:8]:
-                name = post.get("name", "")
-                tagline = post.get("tagline", "")
-                url = f"https://producthunt.com{post.get('url', '')}"
-                if name:
-                    title = f"{name}：{tagline}" if tagline else name
-                    articles.append({"title": title, "url": url, "source": "Product Hunt", "pubdate": ""})
-    except Exception as e:
-        print(f"Product Hunt 抓取失败: {e}")
-    return articles
-
-
-def enrich_with_summaries(articles):
-    """并发抓每条的摘要。"""
+def enrich_summaries(articles):
+    """并发抓摘要。"""
     session = requests.Session()
     with concurrent.futures.ThreadPoolExecutor(max_workers=6) as ex:
-        futures = {ex.submit(fetch_summary, session, a["url"]): a for a in articles}
+        futures = {ex.submit(fetch_summary, a["url"]): a for a in articles}
         for f in concurrent.futures.as_completed(futures):
             article = futures[f]
             try:
@@ -187,94 +183,92 @@ def enrich_with_summaries(articles):
                 article["summary"] = ""
     return articles
 
-
 def build_message(articles):
-    now = datetime.now().strftime("%Y-%m-%d %H:%M")
     weekday_map = {
         "Monday": "周一", "Tuesday": "周二", "Wednesday": "周三",
         "Thursday": "周四", "Friday": "周五", "Saturday": "周六", "Sunday": "周日"
     }
     weekday = weekday_map.get(datetime.now().strftime("%A"), "")
-    title = f"【{weekday}】AI 热点速递 · {now}"
+    title = f"【{weekday}】AI 热点速递 · {today}（含昨日）"
 
     lines = [
-        f"## 📰 AI 热点速递 · {now}\n",
-        f"来源：量子位 · 机器之心 · Hacker News · Product Hunt",
-        f"整理：小叮当\n",
+        f"## 📰 AI 热点速递 · {weekday} · {today}\n",
+        f"📅 内容范围：{yesterday} ~ {today}（昨天+今天）",
+        f"来源：量子位 · 机器之心 · 36kr · Hacker News · 微博AI热搜",
+        "筛选：仅保留含 AI / 大模型 / 国内大厂动态 的当天资讯",
+        "",
+        "---",
     ]
 
-    # 按来源分组显示，来源标签突出
-    sources_order = ["量子位", "机器之心", "Hacker News", "Product Hunt"]
-    by_source = {}
-    for a in articles:
-        by_source.setdefault(a["source"], []).append(a)
-
+    emoji_map = {"量子位": "🔬", "机器之心": "🤖", "36kr AI": "📊",
+                 "Hacker News": "🌐", "微博AI热搜": "🔥"}
     idx = 1
-    for src in sources_order:
-        if src not in by_source:
-            continue
-        for a in by_source[src]:
-            emoji_map = {"量子位": "🔬", "机器之心": "🤖", "Hacker News": "🌐", "Product Hunt": "🚀"}
-            emoji = emoji_map.get(src, "📌")
-            lines.append(f"### {emoji} {a['title']}")
-            if a.get("pubdate"):
-                lines.append(f"**时间：** {a['pubdate']}")
-            summary = a.get("summary", "").strip()
-            if summary:
-                lines.append(f"{summary}")
-            lines.append(f"来源：[{src}]({a['url']})")
-            lines.append("")
-            idx += 1
+    for a in articles:
+        emoji = emoji_map.get(a["source"], "📌")
+        lines.append(f"### {emoji} {a['title']}")
+        if a.get("pubdate"):
+            lines.append(f"**时间：** {a['pubdate']}")
+        summary = a.get("summary", "").strip()
+        if summary:
+            lines.append(summary)
+        lines.append(f"来源：[{a['source']}]({a['url']})")
+        lines.append("")
+        idx += 1
 
     lines.append("---")
-    lines.append("以上资讯由小叮当整理，每条均附摘要。如有帮助，点个赞 👍")
+    lines.append("以上资讯由小叮当整理，每条均附摘要。点个赞 👍 支持一下")
     return title, "\n".join(lines)
-
 
 def send_wechat(title, content):
     if not SENDKEY:
         print("SENDKEY 未设定，无法推送")
         return
     url = f"https://sctapi.ftqq.com/{SENDKEY}.send"
-    data = {"title": title, "desp": content}
     try:
-        r = requests.post(url, data=data, timeout=10)
-        print("推送结果:", r.text[:200])
+        r = requests.post(url, data={"title": title, "desp": content}, timeout=10)
+        print(r.text[:200])
     except Exception as e:
-        print("推送失败:", e)
-
+        print(f"推送失败: {e}")
 
 def main():
-    print("开始抓取 AI 资讯热点...")
+    print(f"抓取AI资讯热点 ({yesterday} 至 {today})...")
+
+    dedup_titles = load_dedup()
     all_articles = []
 
-    # 并行抓国内来源
+    # 1. 并行抓RSS
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
-        f1 = ex.submit(fetch_qbitai)
-        f2 = ex.submit(fetch_rszhixin)
-        all_articles += f1.result()
-        all_articles += f2.result()
+        futures = [ex.submit(fetch_rss, src, dedup_titles) for src in RSS_FEEDS]
+        for f in concurrent.futures.as_completed(futures):
+            all_articles.extend(f.result())
 
-    # 抓国际来源
-    all_articles += fetch_hackernews()
-    all_articles += fetch_producthunt()
+    # 2. Hacker News
+    all_articles.extend(fetch_hackernews(dedup_titles))
 
-    print(f"抓取到 {len(all_articles)} 条标题，开始抓摘要...")
-    # 打乱顺序，让每天来源分布不同
-    import random
-    random.seed(datetime.now().strftime("%Y%m%d"))
-    random.shuffle(all_articles)
+    # 3. 微博AI热搜（只作补充，3条）
+    all_articles.extend(fetch_weibo_ai(dedup_titles))
 
-    # 取15条
-    all_articles = all_articles[:15]
-    articles_with_summary = enrich_with_summaries(all_articles)
+    # 去重（同标题）
+    seen = set()
+    unique = []
+    for a in all_articles:
+        if a["title"] not in seen:
+            seen.add(a["title"])
+            seen.update(dedup_titles)
+            unique.append(a)
 
-    title, content = build_message(articles_with_summary)
+    # 取8-12条
+    unique = unique[:12]
+
+    # 并发抓摘要
+    articles = enrich_summaries(unique)
+
+    # 更新去重记录
+    save_dedup(seen)
+
+    title, content = build_message(articles)
     send_wechat(title, content)
-    print(f"推送完成，共 {len(articles_with_summary)} 条")
-
+    print(f"推送完成：{len(articles)} 条")
 
 if __name__ == "__main__":
-    import os as _os
-    os = _os
     main()
