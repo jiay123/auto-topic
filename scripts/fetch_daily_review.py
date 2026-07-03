@@ -201,7 +201,7 @@ def build_message(parsed, archived, suggestions):
 
     # 今日推送汇总
     lines.append("### 📬 今日推送一览")
-    lines.append("  08:00  AI 热点速递")
+    lines.append("  07:00  AI 热点速递")
     lines.append("  09:00  GitHub 项目推荐")
     lines.append("  11:00  文章选题推荐")
     lines.append("  15:00  知识星球内容")
