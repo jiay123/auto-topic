@@ -98,6 +98,7 @@ def score_repo(repo):
     stars = repo["stargazers_count"]
     topics = repo.get("topics", [])
     desc = (repo.get("description") or "").lower()
+    name = (repo.get("name") or "").lower()
     lang = repo.get("language") or ""
 
     # 星星评分
@@ -112,29 +113,60 @@ def score_repo(repo):
     else:
         score += 1
 
-    # AI 相关性强加分
+    # === 爆款规律：转发率最高的话题（数据来自老贾4-7月37篇文章）===
+
+    # 免费/省钱/替代付费 → 转发率16-21%，最高效
+    free_kw = ["free", "open-source", "open-source", "替代", "alternative",
+               "free-alternative", "free-替代", "省钱", "省", "free"]
+    if any(k in desc or k in topics or k in name for k in free_kw):
+        score += 6
+
+    # 蹭大厂热度（Google/微软/苹果相关工具）→ 高转发
+    company_kw = ["google", "microsoft", "apple", "openai", "meta", "nvidia",
+                  "claude", "deepseek", "gemini", "anthropic"]
+    if any(k in desc or k in topics for k in company_kw):
+        score += 4
+
+    # 争议性/情绪话题 → 高转发（印钞机/程序员慌了/被开除）
+    drama_kw = ["印钞", "money", "job", "career", "resume", "hire", "失业",
+                "免费", "替代", "慌", "裁员", "被开除", "省"]
+    if any(k in desc or k in name for k in drama_kw):
+        score += 3
+
+    # AI 相关性
     ai_kw = ["ai", "llm", "gpt", "chatgpt", "machine-learning", "deep-learning",
              "neural", "nlp", "copilot", "claude", "gemini", "langchain", "rag",
              "embedding", "vector", "mistral", "ollama", "openai"]
-    has_ai = any(t in topics or t in desc for t in ai_kw)
+    has_ai = any(t.lower() in topics or t.lower() in desc for t in ai_kw)
     if has_ai:
         score += 3
 
     # 中文支持
     cn_kw = ["chinese", "cn", "zh", "中文"]
-    has_cn = any(t in topics for t in cn_kw)
+    has_cn = any(t.lower() in topics for t in cn_kw)
     if has_cn:
         score += 2
 
-    # 实用工具类
-    tool_kw = ["cli", "tool", "app", "gui", "desktop", "extension"]
-    if any(t in topics for t in tool_kw):
-        score += 1
+    # 实用工具类（小白能用的）
+    tool_kw = ["cli", "tool", "app", "gui", "desktop", "extension", "browser",
+               "web", "online", "saas"]
+    if any(t.lower() in topics for t in tool_kw):
+        score += 2
+
+    # 在线可用（不需要安装）→ 高转发
+    if "web" in topics or "online" in topics or "saas" in topics:
+        score += 2
 
     # 编程语言加分
     popular_lang = ["python", "javascript", "typescript", "rust", "go"]
     if lang and lang.lower() in popular_lang:
         score += 1
+
+    # === 否決線：一票否決 ===
+    # 安装复杂/技术门槛高 → 低转发，转发率通常<3%
+    hard_kw = ["docker", "kubernetes", "kubernetes", "helm", "terraform"]
+    if any(k in topics for k in hard_kw):
+        score -= 5
 
     return score
 
