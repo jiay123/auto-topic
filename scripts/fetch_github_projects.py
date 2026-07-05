@@ -105,19 +105,54 @@ def pick_top_projects(repos, articles, count=5):
     scored.sort(key=lambda x: x[0], reverse=True)
     return scored[:count]
 
-def translate_desc(desc):
-    """把英文描述转成简短中文说明。"""
-    if not desc:
-        return "暂无简介"
+def summarize_repo(repo):
+    """用中文模板生成项目简介。"""
+    desc = repo.get("description") or ""
+    topics = repo.get("topics", [])
+    name = repo.get("name", "")
+    lang = repo.get("language") or ""
+
     desc_lower = desc.lower()
-    if "ai" in desc_lower or "llm" in desc_lower or "gpt" in desc_lower:
-        return f"AI工具：{desc[:60]}..."
-    elif "free" in desc_lower or "open" in desc_lower:
-        return f"免费开源：{desc[:60]}..."
-    elif "tool" in desc_lower or "cli" in desc_lower or "library" in desc_lower:
-        return f"开发工具：{desc[:60]}..."
+    topics_lower = [t.lower() for t in topics]
+
+    # 判断项目类型
+    is_ai = any(k in desc_lower or k in topics_lower for k in ["ai", "llm", "gpt", "chatgpt", "machine-learning", "deep-learning", "neural", "nlp"])
+    is_free = any(k in desc_lower or k in topics_lower for k in ["free", "open-source", "alternative"])
+    is_tool = any(k in topics_lower for k in ["cli", "tool", "app", "gui", "desktop", "browser-extension"])
+    is_web = any(k in topics_lower for k in ["web", "online", "saas"])
+    is_dev = any(k in topics_lower for k in ["developer-tools", "ide", "editor", "framework", "library"])
+    is_video = any(k in desc_lower or k in topics_lower for k in ["video", "image", "photo", "edit", "generation", "create"])
+    is_chinese = any(k in topics_lower for k in ["chinese", "cn", "zh"])
+
+    # 截取描述中的有用部分（去掉开头冗余词）
+    clean_desc = desc[:120] if desc else "暂无详细介绍"
+
+    # 按类型生成中文摘要
+    if is_ai and is_video:
+        summary = f"AI 生成工具：用 AI 自动生成图片/视频内容，{clean_desc}"
+    elif is_ai and is_dev:
+        summary = f"AI 开发工具：帮助程序员更高效写代码，{clean_desc}"
+    elif is_ai and is_free:
+        summary = f"免费 AI 工具：{clean_desc}"
+    elif is_ai:
+        summary = f"AI 工具：{clean_desc}"
+    elif is_free:
+        summary = f"免费开源工具：{clean_desc}"
+    elif is_video:
+        summary = f"视频/图片处理工具：{clean_desc}"
+    elif is_web:
+        summary = f"在线工具（不用安装）：{clean_desc}"
+    elif is_tool:
+        summary = f"实用工具：{clean_desc}"
+    elif is_dev:
+        summary = f"开发者工具：{clean_desc}"
     else:
-        return desc[:80]
+        summary = clean_desc
+
+    if is_chinese:
+        summary += "（支持中文）"
+
+    return summary
 
 def build_message(picked, best, articles):
     date_cn = f"{today.year}年{today.month}月{today.day}日"
@@ -127,47 +162,53 @@ def build_message(picked, best, articles):
     title = f"老贾，今天是{date_cn}早上好，今日开源项目推荐"
 
     lines = [
-        f"老贾，今天是{date_cn}（{weekday}）早上好。今天推荐5个开源项目：\n",
+        f"老贾，今天是{date_cn}（{weekday}）早上好。今天在 GitHub 上找到5个项目，我帮你筛选了最适合写的：\n",
     ]
 
-    # 最佳推荐（强烈建议写这篇）
+    # 最佳推荐
     best_repo = best[1]
+    best_score = best[0]
     best_reasons = best[2]
     stars_k = f"{best_repo['stargazers_count']/1000:.1f}K" if best_repo['stargazers_count'] >= 1000 else str(best_repo['stargazers_count'])
     lang = best_repo.get("language") or "多语言"
 
     lines.append("🏆 最佳推荐（建议写这篇）")
     lines.append(f"")
-    lines.append(f"项目：{best_repo['full_name']}")
-    lines.append(f"星数：⭐ {stars_k}　语言：{lang}")
-    lines.append(f"简介：{translate_desc(best_repo.get('description', ''))}")
+    lines.append(f"📌 项目：{best_repo['full_name']}")
+    lines.append(f"⭐ 星数：{stars_k}　🔧 语言：{lang}")
+    lines.append(f"")
+    lines.append(f"📖 它是做什么的：")
+    lines.append(f"{summarize_repo(best_repo)}")
+    lines.append(f"")
+    lines.append(f"✅ 为什么推荐你写：")
+    for r in best_reasons[:3]:
+        lines.append(f"  • {r}")
+    # 数据匹配理由
+    if any(k in (best_repo.get("description") or "").lower() or k in best_repo.get("topics", []) or k in best_repo.get("name", "").lower() for k in ["free", "省钱", "免费", "替代", "alternative"]):
+        lines.append(f"  • 你之前写省钱/免费类文章，最高891播放、155转发，读者很爱看")
+    if any(k in (best_repo.get("description") or "").lower() for k in ["money", "job", "印钞", "赚钱", "搞钱"]):
+        lines.append(f"  • 你之前写搞钱类文章，最高5617播放、811转发，爆款潜力大")
+    if any(k in (best_repo.get("description") or "").lower() or k in best_repo.get("topics", []) for k in ["google", "microsoft", "apple", "openai", "meta", "deepseek"]):
+        lines.append(f"  • 蹭大厂热度，你之前写Google相关文章最高8830播放")
     lines.append(f"🔗 {best_repo['html_url']}")
     lines.append(f"")
-    lines.append(f"为什么推荐：")
-    for r in best_reasons[:3]:
-        lines.append(f"  ✅ {r}")
-    if any(k in (best_repo.get("description") or "").lower() or k in best_repo.get("topics", []) or k in best_repo.get("name", "").lower() for k in ["free", "省钱", "免费", "替代", "alternative"]):
-        lines.append(f"  📊 你之前写省钱类最高891播放、155转发")
-    if any(k in (best_repo.get("description") or "").lower() for k in ["money", "job", "印钞", "赚钱", "搞钱"]):
-        lines.append(f"  📊 你之前写搞钱类最高5617播放、811转发")
-    lines.append(f"")
 
-    # 全部5个项目一览
-    lines.append("---")
-    lines.append("今日全部推荐（共5个）：\n")
+    # 全部5个项目
+    lines.append("━" * 20)
+    lines.append("其他可选项目（共5个，写编号即可）：\n")
     for i, (score, repo, reasons) in enumerate(picked, 1):
         stars_k = f"{repo['stargazers_count']/1000:.1f}K" if repo['stargazers_count'] >= 1000 else str(repo['stargazers_count'])
         lang = repo.get("language") or "多语言"
         is_best = "🏆 " if repo["full_name"] == best_repo["full_name"] else ""
         lines.append(f"{is_best}{i}. {repo['full_name']}（⭐ {stars_k} · {lang}）")
-        lines.append(f"   {translate_desc(repo.get('description', ''))}")
+        lines.append(f"   简介：{summarize_repo(repo)}")
         if repo["full_name"] == best_repo["full_name"]:
-            lines.append(f"   ← 最推荐写这篇")
+            lines.append(f"   ← 最推荐这篇")
         lines.append(f"")
 
-    lines.append("---")
-    lines.append("回复「写」我就写推荐的那篇。")
-    lines.append("想换一个？回复编号（如「写3」）我就写第3个。")
+    lines.append("━" * 20)
+    lines.append("回复「写」我帮你写推荐的那篇。")
+    lines.append("想写其他的？回复编号比如「写3」。")
 
     return title, "\n".join(lines)
 
