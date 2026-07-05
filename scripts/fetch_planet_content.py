@@ -185,7 +185,7 @@ def build_message(title, content, topic_type):
         "Thursday": "周四", "Friday": "周五", "Saturday": "周六", "Sunday": "周日"
     }
     weekday = weekday_map.get(datetime.now().strftime("%A"), "")
-    full_title = f"老贾，今天是{date_cn}早上好，知识星球内容"
+    full_title = f"老贾，今天是{date_cn}中午好，知识星球内容"
 
     lines = [
         f"老贾，今天是{date_cn}（{weekday}）。以下是星球专属内容：\n",

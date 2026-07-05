@@ -144,7 +144,7 @@ def build_message(parsed, archived, suggestions):
     }
     weekday = weekday_map.get(datetime.now().strftime("%A"), "")
     date_cn = f"{datetime.now().year}年{datetime.now().month}月{datetime.now().day}日"
-    title = f"老贾，今天是{date_cn}早上好，今日复盘"
+    title = f"老贾，今天是{date_cn}下午好，今日复盘"
 
     lines = [
         f"老贾，今天是{date_cn}（{weekday}）。以下是今日复盘：\n",
