@@ -95,7 +95,7 @@ def score_repo(repo, articles):
 
     return score, match_reasons
 
-def pick_top_projects(repos, articles, count=3):
+def pick_top_projects(repos, articles, count=5):
     scored = []
     for r in repos:
         name = r["full_name"]
@@ -127,12 +127,11 @@ def build_message(picked, best, articles):
     title = f"老贾，今天是{date_cn}早上好，今日开源项目推荐"
 
     lines = [
-        f"老贾，今天是{date_cn}（{weekday}）早上好。今天推荐以下开源项目：\n",
+        f"老贾，今天是{date_cn}（{weekday}）早上好。今天推荐5个开源项目：\n",
     ]
 
-    # 最佳推荐（放在最前面）
+    # 最佳推荐（强烈建议写这篇）
     best_repo = best[1]
-    best_score = best[0]
     best_reasons = best[2]
     stars_k = f"{best_repo['stargazers_count']/1000:.1f}K" if best_repo['stargazers_count'] >= 1000 else str(best_repo['stargazers_count'])
     lang = best_repo.get("language") or "多语言"
@@ -144,34 +143,31 @@ def build_message(picked, best, articles):
     lines.append(f"简介：{translate_desc(best_repo.get('description', ''))}")
     lines.append(f"🔗 {best_repo['html_url']}")
     lines.append(f"")
-    lines.append(f"为什么推荐这篇：")
+    lines.append(f"为什么推荐：")
     for r in best_reasons[:3]:
         lines.append(f"  ✅ {r}")
-    # 加上数据匹配
-    best_type = ""
     if any(k in (best_repo.get("description") or "").lower() or k in best_repo.get("topics", []) or k in best_repo.get("name", "").lower() for k in ["free", "省钱", "免费", "替代", "alternative"]):
-        lines.append(f"  📊 你之前写省钱类最高891播放、155转发，读者爱看")
+        lines.append(f"  📊 你之前写省钱类最高891播放、155转发")
     if any(k in (best_repo.get("description") or "").lower() for k in ["money", "job", "印钞", "赚钱", "搞钱"]):
-        lines.append(f"  📊 你之前写搞钱类最高5617播放、811转发，爆款潜力大")
+        lines.append(f"  📊 你之前写搞钱类最高5617播放、811转发")
     lines.append(f"")
 
-    # 其他推荐
+    # 全部5个项目一览
     lines.append("---")
-    lines.append("其他可选项目：\n")
+    lines.append("今日全部推荐（共5个）：\n")
     for i, (score, repo, reasons) in enumerate(picked, 1):
-        if repo["full_name"] == best_repo["full_name"]:
-            continue
         stars_k = f"{repo['stargazers_count']/1000:.1f}K" if repo['stargazers_count'] >= 1000 else str(repo['stargazers_count'])
         lang = repo.get("language") or "多语言"
-        lines.append(f"{i}. {repo['full_name']}（⭐ {stars_k} · {lang}）")
+        is_best = "🏆 " if repo["full_name"] == best_repo["full_name"] else ""
+        lines.append(f"{is_best}{i}. {repo['full_name']}（⭐ {stars_k} · {lang}）")
         lines.append(f"   {translate_desc(repo.get('description', ''))}")
-        for r in reasons[:2]:
-            lines.append(f"   ✅ {r}")
+        if repo["full_name"] == best_repo["full_name"]:
+            lines.append(f"   ← 最推荐写这篇")
         lines.append(f"")
 
     lines.append("---")
-    lines.append("回复「写」我就开始写上面推荐那篇。")
-    lines.append("不想写这个？回复「换」重新推荐。")
+    lines.append("回复「写」我就写推荐的那篇。")
+    lines.append("想换一个？回复编号（如「写3」）我就写第3个。")
 
     return title, "\n".join(lines)
 
@@ -199,22 +195,32 @@ def main():
         f"stars:>100 pushed:>{DATE_3D}",
     ]
 
+    # 循环搜索：凑满5个高分项目
+    all_queries = queries[:]
     all_repos = []
-    for q in queries:
-        results = search_github(q, per_page=8)
+    max_rounds = 3
+    for round_num in range(max_rounds):
+        if not all_queries:
+            break
+        q = all_queries.pop(0)
+        results = search_github(q, per_page=12)
         all_repos.extend(results)
         time.sleep(0.5)
 
-    seen = set()
-    unique = []
-    for r in all_repos:
-        if r["full_name"] not in seen:
-            seen.add(r["full_name"])
-            unique.append(r)
+        # 去重+评分
+        seen = set()
+        unique = []
+        for r in all_repos:
+            if r["full_name"] not in seen:
+                seen.add(r["full_name"])
+                unique.append(r)
 
-    print(f"候选项目：{len(unique)} 个，评分中...")
+        picked = pick_top_projects(unique, articles, count=5)
+        print(f"  第{round_num+1}轮：{len(results)} 个新项目，累计{len(unique)} 个唯一，已凑够{len(picked)} 个高分")
 
-    picked = pick_top_projects(unique, articles, count=3)
+        if len(picked) >= 5:
+            print("已凑满5个项目")
+            break
 
     if not picked:
         send_wechat("老贾，今天没找到合适的项目", "GitHub 上没有匹配的项目，明天再试。")
@@ -222,6 +228,7 @@ def main():
 
     # 最佳推荐 = 分数最高的
     best = picked[0]
+    second = picked[1] if len(picked) > 1 else None
 
     # 保存供下游脚本
     github_state_file = os.path.join(os.path.dirname(__file__), "..", "state_github_projects.json")
