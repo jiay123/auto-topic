@@ -79,24 +79,6 @@ def fetch_summary(url, timeout=8):
         pass
     return ""
 
-def translate_title(title):
-    trans_map = {
-        "OpenAI": "OpenAI", "Anthropic": "Anthropic", "Google": "谷歌",
-        "DeepMind": "DeepMind", "Meta": "Meta", "Microsoft": "微软",
-        "Apple": "苹果", "Amazon": "亚马逊", "Tesla": "特斯拉",
-        "Nvidia": "英伟达", "GPT": "GPT", "LLM": "大模型",
-        "AI": "AI", "model": "模型", "models": "模型",
-        "agent": "智能体", "reasoning": "推理",
-        "launch": "发布", "release": "发布",
-        "introduces": "推出", "announces": "宣布",
-        "study": "研究", "research": "研究",
-        "benchmark": "基准", "score": "得分",
-    }
-    result = title
-    for en, zh in trans_map.items():
-        result = re.sub(rf'\b{re.escape(en)}\b', zh, result, flags=re.I)
-    return result
-
 # --- 数据源 ---
 RSS_FEEDS = [
     {"name": "量子位", "url": "https://www.qbitai.com/feed", "lang": "zh", "limit": 8},
@@ -122,29 +104,6 @@ def fetch_rss(source, dedup_titles):
             articles.append({"title": title, "url": link, "source": source["name"], "pubdate": pubdate[:16]})
     except Exception as e:
         print(f"{source['name']} 抓取失败: {e}")
-    return articles
-
-def fetch_hackernews(dedup_titles):
-    articles = []
-    queries = ["AI OR GPT OR LLM OR artificial intelligence", "OpenAI OR Gemini OR Claude"]
-    seen_today = set()
-    for q in queries:
-        try:
-            url = f"https://hn.algolia.com/api/v1/search?query={requests.utils.quote(q)}&tags=story&hitsPerPage=15"
-            r = requests.get(url, headers=HEADERS, timeout=10)
-            if r.status_code == 200:
-                for hit in r.json().get("hits", []):
-                    title = hit.get("title", "")
-                    if not title or title in dedup_titles or title in seen_today:
-                        continue
-                    seen_today.add(title)
-                    zh_title = translate_title(title)
-                    # 跳过太英文的标题
-                    url_hn = hit.get("url", "") or f"https://news.ycombinator.com/item?id={hit.get('objectID','')}"
-                    pubdate = hit.get("created_at", "")[:16]
-                    articles.append({"title": zh_title, "url": url_hn, "source": "Hacker News", "pubdate": pubdate})
-        except Exception as e:
-            print(f"Hacker News 抓取失败: {e}")
     return articles
 
 def fetch_weibo_ai(dedup_titles):
@@ -195,14 +154,14 @@ def build_message(articles):
     lines = [
         f"老贾，今天是{date_cn}（{weekday}）早上好。以下是今天和昨天的 AI 资讯热点：\n",
         f"📅 内容范围：{yesterday} ~ {today}（昨天+今天）",
-        f"来源：量子位 · 机器之心 · 36kr · Hacker News · 微博AI热搜",
+        f"来源：量子位 · 机器之心 · 36kr · 微博AI热搜",
         "筛选：仅保留含 AI / 大模型 / 国内大厂动态 的当天资讯",
         "",
         "---",
     ]
 
     emoji_map = {"量子位": "🔬", "机器之心": "🤖", "36kr AI": "📊",
-                 "Hacker News": "🌐", "微博AI热搜": "🔥"}
+                 "微博AI热搜": "🔥"}
     idx = 1
     for a in articles:
         emoji = emoji_map.get(a["source"], "📌")
@@ -243,10 +202,7 @@ def main():
         for f in concurrent.futures.as_completed(futures):
             all_articles.extend(f.result())
 
-    # 2. Hacker News
-    all_articles.extend(fetch_hackernews(dedup_titles))
-
-    # 3. 微博AI热搜（只作补充，3条）
+    # 2. 微博AI热搜（只作补充，3条）
     all_articles.extend(fetch_weibo_ai(dedup_titles))
 
     # 去重（同标题）
