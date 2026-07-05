@@ -189,10 +189,11 @@ def build_message(articles):
         "Thursday": "周四", "Friday": "周五", "Saturday": "周六", "Sunday": "周日"
     }
     weekday = weekday_map.get(datetime.now().strftime("%A"), "")
-    title = f"【{weekday}】AI 热点速递 · {today}（含昨日）"
+    date_cn = f"{datetime.now().year}年{datetime.now().month}月{datetime.now().day}日"
+    title = f"老贾，今天是{date_cn}早上好，AI 热点速递"
 
     lines = [
-        f"## 📰 AI 热点速递 · {weekday} · {today}\n",
+        f"老贾，今天是{date_cn}（{weekday}）早上好。以下是今天和昨天的 AI 资讯热点：\n",
         f"📅 内容范围：{yesterday} ~ {today}（昨天+今天）",
         f"来源：量子位 · 机器之心 · 36kr · Hacker News · 微博AI热搜",
         "筛选：仅保留含 AI / 大模型 / 国内大厂动态 的当天资讯",

@@ -34,7 +34,7 @@ SENDKEY = _get_sendkey()
 # 兼容本地和云端（GitHub Actions Ubuntu）路径
 _script_dir = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(_script_dir)  # auto-topic/
-PROGRESS_FILE = os.path.join(ROOT_DIR, "当前进度.md")
+PROGRESS_FILE = os.path.join(ROOT_DIR, "..", "jithub最新項目", "当前进度.md")
 ARCHIVE_DIR = os.path.join(ROOT_DIR, "进度存档")
 
 
@@ -143,10 +143,11 @@ def build_message(parsed, archived, suggestions):
         "Thursday": "周四", "Friday": "周五", "Saturday": "周六", "Sunday": "周日"
     }
     weekday = weekday_map.get(datetime.now().strftime("%A"), "")
-    title = f"📋 今日复盘 · {weekday} · {now}"
+    date_cn = f"{datetime.now().year}年{datetime.now().month}月{datetime.now().day}日"
+    title = f"老贾，今天是{date_cn}早上好，今日复盘"
 
     lines = [
-        f"## 📋 老贾，今日复盘 · {weekday} · {now}\n",
+        f"老贾，今天是{date_cn}（{weekday}）。以下是今日复盘：\n",
     ]
 
     # 今日完成

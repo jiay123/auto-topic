@@ -11,7 +11,13 @@ import requests
 import os
 import json
 import random
+import time
 from datetime import datetime, timedelta
+
+# 计算相对日期（GitHub API 不再支持 7days 等相对格式）
+today = datetime.now()
+DATE_7D  = (today - timedelta(days=7)).strftime("%Y-%m-%d")
+DATE_3D  = (today - timedelta(days=3)).strftime("%Y-%m-%d")
 
 def _get_sendkey():
     SENDKEY = os.environ.get("SENDKEY", "")
@@ -82,14 +88,20 @@ def search_github(query, per_page=10):
     url = f"https://api.github.com/search/repositories?q={requests.utils.quote(query)}&sort=stars&order=desc&per_page={per_page}"
     try:
         r = requests.get(url, headers=HEADERS, timeout=15)
+        print(f"  GitHub API: {r.status_code} ({query[:30]}...)")
         if r.status_code == 200:
-            return r.json().get("items", [])
+            items = r.json().get("items", [])
+            print(f"  -> 返回 {len(items)} 个项目")
+            return items
         elif r.status_code == 403:
-            print("GitHub API 限速，等待60秒...")
+            print("  -> GitHub API 限速，等待60秒...")
+            print(f"  -> 响应: {r.text[:200]}")
             time.sleep(60)
             return search_github(query, per_page)
+        else:
+            print(f"  -> 失败: {r.text[:200]}")
     except Exception as e:
-        print(f"搜索失败 ({query}): {e}")
+        print(f"  搜索失败 ({query}): {e}")
     return []
 
 
@@ -209,10 +221,11 @@ def build_message(repos):
         "Thursday": "周四", "Friday": "周五", "Saturday": "周六", "Sunday": "周日"
     }
     weekday = weekday_map.get(datetime.now().strftime("%A"), "")
-    title = f"【{weekday}】GitHub 优质项目推荐"
+    date_cn = f"{datetime.now().year}年{datetime.now().month}月{datetime.now().day}日"
+    title = f"老贾，今天是{date_cn}早上好，GitHub 优质项目推荐"
 
     lines = [
-        f"## 🛠 GitHub 优质项目推荐 · {now}\n",
+        f"老贾，今天是{date_cn}（{weekday}）早上好。以下是今天推荐的 GitHub 开源项目：\n",
         "筛选条件：一周内活跃 · 星星多 · 有人维护 · 每天不重复\n",
         "---",
     ]
@@ -262,12 +275,12 @@ def main():
 
     # 多种搜索策略，确保覆盖面
     queries = [
-        "stars:>500 pushed:>7days",            # 高星近期活跃
-        "topic:ai stars:>200 pushed:>7days",   # AI赛道
-        "topic:open-source stars:>300 pushed:>7days",  # 精品开源
-        "topic:developer-tools stars:>200 pushed:>7days",  # 开发者工具
-        "stars:>100 pushed:>3days",           # 3天内新热
-        "topic:chatgpt OR topic:llm OR topic:ollama stars:>100 pushed:>7days",  # AI工具
+        f"stars:>500 pushed:>{DATE_7D}",                      # 高星近期活跃
+        f"topic:ai stars:>200 pushed:>{DATE_7D}",            # AI赛道
+        f"topic:open-source stars:>300 pushed:>{DATE_7D}",   # 精品开源
+        f"topic:developer-tools stars:>200 pushed:>{DATE_7D}", # 开发者工具
+        f"stars:>100 pushed:>{DATE_3D}",                     # 3天内新热
+        f"(topic:chatgpt OR topic:llm OR topic:ollama) stars:>100 pushed:>{DATE_7D}",  # AI工具
     ]
 
     all_repos = []

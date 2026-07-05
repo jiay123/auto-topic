@@ -179,10 +179,16 @@ def build_content_for_topic(topic_type, github_project=None):
 
 def build_message(title, content, topic_type):
     now = datetime.now().strftime("%Y-%m-%d")
-    full_title = f"🌏 知识星球内容 · {title}"
+    date_cn = f"{datetime.now().year}年{datetime.now().month}月{datetime.now().day}日"
+    weekday_map = {
+        "Monday": "周一", "Tuesday": "周二", "Wednesday": "周三",
+        "Thursday": "周四", "Friday": "周五", "Saturday": "周六", "Sunday": "周日"
+    }
+    weekday = weekday_map.get(datetime.now().strftime("%A"), "")
+    full_title = f"老贾，今天是{date_cn}早上好，知识星球内容"
 
     lines = [
-        f"## 🌏 知识星球 · {now}\n",
+        f"老贾，今天是{date_cn}（{weekday}）。以下是星球专属内容：\n",
         f"内容类型：**{topic_type}**\n",
         "---",
         f"### {title}",
