@@ -17,6 +17,7 @@ DATE_3D = (today - timedelta(days=3)).strftime("%Y-%m-%d")
 SENDKEY = os.environ.get("SENDKEY", "")
 GH_TOKEN = os.environ.get("GH_TOKEN", "")
 STATE_FILE = os.path.join(os.path.dirname(__file__), "..", "state_github.json")
+HISTORY_FILE = os.path.join(os.path.dirname(__file__), "..", "recommended_history.json")
 ARTICLE_DATA = os.path.join(os.path.dirname(__file__), "..", "article_data.json")
 
 HEADERS = {"Accept": "application/vnd.github.v3+json", "User-Agent": "auto-topic-bot"}
@@ -43,6 +44,37 @@ def load_article_data():
     except:
         pass
     return []
+
+def load_history():
+    """读取已推荐过的项目记录，避免重复。"""
+    try:
+        if os.path.exists(HISTORY_FILE):
+            with open(HISTORY_FILE) as f:
+                return json.load(f)
+    except:
+        pass
+    return []
+
+def save_history(new_picks):
+    """追加今日推荐到历史记录，清理14天前的旧记录。"""
+    history = load_history()
+    cutoff = (today - timedelta(days=14)).strftime("%Y-%m-%d")
+    # 清理旧记录
+    history = [h for h in history if h.get("date", "") > cutoff]
+    # 追加今日
+    for _, repo, _ in new_picks:
+        history.append({
+            "name": repo["full_name"],
+            "date": today.strftime("%Y-%m-%d"),
+        })
+    with open(HISTORY_FILE, "w") as f:
+        json.dump(history, f, ensure_ascii=False, indent=2)
+
+def get_seen_names():
+    """获取14天内已推荐过的项目名集合。"""
+    history = load_history()
+    cutoff = (today - timedelta(days=14)).strftime("%Y-%m-%d")
+    return {h["name"] for h in history if h.get("date", "") > cutoff}
 
 def search_github(query, per_page=10):
     url = f"https://api.github.com/search/repositories?q={requests.utils.quote(query)}&sort=stars&order=desc&per_page={per_page}"
@@ -96,8 +128,12 @@ def score_repo(repo, articles):
     return score, match_reasons
 
 def pick_top_projects(repos, articles, count=5):
+    seen = get_seen_names()
+    fresh = [r for r in repos if r["full_name"] not in seen]
+    print(f"  排除{len(repos)-len(fresh)}个已推荐过的")
+
     scored = []
-    for r in repos:
+    for r in fresh:
         name = r["full_name"]
         s, reasons = score_repo(r, articles)
         s += random.uniform(0, 0.3)
@@ -290,6 +326,7 @@ def main():
 
     title, content = build_message(picked, best, articles)
     send_wechat(title, content)
+    save_history(picked)
     print(f"推送完成：{len(picked)} 个项目")
 
 if __name__ == "__main__":
