@@ -1,11 +1,7 @@
 """
-09:00 GitHub 优质项目推荐
-筛选条件：
-  - 一周内创建或更新
-  - stars 数量较高（综合排序）
-  - 有人维护（15天内有提交）
-  - 每天不重复（排除近30天已推送项目）
-输出6个项目，每个带中文标签、简介。
+08:00 GitHub 项目推荐 + 智能选文
+根据老贾37篇文章数据，匹配最适合写的开源项目。
+只推2-3个，明确推荐最好写的那个。
 """
 import requests
 import os
@@ -14,282 +10,201 @@ import random
 import time
 from datetime import datetime, timedelta
 
-# 计算相对日期（GitHub API 不再支持 7days 等相对格式）
 today = datetime.now()
-DATE_7D  = (today - timedelta(days=7)).strftime("%Y-%m-%d")
-DATE_3D  = (today - timedelta(days=3)).strftime("%Y-%m-%d")
+DATE_7D = (today - timedelta(days=7)).strftime("%Y-%m-%d")
+DATE_3D = (today - timedelta(days=3)).strftime("%Y-%m-%d")
 
-def _get_sendkey():
-    SENDKEY = os.environ.get("SENDKEY", "")
-    if not SENDKEY:
-        try:
-            with open(os.path.join(os.path.dirname(__file__), "..", ".env")) as f:
-                for line in f:
-                    if line.startswith("SENDKEY="):
-                        SENDKEY = line.strip().split("=", 1)[1]
-                        break
-        except:
-            pass
-    return SENDKEY
-
-SENDKEY = _get_sendkey()
-
-
+SENDKEY = os.environ.get("SENDKEY", "")
 GH_TOKEN = os.environ.get("GH_TOKEN", "")
 STATE_FILE = os.path.join(os.path.dirname(__file__), "..", "state_github.json")
+ARTICLE_DATA = os.path.join(os.path.dirname(__file__), "..", "article_data.json")
 
 HEADERS = {"Accept": "application/vnd.github.v3+json", "User-Agent": "auto-topic-bot"}
 if GH_TOKEN:
     HEADERS["Authorization"] = f"Bearer {GH_TOKEN}"
 
+# 老贾爆款规律（来自37篇文章数据分析）
+PATTERNS = {
+    "省钱免费": {"keywords": ["free", "替代", "alternative", "省钱", "免费", "省", "open-source"], "score": 6, "reason": "省钱/免费类你之前转发率11-21%，非常稳"},
+    "大厂热度": {"keywords": ["google", "microsoft", "apple", "openai", "meta", "nvidia", "deepseek", "gemini", "claude", "anthropic"], "score": 4, "reason": "蹭大厂热度，你之前最高播放8830"},
+    "搞钱情绪": {"keywords": ["money", "job", "career", "印钞", "赚钱", "搞钱", "慌", "被开除", "裁员", "省"], "score": 3, "reason": "搞钱/情绪类转发率14-17%，最高播放15611"},
+    "AI相关": {"keywords": ["ai", "llm", "gpt", "chatgpt", "machine-learning", "ollama", "openai", "claude", "gemini", "langchain", "rag", "agent"], "score": 3, "reason": "AI类流量有保障，稳定1000+"},
+    "直接能用": {"keywords": ["web", "online", "saas", "app", "gui", "browser", "extension"], "score": 2, "reason": "在线可用不用安装，读者门槛低"},
+    "中文友好": {"keywords": ["chinese", "cn", "zh", "中文"], "score": 2, "reason": "支持中文，读者上手快"},
+    "安装复杂": {"keywords": ["docker", "kubernetes", "helm", "terraform"], "score": -5, "reason": "安装复杂劝退读者"},
+}
 
-def _read_sendkey():
-    SENDKEY = os.environ.get("SENDKEY", "")
-    if not SENDKEY:
-        try:
-            with open(os.path.join(os.path.dirname(__file__), "..", ".env")) as f:
-                for line in f:
-                    if line.startswith("SENDKEY="):
-                        SENDKEY = line.strip().split("=", 1)[1]
-                        break
-        except:
-            pass
-    return SENDKEY
-
-
-def load_state():
+def load_article_data():
+    """读取老贾的文章数据，用于匹配推荐理由。"""
     try:
-        if os.path.exists(STATE_FILE):
-            with open(STATE_FILE) as f:
+        if os.path.exists(ARTICLE_DATA):
+            with open(ARTICLE_DATA, encoding="utf-8") as f:
                 return json.load(f)
     except:
         pass
-    return {"pushed": [], "last_date": ""}
-
-
-def save_state(state):
-    with open(STATE_FILE, "w") as f:
-        json.dump(state, f)
-
-
-def is_active(repo):
-    """检查项目是否有人在维护（15天内有更新）。"""
-    push_date = repo.get("pushed_at", "") or repo.get("updated_at", "")
-    if not push_date:
-        return False
-    try:
-        push = datetime.strptime(push_date[:10], "%Y-%m-%d")
-        return (datetime.now() - push).days <= 15
-    except:
-        return True
-
+    return []
 
 def search_github(query, per_page=10):
     url = f"https://api.github.com/search/repositories?q={requests.utils.quote(query)}&sort=stars&order=desc&per_page={per_page}"
     try:
         r = requests.get(url, headers=HEADERS, timeout=15)
-        print(f"  GitHub API: {r.status_code} ({query[:30]}...)")
         if r.status_code == 200:
             items = r.json().get("items", [])
-            print(f"  -> 返回 {len(items)} 个项目")
+            print(f"  API 200: {len(items)} 个项目 ({query[:30]}...)")
             return items
         elif r.status_code == 403:
-            print("  -> GitHub API 限速，等待60秒...")
-            print(f"  -> 响应: {r.text[:200]}")
+            print(f"  API 403 限速，等60秒... {r.text[:100]}")
             time.sleep(60)
             return search_github(query, per_page)
         else:
-            print(f"  -> 失败: {r.text[:200]}")
+            print(f"  API {r.status_code}: {r.text[:100]}")
     except Exception as e:
-        print(f"  搜索失败 ({query}): {e}")
+        print(f"  搜索失败: {e}")
     return []
 
-
-def score_repo(repo):
+def score_repo(repo, articles):
     score = 0
     stars = repo["stargazers_count"]
     topics = repo.get("topics", [])
     desc = (repo.get("description") or "").lower()
     name = (repo.get("name") or "").lower()
     lang = repo.get("language") or ""
+    match_reasons = []
 
-    # 星星评分
-    if stars >= 10000:
-        score += 5
-    elif stars >= 5000:
-        score += 4
-    elif stars >= 1000:
-        score += 3
-    elif stars >= 500:
-        score += 2
-    else:
+    # 星星分
+    if stars >= 10000: score += 5
+    elif stars >= 5000: score += 4
+    elif stars >= 1000: score += 3
+    elif stars >= 500: score += 2
+    else: score += 1
+
+    # 匹配爆款规律
+    for pattern_name, pattern in PATTERNS.items():
+        if any(k in desc or k in topics or k in name for k in pattern["keywords"]):
+            score += pattern["score"]
+            if pattern["score"] > 0:
+                match_reasons.append(pattern["reason"])
+
+    # 编程语言友好度
+    easy_lang = ["python", "javascript", "typescript", "shell"]
+    hard_lang = ["c++", "c", "java", "rust", "go"]
+    if lang.lower() in easy_lang:
         score += 1
+    elif lang.lower() in hard_lang:
+        score -= 1
 
-    # === 爆款规律：转发率最高的话题（数据来自老贾4-7月37篇文章）===
+    return score, match_reasons
 
-    # 免费/省钱/替代付费 → 转发率16-21%，最高效
-    free_kw = ["free", "open-source", "open-source", "替代", "alternative",
-               "free-alternative", "free-替代", "省钱", "省", "free"]
-    if any(k in desc or k in topics or k in name for k in free_kw):
-        score += 6
-
-    # 蹭大厂热度（Google/微软/苹果相关工具）→ 高转发
-    company_kw = ["google", "microsoft", "apple", "openai", "meta", "nvidia",
-                  "claude", "deepseek", "gemini", "anthropic"]
-    if any(k in desc or k in topics for k in company_kw):
-        score += 4
-
-    # 争议性/情绪话题 → 高转发（印钞机/程序员慌了/被开除）
-    drama_kw = ["印钞", "money", "job", "career", "resume", "hire", "失业",
-                "免费", "替代", "慌", "裁员", "被开除", "省"]
-    if any(k in desc or k in name for k in drama_kw):
-        score += 3
-
-    # AI 相关性
-    ai_kw = ["ai", "llm", "gpt", "chatgpt", "machine-learning", "deep-learning",
-             "neural", "nlp", "copilot", "claude", "gemini", "langchain", "rag",
-             "embedding", "vector", "mistral", "ollama", "openai"]
-    has_ai = any(t.lower() in topics or t.lower() in desc for t in ai_kw)
-    if has_ai:
-        score += 3
-
-    # 中文支持
-    cn_kw = ["chinese", "cn", "zh", "中文"]
-    has_cn = any(t.lower() in topics for t in cn_kw)
-    if has_cn:
-        score += 2
-
-    # 实用工具类（小白能用的）
-    tool_kw = ["cli", "tool", "app", "gui", "desktop", "extension", "browser",
-               "web", "online", "saas"]
-    if any(t.lower() in topics for t in tool_kw):
-        score += 2
-
-    # 在线可用（不需要安装）→ 高转发
-    if "web" in topics or "online" in topics or "saas" in topics:
-        score += 2
-
-    # 编程语言加分
-    popular_lang = ["python", "javascript", "typescript", "rust", "go"]
-    if lang and lang.lower() in popular_lang:
-        score += 1
-
-    # === 否決線：一票否決 ===
-    # 安装复杂/技术门槛高 → 低转发，转发率通常<3%
-    hard_kw = ["docker", "kubernetes", "kubernetes", "helm", "terraform"]
-    if any(k in topics for k in hard_kw):
-        score -= 5
-
-    return score
-
-
-def pick_top6(repos, exclude_names, seed=None):
-    """从候选项目中选6个，优先高分，多样化。"""
+def pick_top_projects(repos, articles, count=3):
     scored = []
     for r in repos:
         name = r["full_name"]
-        if name in exclude_names:
-            continue
-        if not is_active(r):
-            continue
-        s = score_repo(r)
-        s += random.uniform(0, 0.5)  # 加点随机性，避免每天都一样
-        scored.append((s, r))
-
+        s, reasons = score_repo(r, articles)
+        s += random.uniform(0, 0.3)
+        scored.append((s, r, reasons))
     scored.sort(key=lambda x: x[0], reverse=True)
-    return [r for _, r in scored[:6]]
+    return scored[:count]
 
+def translate_desc(desc):
+    """把英文描述转成简短中文说明。"""
+    if not desc:
+        return "暂无简介"
+    desc_lower = desc.lower()
+    if "ai" in desc_lower or "llm" in desc_lower or "gpt" in desc_lower:
+        return f"AI工具：{desc[:60]}..."
+    elif "free" in desc_lower or "open" in desc_lower:
+        return f"免费开源：{desc[:60]}..."
+    elif "tool" in desc_lower or "cli" in desc_lower or "library" in desc_lower:
+        return f"开发工具：{desc[:60]}..."
+    else:
+        return desc[:80]
 
-def summarize_repo(repo):
-    topics = repo.get("topics", [])
-    desc = repo.get("description") or ""
-    lang = repo.get("language") or ""
-
-    parts = []
-    if topics:
-        parts.append("、".join(topics[:3]))
-    if desc:
-        parts.append(desc)
-    result = "。".join(parts) if parts else "暂无简介"
-    return result
-
-
-def build_message(repos):
-    now = datetime.now().strftime("%Y-%m-%d")
-    weekday_map = {
-        "Monday": "周一", "Tuesday": "周二", "Wednesday": "周三",
-        "Thursday": "周四", "Friday": "周五", "Saturday": "周六", "Sunday": "周日"
-    }
-    weekday = weekday_map.get(datetime.now().strftime("%A"), "")
-    date_cn = f"{datetime.now().year}年{datetime.now().month}月{datetime.now().day}日"
-    title = f"老贾，今天是{date_cn}早上好，GitHub 优质项目推荐"
+def build_message(picked, best, articles):
+    date_cn = f"{today.year}年{today.month}月{today.day}日"
+    weekday_map = {"Monday": "周一", "Tuesday": "周二", "Wednesday": "周三",
+                   "Thursday": "周四", "Friday": "周五", "Saturday": "周六", "Sunday": "周日"}
+    weekday = weekday_map.get(today.strftime("%A"), "")
+    title = f"老贾，今天是{date_cn}早上好，今日开源项目推荐"
 
     lines = [
-        f"老贾，今天是{date_cn}（{weekday}）早上好。以下是今天推荐的 GitHub 开源项目：\n",
-        "筛选条件：一周内活跃 · 星星多 · 有人维护 · 每天不重复\n",
-        "---",
+        f"老贾，今天是{date_cn}（{weekday}）早上好。今天推荐以下开源项目：\n",
     ]
 
-    for i, repo in enumerate(repos, 1):
-        stars_k = f"{repo['stargazers_count'] / 1000:.1f}K" if repo["stargazers_count"] >= 1000 else str(repo["stargazers_count"])
-        lang = repo.get("language") or "多语言"
-        summary = summarize_repo(repo)
+    # 最佳推荐（放在最前面）
+    best_repo = best[1]
+    best_score = best[0]
+    best_reasons = best[2]
+    stars_k = f"{best_repo['stargazers_count']/1000:.1f}K" if best_repo['stargazers_count'] >= 1000 else str(best_repo['stargazers_count'])
+    lang = best_repo.get("language") or "多语言"
 
-        lines.append(f"### {i}. {repo['full_name']}")
-        lines.append(f"⭐ {stars_k}　🔧 {lang}")
-        lines.append(f"📝 {summary}")
-        lines.append(f"🔗 {repo['html_url']}")
-        lines.append("")
+    lines.append("🏆 最佳推荐（建议写这篇）")
+    lines.append(f"")
+    lines.append(f"项目：{best_repo['full_name']}")
+    lines.append(f"星数：⭐ {stars_k}　语言：{lang}")
+    lines.append(f"简介：{translate_desc(best_repo.get('description', ''))}")
+    lines.append(f"🔗 {best_repo['html_url']}")
+    lines.append(f"")
+    lines.append(f"为什么推荐这篇：")
+    for r in best_reasons[:3]:
+        lines.append(f"  ✅ {r}")
+    # 加上数据匹配
+    best_type = ""
+    if any(k in (best_repo.get("description") or "").lower() or k in best_repo.get("topics", []) or k in best_repo.get("name", "").lower() for k in ["free", "省钱", "免费", "替代", "alternative"]):
+        lines.append(f"  📊 你之前写省钱类最高891播放、155转发，读者爱看")
+    if any(k in (best_repo.get("description") or "").lower() for k in ["money", "job", "印钞", "赚钱", "搞钱"]):
+        lines.append(f"  📊 你之前写搞钱类最高5617播放、811转发，爆款潜力大")
+    lines.append(f"")
+
+    # 其他推荐
+    lines.append("---")
+    lines.append("其他可选项目：\n")
+    for i, (score, repo, reasons) in enumerate(picked, 1):
+        if repo["full_name"] == best_repo["full_name"]:
+            continue
+        stars_k = f"{repo['stargazers_count']/1000:.1f}K" if repo['stargazers_count'] >= 1000 else str(repo['stargazers_count'])
+        lang = repo.get("language") or "多语言"
+        lines.append(f"{i}. {repo['full_name']}（⭐ {stars_k} · {lang}）")
+        lines.append(f"   {translate_desc(repo.get('description', ''))}")
+        for r in reasons[:2]:
+            lines.append(f"   ✅ {r}")
+        lines.append(f"")
 
     lines.append("---")
-    lines.append("回复「写X」（如「写2」）我立刻为你写文章。")
-    lines.append("不想写这些？回复「换」重新推荐。")
-    return title, "\n".join(lines)
+    lines.append("回复「写」我就开始写上面推荐那篇。")
+    lines.append("不想写这个？回复「换」重新推荐。")
 
+    return title, "\n".join(lines)
 
 def send_wechat(title, content):
     if not SENDKEY:
-        print("SENDKEY 未设定，无法推送")
+        print("SENDKEY 未设定")
         return
     url = f"https://sctapi.ftqq.com/{SENDKEY}.send"
-    data = {"title": title, "desp": content}
     try:
-        r = requests.post(url, data=data, timeout=10)
+        r = requests.post(url, data={"title": title, "desp": content}, timeout=10)
         print("推送结果:", r.text[:200])
     except Exception as e:
         print("推送失败:", e)
 
-
 def main():
-    today_str = datetime.now().strftime("%Y-%m-%d")
-    print(f"抓取 GitHub 热门项目 ({today_str})...")
+    print(f"抓取 GitHub 热门项目 ({today.strftime('%Y-%m-%d')})...")
 
-    state = load_state()
+    articles = load_article_data()
+    print(f"已加载 {len(articles)} 条文章数据")
 
-    # 如果是今天第一次跑，清空当天已推送
-    if state.get("last_date") != today_str:
-        state["pushed"] = []
-        state["last_date"] = today_str
-
-    exclude_names = set(state.get("pushed", []))
-
-    # 多种搜索策略，确保覆盖面
     queries = [
-        f"stars:>500 pushed:>{DATE_7D}",                      # 高星近期活跃
-        f"topic:ai stars:>200 pushed:>{DATE_7D}",            # AI赛道
-        f"topic:open-source stars:>300 pushed:>{DATE_7D}",   # 精品开源
-        f"topic:developer-tools stars:>200 pushed:>{DATE_7D}", # 开发者工具
-        f"stars:>100 pushed:>{DATE_3D}",                     # 3天内新热
-        f"(topic:chatgpt OR topic:llm OR topic:ollama) stars:>100 pushed:>{DATE_7D}",  # AI工具
+        f"stars:>500 pushed:>{DATE_7D}",
+        f"topic:ai stars:>200 pushed:>{DATE_7D}",
+        f"topic:open-source stars:>300 pushed:>{DATE_7D}",
+        f"stars:>100 pushed:>{DATE_3D}",
     ]
 
     all_repos = []
     for q in queries:
         results = search_github(q, per_page=8)
         all_repos.extend(results)
-        time.sleep(0.5)  # 避免太快触发限速
+        time.sleep(0.5)
 
-    # 去重
     seen = set()
     unique = []
     for r in all_repos:
@@ -297,19 +212,18 @@ def main():
             seen.add(r["full_name"])
             unique.append(r)
 
-    print(f"候选项目：{len(unique)} 个，筛选中...")
-    picked = pick_top6(unique, exclude_names, seed=int(today_str.replace("-", "")))
+    print(f"候选项目：{len(unique)} 个，评分中...")
+
+    picked = pick_top_projects(unique, articles, count=3)
 
     if not picked:
-        send_wechat("GitHub 选题抓取失败", "今天没有找到合适的项目，明天再试。")
+        send_wechat("老贾，今天没找到合适的项目", "GitHub 上没有匹配的项目，明天再试。")
         return
 
-    # 更新状态
-    state["pushed"].extend([r["full_name"] for r in picked])
-    state["pushed"] = state["pushed"][-30:]  # 只保留近30天
-    save_state(state)
+    # 最佳推荐 = 分数最高的
+    best = picked[0]
 
-    # 保存供 11:00 脚本使用
+    # 保存供下游脚本
     github_state_file = os.path.join(os.path.dirname(__file__), "..", "state_github_projects.json")
     with open(github_state_file, "w") as f:
         json.dump({
@@ -320,19 +234,15 @@ def main():
                 "description": r.get("description") or "",
                 "url": r["html_url"],
                 "topics": r.get("topics", []),
-                "updated": r.get("pushed_at", "")[:10] if r.get("pushed_at") else r.get("updated_at", "")[:10],
-            } for r in picked],
-            "date": today_str
+                "updated": (r.get("pushed_at") or r.get("updated_at") or "")[:10],
+            } for score, r, reasons in picked],
+            "date": today.strftime("%Y-%m-%d"),
+            "best_pick": best[1]["full_name"],
         }, f)
 
-    title, content = build_message(picked)
+    title, content = build_message(picked, best, articles)
     send_wechat(title, content)
     print(f"推送完成：{len(picked)} 个项目")
 
-
 if __name__ == "__main__":
-    import time as _time
-    time = _time
-    import random as _random
-    random = _random
     main()
