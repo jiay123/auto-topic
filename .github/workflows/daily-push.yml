@@ -37,7 +37,7 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: state_github_projects.json
-          key: github-projects-state-${{ github.run_id }}
+          key: github-projects-state
       - run: pip install requests
       - run: python scripts/fetch_github_projects.py
         env:
