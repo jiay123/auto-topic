@@ -58,7 +58,7 @@ def load_history():
 def save_history(new_picks):
     """追加今日推荐到历史记录，清理14天前的旧记录。"""
     history = load_history()
-    cutoff = (today - timedelta(days=14)).strftime("%Y-%m-%d")
+    cutoff = (today - timedelta(days=3)).strftime("%Y-%m-%d")
     # 清理旧记录
     history = [h for h in history if h.get("date", "") > cutoff]
     # 追加今日
@@ -73,7 +73,7 @@ def save_history(new_picks):
 def get_seen_names():
     """获取14天内已推荐过的项目名集合。"""
     history = load_history()
-    cutoff = (today - timedelta(days=14)).strftime("%Y-%m-%d")
+    cutoff = (today - timedelta(days=3)).strftime("%Y-%m-%d")
     return {h["name"] for h in history if h.get("date", "") > cutoff}
 
 def search_github(query, per_page=10):
@@ -266,9 +266,9 @@ def main():
     print(f"已加载 {len(articles)} 条文章数据")
 
     queries = [
-        f"stars:>500 pushed:>{DATE_7D}",
-        f"topic:ai stars:>200 pushed:>{DATE_7D}",
-        f"topic:open-source stars:>300 pushed:>{DATE_7D}",
+        f"stars:>500 pushed:>{DATE_3D}",
+        f"topic:ai stars:>200 pushed:>{DATE_3D}",
+        f"topic:open-source stars:>300 pushed:>{DATE_3D}",
         f"stars:>100 pushed:>{DATE_3D}",
     ]
 
@@ -298,6 +298,28 @@ def main():
         if len(picked) >= 5:
             print("已凑满5个项目")
             break
+
+    # 兜底：去重后不足5个（GitHub当天新项目少），放宽到14天窗口补满
+    if len(picked) < 5:
+        print(f"  当天新项目不足{len(picked)}个，放宽到14天窗口补满")
+        fallback = (today - timedelta(days=14)).strftime("%Y-%m-%d")
+        fallback_queries = [
+            f"stars:>1000 pushed:>{fallback}",
+            f"topic:ai stars:>500 pushed:>{fallback}",
+        ]
+        for q in fallback_queries:
+            results = search_github(q, per_page=12)
+            all_repos.extend(results)
+            time.sleep(0.5)
+            seen = set()
+            unique = []
+            for r in all_repos:
+                if r["full_name"] not in seen:
+                    seen.add(r["full_name"])
+                    unique.append(r)
+            picked = pick_top_projects(unique, articles, count=5)
+            if len(picked) >= 5:
+                break
 
     if not picked:
         send_wechat("老贾，今天没找到合适的项目", "GitHub 上没有匹配的项目，明天再试。")
