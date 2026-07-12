@@ -34,15 +34,19 @@ HEADERS = {"Accept": "application/vnd.github.v3+json", "User-Agent": "auto-topic
 if GH_TOKEN:
     HEADERS["Authorization"] = f"Bearer {GH_TOKEN}"
 
-# 老贾爆款规律（来自历史文章数据分析），用于给“数据相关”项目打分
+# 老贾爆款规律（来自历史文章 + 涨粉数据分析），用于给“数据相关”项目打分
+# 权重依据「单篇涨粉」硬指标（2026-07-12 更新）：求职上岸103、大厂干货83、搞钱80/61、省钱34
 PATTERNS = {
-    "省钱免费": {"keywords": ["free", "替代", "alternative", "省钱", "免费", "省", "open-source"], "score": 6, "reason": "省钱/免费类你之前转发率11-21%，非常稳"},
-    "大厂热度": {"keywords": ["google", "microsoft", "apple", "openai", "meta", "nvidia", "deepseek", "gemini", "claude", "anthropic"], "score": 4, "reason": "蹭大厂热度，你之前最高播放8830"},
-    "搞钱情绪": {"keywords": ["money", "job", "career", "印钞", "赚钱", "搞钱", "慌", "被开除", "裁员"], "score": 3, "reason": "搞钱/情绪类转发率14-17%，最高播放15611"},
+    "求职上岸": {"keywords": ["job", "jobs", "career", "resume", "cv", "interview", "hire", "hiring", "求职", "找工作", "简历", "面试", "上岸"], "score": 7, "reason": "求职/上岸类涨粉最猛（单篇+103），读者最愿意关注"},
+    "省钱免费": {"keywords": ["free", "替代", "alternative", "省钱", "免费", "省", "open-source"], "score": 6, "reason": "省钱/免费类转发率11-21%、涨粉稳（+34），非常稳"},
+    "搞钱变现": {"keywords": ["money", "印钞", "赚钱", "搞钱", "副业", "monetize", "revenue", "earn", "profit", "变现", "side-project"], "score": 6, "reason": "搞钱/变现类涨粉高（+80/+61），最高播放15611"},
+    "大厂干货": {"keywords": ["google", "microsoft", "apple", "openai", "meta", "nvidia", "deepseek", "gemini", "claude", "anthropic"], "score": 5, "reason": "大厂/内行干货涨粉高（CLAUDE.md +83），最高播放8830"},
+    "情绪爆点": {"keywords": ["慌", "被开除", "裁员", "太狠", "疯传"], "score": 3, "reason": "情绪词标题，转发率14-17%"},
     "AI相关": {"keywords": ["ai", "llm", "gpt", "chatgpt", "machine-learning", "ollama", "openai", "claude", "gemini", "langchain", "rag", "agent"], "score": 3, "reason": "AI类流量有保障，稳定1000+"},
     "直接能用": {"keywords": ["web", "online", "saas", "app", "gui", "browser", "extension"], "score": 2, "reason": "在线可用不用安装，读者门槛低"},
     "中文友好": {"keywords": ["chinese", "cn", "zh", "中文"], "score": 2, "reason": "支持中文，读者上手快"},
-    "安装复杂": {"keywords": ["docker", "kubernetes", "helm", "terraform"], "score": -5, "reason": "安装复杂劝退读者"},
+    "纯技术资讯": {"keywords": ["driver", "kernel", "compiler", "benchmark", "3d-engine", "physics"], "score": -6, "reason": "纯技术/硬件资讯涨粉≈0，别写"},
+    "安装复杂": {"keywords": ["kubernetes", "helm", "terraform"], "score": -5, "reason": "安装复杂劝退读者"},
 }
 
 # 中文卡片规则库：按顺序匹配，命中第一条就用。每条给出“大白话标题 + 3条中文要点”
@@ -346,24 +350,24 @@ def main():
     articles = load_article_data()
     print(f"已加载 {len(articles)} 条文章数据")
 
-    # 搜索“数据相关”候选
+    # 搜索“数据相关”候选。前面几条是「涨粉高类型」的定向捞货（求职/搞钱/省钱替代），
+    # 保证候选池里一定有读者最爱看的类型，不会断供；后面几条泛热门兜底。
+    DATE_30D = (today - timedelta(days=30)).strftime("%Y-%m-%d")
     queries = [
-        f"stars:>500 pushed:>{DATE_7D}",
-        f"topic:ai stars:>200 pushed:>{DATE_7D}",
-        f"topic:open-source stars:>300 pushed:>{DATE_7D}",
-        f"stars:>100 pushed:>{DATE_3D}",
+        f"job OR career OR resume OR interview stars:>300 pushed:>{DATE_30D}",   # 涨粉冠军：求职上岸
+        f"alternative OR self-hosted OR free stars:>500 pushed:>{DATE_7D}",       # 省钱替代付费
+        f"money OR monetize OR automation OR agent stars:>500 pushed:>{DATE_7D}", # 搞钱/自动化
+        f"stars:>800 pushed:>{DATE_7D}",                                          # 泛热门兜底
+        f"topic:ai stars:>300 pushed:>{DATE_7D}",                                 # AI 兜底
     ]
     all_repos = []
-    for _ in range(3):
-        if not queries:
-            break
-        q = queries.pop(0)
-        results = search_github(q, per_page=12)
+    for q in queries:
+        results = search_github(q, per_page=10)
         all_repos.extend(results)
         time.sleep(0.5)
         seen = set()
         unique = [r for r in all_repos if not (r["full_name"] in seen or seen.add(r["full_name"]))]
-        if len(unique) >= 8:
+        if len(unique) >= 20:
             break
 
     # 本周热门（带轮转）
