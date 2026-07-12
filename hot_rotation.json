@@ -1,8 +1,10 @@
 {
   "week": "2026-07-06",
   "pushed": [
+    "nilbuild/developer-roadmap",
+    "freeCodeCamp/freeCodeCamp",
     "openclaw/openclaw",
-    "freeCodeCamp/freeCodeCamp"
+    "vinta/awesome-python"
   ],
   "updated": "2026-07-12"
 }
