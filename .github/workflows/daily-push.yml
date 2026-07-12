@@ -29,20 +29,27 @@ jobs:
   github-projects:
     if: ${{ github.event.schedule == '0 0 * * *' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - uses: actions/cache@v4
-        with:
-          path: state_github_projects.json
-          key: github-projects-state
       - run: pip install requests
       - run: python scripts/fetch_github_projects.py
         env:
           SENDKEY: ${{ secrets.SENDKEY }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: 提交状态文件（去重+热门轮转持久化）
+        run: |
+          git config user.email "bot@auto-topic.local"
+          git config user.name "auto-topic-bot"
+          git add recommended_history.json hot_rotation.json
+          git commit -m "chore: 更新推荐状态 $(date +%F)" || echo "no changes"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   planet-content:
     if: ${{ github.event.schedule == '0 4 * * *' || github.event_name == 'workflow_dispatch' }}
