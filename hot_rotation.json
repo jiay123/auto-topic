@@ -1,5 +1,8 @@
 {
   "week": "2026-07-13",
-  "pushed": [],
-  "updated": "2026-07-13"
+  "pushed": [
+    "openclaw/openclaw",
+    "awesome-selfhosted/awesome-selfhosted"
+  ],
+  "updated": "2026-07-14"
 }
