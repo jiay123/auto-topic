@@ -70,5 +70,25 @@
   {
     "name": "open-webui/open-webui",
     "date": "2026-07-14"
+  },
+  {
+    "name": "ripienaar/free-for-dev",
+    "date": "2026-07-15"
+  },
+  {
+    "name": "freeCodeCamp/freeCodeCamp",
+    "date": "2026-07-15"
+  },
+  {
+    "name": "trekhleb/javascript-algorithms",
+    "date": "2026-07-15"
+  },
+  {
+    "name": "EbookFoundation/free-programming-books",
+    "date": "2026-07-15"
+  },
+  {
+    "name": "codecrafters-io/build-your-own-x",
+    "date": "2026-07-15"
   }
 ]
