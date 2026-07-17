@@ -1,12 +1,14 @@
 {
   "week": "2026-07-13",
   "pushed": [
-    "freeCodeCamp/freeCodeCamp",
-    "codecrafters-io/build-your-own-x",
+    "vinta/awesome-python",
     "nilbuild/developer-roadmap",
-    "openclaw/openclaw",
     "EbookFoundation/free-programming-books",
-    "awesome-selfhosted/awesome-selfhosted"
+    "openclaw/openclaw",
+    "awesome-selfhosted/awesome-selfhosted",
+    "obra/superpowers",
+    "freeCodeCamp/freeCodeCamp",
+    "codecrafters-io/build-your-own-x"
   ],
-  "updated": "2026-07-16"
+  "updated": "2026-07-17"
 }
