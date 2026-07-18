@@ -130,5 +130,17 @@
   {
     "name": "DigitalPlatDev/FreeDomain",
     "date": "2026-07-17"
+  },
+  {
+    "name": "torvalds/linux",
+    "date": "2026-07-18"
+  },
+  {
+    "name": "react/react",
+    "date": "2026-07-18"
+  },
+  {
+    "name": "n8n-io/n8n",
+    "date": "2026-07-18"
   }
 ]
