@@ -16,6 +16,8 @@ jobs:
   ai-news:
     if: ${{ github.event.schedule == '0 23 * * *' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

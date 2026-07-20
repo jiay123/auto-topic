@@ -1,5 +1,7 @@
 # 状态文件（缓存使用，不要提交）
 state_*.json
+# 但新闻去重状态必须提交，否则每天去重失效、内容重复
+!state_news_dedup.json
 
 # 本地测试文件
 _test_*.txt

@@ -7,7 +7,9 @@
 import requests
 import re
 import os
+import sys
 import json
+import subprocess
 import concurrent.futures
 from datetime import datetime, timedelta
 
@@ -22,14 +24,25 @@ if not SENDKEY:
     except:
         pass
 
-STATE_FILE = os.path.join(os.path.dirname(__file__), "..", "state_news_dedup.json")
+BASE_DIR = os.path.join(os.path.dirname(__file__), "..")
+STATE_FILE = os.path.join(BASE_DIR, "state_news_dedup.json")
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
 
 # --- 日期范围：昨天 + 今天 ---
 today = datetime.now().strftime("%Y-%m-%d")
 yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
 
+def _git(*args):
+    try:
+        subprocess.run(["git", "-C", BASE_DIR] + list(args), check=False,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except Exception:
+        pass
+
 def load_dedup():
+    # 云端每次是全新 checkout，先尝试从远端拉取最新的去重状态
+    if os.environ.get("GITHUB_ACTIONS") == "true":
+        _git("pull", "--ff-only")
     try:
         if os.path.exists(STATE_FILE):
             with open(STATE_FILE) as f:
@@ -43,9 +56,16 @@ def save_dedup(titles):
     today_titles = list(titles)[-200:]
     try:
         with open(STATE_FILE, "w") as f:
-            json.dump({"titles": today_titles, "date": today}, f)
+            json.dump({"titles": today_titles, "date": today}, f, ensure_ascii=False)
     except:
         pass
+    # 云端把去重状态提交回仓库，保证下次运行能去重（不重复推送）
+    if os.environ.get("GITHUB_ACTIONS") == "true":
+        _git("config", "user.email", "bot@auto-topic.local")
+        _git("config", "user.name", "auto-topic-bot")
+        _git("add", "state_news_dedup.json")
+        _git("commit", "-m", f"chore: 更新新闻去重状态 {today}")
+        _git("push")
 
 def is_recent(pubdate_str):
     """判断发布时间是否在昨天或今天。"""

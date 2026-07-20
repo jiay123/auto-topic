@@ -233,6 +233,7 @@ def build_cn_card(repo):
         is_ai = any(k in blob for k in ["ai", "llm", "gpt", "chat", "agent", "model"])
         is_free = any(k in blob for k in ["free", "open-source", "alternative", "开源"])
         is_web = any(k in blob for k in ["web", "online", "saas", "browser"])
+        is_tool = any(k in blob for k in ["tool", "util", "manager", "cli", "script", "bot"])
         if is_ai and is_free:
             title = "免费的 AI 开源工具"
         elif is_ai:
@@ -242,12 +243,17 @@ def build_cn_card(repo):
         elif is_web:
             title = "在线就能用的开源工具"
         else:
-            title = "开源工具（具体能帮你做什么，小叮当下次细说）"
+            title = "开源工具（照名字就能看出能干啥）"
+        # 描述缺失时，用项目名 + topics 生成真实可读的兜底要点，绝不出现“小叮当下次细说”
+        name_cn = repo.get("name", "").replace("-", " ").replace("_", " ")
+        topic_cn = "、".join(topics[:3]) if topics else ""
         points = [
-            "是什么：一个开源项目，代码公开、能免费自部署",
-            "能干啥：具体功能小叮当下次帮你确认清楚",
-            "适合谁：想省会员费、或想自己掌控工具的人",
+            f"是什么：一个叫「{name_cn}」的开源项目" + (f"，标签是 {topic_cn}" if topic_cn else "，代码公开可免费自部署"),
+            "能干啥：点下面链接进项目主页，README 里有完整功能说明和用法",
+            "适合谁：想省会员费、或想自己掌控工具、跟着热点折腾的人",
         ]
+        if not is_tool and not is_ai:
+            points[1] = "能干啥：开源项目，自己部署就能用，具体看主页说明"
 
     updated = (repo.get("pushed_at") or "")[:10]
     fresh = f"本周有更新（{updated}）" if updated >= DATE_7D else f"最近更新 {updated}"
@@ -299,7 +305,7 @@ def build_message(hot_picks, data_picks, best):
     for r in hot_picks:
         lines.append(f"\n◆ {r['full_name']}")
         lines.append(build_cn_card(r))
-        lines.append(r["html_url"])
+        lines.append(f"项目主页：[{r['full_name']}]({r['html_url']})")
 
     lines.append("\n【二、最适合你写的 3 个项目】（结合你历史数据）")
     for i, (s, r, reasons) in enumerate(data_picks, 1):
@@ -307,7 +313,7 @@ def build_message(hot_picks, data_picks, best):
             continue
         lines.append(f"\n{i}. {r['full_name']}")
         lines.append(build_cn_card(r))
-        lines.append(r["html_url"])
+        lines.append(f"项目主页：[{r['full_name']}]({r['html_url']})")
 
     best_repo = best[1] if isinstance(best[1], dict) else {}
     if best_repo.get("full_name") and not best_repo["full_name"].startswith("（"):
@@ -325,7 +331,7 @@ def build_message(hot_picks, data_picks, best):
             lines.append("  · 你之前写搞钱类文章，最高5617播放、811转发，爆款潜力大")
         if any(k in blob for k in ["google", "microsoft", "apple", "openai", "meta", "deepseek"]):
             lines.append("  · 蹭大厂热度，你之前写Google相关文章最高8830播放")
-        lines.append(f"链接：{best_repo['html_url']}")
+        lines.append(f"链接：[{best_repo['full_name']}]({best_repo['html_url']})")
 
     lines.append("\n（想写哪个回复编号或“写”，我帮你出文章）")
     return title, "\n".join(lines)
