@@ -2,7 +2,9 @@
   "week": "2026-07-20",
   "pushed": [
     "freeCodeCamp/freeCodeCamp",
-    "openclaw/openclaw"
+    "nilbuild/developer-roadmap",
+    "openclaw/openclaw",
+    "awesome-selfhosted/awesome-selfhosted"
   ],
-  "updated": "2026-07-21"
+  "updated": "2026-07-22"
 }
