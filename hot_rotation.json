@@ -1,12 +1,14 @@
 {
   "week": "2026-07-20",
   "pushed": [
-    "nilbuild/developer-roadmap",
-    "EbookFoundation/free-programming-books",
+    "vinta/awesome-python",
+    "react/react",
+    "obra/superpowers",
     "openclaw/openclaw",
-    "awesome-selfhosted/awesome-selfhosted",
     "freeCodeCamp/freeCodeCamp",
-    "vinta/awesome-python"
+    "nilbuild/developer-roadmap",
+    "awesome-selfhosted/awesome-selfhosted",
+    "EbookFoundation/free-programming-books"
   ],
-  "updated": "2026-07-23"
+  "updated": "2026-07-24"
 }
