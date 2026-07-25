@@ -194,5 +194,17 @@
   {
     "name": "obra/superpowers",
     "date": "2026-07-24"
+  },
+  {
+    "name": "public-apis/public-apis",
+    "date": "2026-07-25"
+  },
+  {
+    "name": "amruthpillai/reactive-resume",
+    "date": "2026-07-25"
+  },
+  {
+    "name": "torvalds/linux",
+    "date": "2026-07-25"
   }
 ]
