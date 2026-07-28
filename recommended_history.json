@@ -1,25 +1,5 @@
 [
   {
-    "name": "openclaw/openclaw",
-    "date": "2026-07-14"
-  },
-  {
-    "name": "sudheerj/reactjs-interview-questions",
-    "date": "2026-07-14"
-  },
-  {
-    "name": "TheAlgorithms/Python",
-    "date": "2026-07-14"
-  },
-  {
-    "name": "awesome-selfhosted/awesome-selfhosted",
-    "date": "2026-07-14"
-  },
-  {
-    "name": "open-webui/open-webui",
-    "date": "2026-07-14"
-  },
-  {
     "name": "ripienaar/free-for-dev",
     "date": "2026-07-15"
   },
@@ -178,5 +158,25 @@
   {
     "name": "karanpratapsingh/system-design",
     "date": "2026-07-27"
+  },
+  {
+    "name": "sudheerj/reactjs-interview-questions",
+    "date": "2026-07-28"
+  },
+  {
+    "name": "nilbuild/developer-roadmap",
+    "date": "2026-07-28"
+  },
+  {
+    "name": "open-webui/open-webui",
+    "date": "2026-07-28"
+  },
+  {
+    "name": "TheAlgorithms/Python",
+    "date": "2026-07-28"
+  },
+  {
+    "name": "openclaw/openclaw",
+    "date": "2026-07-28"
   }
 ]
