@@ -6,10 +6,8 @@ on:
     - cron: '0 23 * * *'
     # 08:00 北京时间 = 00:00 UTC
     - cron: '0 0 * * *'
-    # 12:00 北京时间 = 04:00 UTC
-    - cron: '0 4 * * *'
-    # 15:00 北京时间 = 07:00 UTC
-    - cron: '0 7 * * *'
+    # 09:00 北京时间 = 01:00 UTC
+    - cron: '0 1 * * *'
   workflow_dispatch:
 
 jobs:
@@ -43,42 +41,36 @@ jobs:
         env:
           SENDKEY: ${{ secrets.SENDKEY }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      - name: 提交状态文件（去重+热门轮转持久化）
+      - name: 提交状态文件
         run: |
           git config user.email "bot@auto-topic.local"
           git config user.name "auto-topic-bot"
-          git add recommended_history.json hot_rotation.json
+          git add recommended_history.json hot_rotation.json state_github_projects.json
           git commit -m "chore: 更新推荐状态 $(date +%F)" || echo "no changes"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  planet-content:
-    if: ${{ github.event.schedule == '0 4 * * *' || github.event_name == 'workflow_dispatch' }}
+  daily-tips:
+    if: ${{ github.event.schedule == '0 1 * * *' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - uses: actions/cache/restore@v4
-        with:
-          path: state_github_projects.json
-          key: github-projects-state
       - run: pip install requests
       - run: python scripts/fetch_planet_content.py
         env:
           SENDKEY: ${{ secrets.SENDKEY }}
-
-  daily-review:
-    if: ${{ github.event.schedule == '0 7 * * *' || github.event_name == 'workflow_dispatch' }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - run: pip install requests
-      - run: python scripts/fetch_daily_review.py
+      - name: 提交运营技巧状态
+        run: |
+          git config user.email "bot@auto-topic.local"
+          git config user.name "auto-topic-bot"
+          git add state_daily_tips.json
+          git commit -m "chore: 更新运营技巧状态 $(date +%F)" || echo "no changes"
+          git push
         env:
-          SENDKEY: ${{ secrets.SENDKEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -229,31 +229,44 @@ def build_cn_card(repo):
             points = card["points"]
             break
 
-    if not title:
-        is_ai = any(k in blob for k in ["ai", "llm", "gpt", "chat", "agent", "model"])
-        is_free = any(k in blob for k in ["free", "open-source", "alternative", "开源"])
-        is_web = any(k in blob for k in ["web", "online", "saas", "browser"])
-        is_tool = any(k in blob for k in ["tool", "util", "manager", "cli", "script", "bot"])
-        if is_ai and is_free:
-            title = "免费的 AI 开源工具"
-        elif is_ai:
-            title = "AI 相关的开源工具"
-        elif is_free:
-            title = "免费开源工具"
-        elif is_web:
-            title = "在线就能用的开源工具"
+if not title:
+        # 用 description + topics 生成有意义的中文描述，不再套泛化模板
+        raw_desc = (repo.get("description") or "").strip()
+        raw_name = repo.get("name", "").replace("-", " ").replace("_", " ")
+        raw_topics = [t for t in repo.get("topics", []) if t.lower() not in ("awesome", "awesome-list")]
+        topic_str = "、".join(raw_topics[:3]) if raw_topics else ""
+
+        if raw_desc:
+            title = raw_desc[:60] + ("..." if len(raw_desc) > 60 else "")
+        elif topic_str:
+            title = raw_name + "（" + topic_str + "）"
         else:
-            title = "开源工具（照名字就能看出能干啥）"
-        # 描述缺失时，用项目名 + topics 生成真实可读的兜底要点，绝不出现“小叮当下次细说”
-        name_cn = repo.get("name", "").replace("-", " ").replace("_", " ")
-        topic_cn = "、".join(topics[:3]) if topics else ""
-        points = [
-            f"是什么：一个叫「{name_cn}」的开源项目" + (f"，标签是 {topic_cn}" if topic_cn else "，代码公开可免费自部署"),
-            "能干啥：点下面链接进项目主页，README 里有完整功能说明和用法",
-            "适合谁：想省会员费、或想自己掌控工具、跟着热点折腾的人",
-        ]
-        if not is_tool and not is_ai:
-            points[1] = "能干啥：开源项目，自己部署就能用，具体看主页说明"
+            title = raw_name
+
+        # 三个要点：具体到项目，不泛化
+        pts = []
+        if raw_desc:
+            pts.append(f"是什么：{raw_desc}")
+        elif topic_str:
+            pts.append(f"是什么：{raw_name}，涉及 {topic_str}，代码开源免费使用")
+        else:
+            pts.append(f"是什么：{raw_name}，一个在 GitHub 上开源的项目")
+
+        if raw_topics:
+            pts.append(f"能干啥：可用来做 {topic_str} 相关的事情，自己部署就能跑")
+        elif raw_desc and len(raw_desc) > 30:
+            pts.append("能干啥：上面的描述就是它的核心功能")
+        else:
+            pts.append("能干啥：点下面链接进项目主页看完整的用法说明")
+
+        stars = repo.get("stargazers_count", 0)
+        if stars >= 5000:
+            pts.append(f"适合谁：{stars//1000}K 星说明很多人已经在用了，技术门槛不高的话值得一试")
+        elif stars >= 1000:
+            pts.append("适合谁：千星以上说明社区活跃、值得关注，想省付费工具钱的人适合")
+        else:
+            pts.append("适合谁：想省会员费、自己掌控工具、跟着热点折腾的人")
+        points = pts
 
     updated = (repo.get("pushed_at") or "")[:10]
     fresh = f"本周有更新（{updated}）" if updated >= DATE_7D else f"最近更新 {updated}"
@@ -318,19 +331,24 @@ def build_message(hot_picks, data_picks, best):
     best_repo = best[1] if isinstance(best[1], dict) else {}
     if best_repo.get("full_name") and not best_repo["full_name"].startswith("（"):
         best_reasons = best[2]
+        best_desc = (best_repo.get("description") or "")
+        best_topics = best_repo.get("topics", [])
+        best_name = best_repo.get("name", "")
         lines.append("\n【三、今天最推荐你写这个】")
         lines.append(f"\n★ {best_repo['full_name']}")
         lines.append(build_cn_card(best_repo))
         lines.append(f"\n为什么推荐你写：")
         for rsn in best_reasons[:3]:
             lines.append(f"  · {rsn}")
-        blob = f"{(best_repo.get('description') or '').lower()} {' '.join(best_repo.get('topics', []))} {best_repo.get('name','').lower()}"
+        blob = f"{best_desc.lower()} {' '.join(best_topics)} {best_name.lower()}"
         if any(k in blob for k in ["free", "省钱", "免费", "替代", "alternative"]):
-            lines.append("  · 你之前写省钱/免费类文章，最高891播放、155转发，读者很爱看")
+            lines.append("  · 省钱/免费类是你验证过的爆款方向，转发率高、涨粉稳")
         if any(k in blob for k in ["money", "job", "印钞", "赚钱", "搞钱"]):
-            lines.append("  · 你之前写搞钱类文章，最高5617播放、811转发，爆款潜力大")
+            lines.append("  · 搞钱/求职类文章单篇涨粉过100，是你最猛的涨粉方向")
         if any(k in blob for k in ["google", "microsoft", "apple", "openai", "meta", "deepseek"]):
-            lines.append("  · 蹭大厂热度，你之前写Google相关文章最高8830播放")
+            lines.append("  · 大厂相关自带搜索流量，写一篇能被搜很久")
+        if best_desc:
+            lines.append(f"  · 一句话说清：{best_desc[:80]}{'...' if len(best_desc)>80 else ''}")
         lines.append(f"链接：[{best_repo['full_name']}]({best_repo['html_url']})")
 
     lines.append("\n（想写哪个回复编号或“写”，我帮你出文章）")
