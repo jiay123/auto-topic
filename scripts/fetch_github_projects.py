@@ -229,7 +229,7 @@ def build_cn_card(repo):
             points = card["points"]
             break
 
-if not title:
+    if not title:
         # 用 description + topics 生成有意义的中文描述，不再套泛化模板
         raw_desc = (repo.get("description") or "").strip()
         raw_name = repo.get("name", "").replace("-", " ").replace("_", " ")
