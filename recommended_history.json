@@ -1,25 +1,5 @@
 [
   {
-    "name": "ripienaar/free-for-dev",
-    "date": "2026-07-15"
-  },
-  {
-    "name": "freeCodeCamp/freeCodeCamp",
-    "date": "2026-07-15"
-  },
-  {
-    "name": "trekhleb/javascript-algorithms",
-    "date": "2026-07-15"
-  },
-  {
-    "name": "EbookFoundation/free-programming-books",
-    "date": "2026-07-15"
-  },
-  {
-    "name": "codecrafters-io/build-your-own-x",
-    "date": "2026-07-15"
-  },
-  {
     "name": "doocs/advanced-java",
     "date": "2026-07-16"
   },
@@ -178,5 +158,25 @@
   {
     "name": "openclaw/openclaw",
     "date": "2026-07-28"
+  },
+  {
+    "name": "vinta/awesome-python",
+    "date": "2026-07-29"
+  },
+  {
+    "name": "ripienaar/free-for-dev",
+    "date": "2026-07-29"
+  },
+  {
+    "name": "freeCodeCamp/freeCodeCamp",
+    "date": "2026-07-29"
+  },
+  {
+    "name": "youngyangyang04/leetcode-master",
+    "date": "2026-07-29"
+  },
+  {
+    "name": "yangshun/tech-interview-handbook",
+    "date": "2026-07-29"
   }
 ]
