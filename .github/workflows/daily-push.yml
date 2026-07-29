@@ -47,6 +47,7 @@ jobs:
           git config user.name "auto-topic-bot"
           git add recommended_history.json hot_rotation.json state_github_projects.json
           git commit -m "chore: 更新推荐状态 $(date +%F)" || echo "no changes"
+          git pull --rebase origin main || true
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -71,6 +72,7 @@ jobs:
           git config user.name "auto-topic-bot"
           git add state_daily_tips.json
           git commit -m "chore: 更新运营技巧状态 $(date +%F)" || echo "no changes"
+          git pull --rebase origin main || true
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
