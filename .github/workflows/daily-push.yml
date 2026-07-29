@@ -6,26 +6,9 @@ on:
     - cron: '0 23 * * *'
     # 08:00 北京时间 = 00:00 UTC
     - cron: '0 0 * * *'
-    # 09:00 北京时间 = 01:00 UTC
-    - cron: '0 1 * * *'
   workflow_dispatch:
 
 jobs:
-  ai-news:
-    if: ${{ github.event.schedule == '0 23 * * *' || github.event_name == 'workflow_dispatch' }}
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - run: pip install requests
-      - run: python scripts/fetch_ai_news.py
-        env:
-          SENDKEY: ${{ secrets.SENDKEY }}
-
   github-projects:
     if: ${{ github.event.schedule == '0 0 * * *' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
@@ -52,8 +35,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  daily-tips:
-    if: ${{ github.event.schedule == '0 1 * * *' || github.event_name == 'workflow_dispatch' }}
+  ai-news:
+    if: ${{ github.event.schedule == '0 23 * * *' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -63,16 +46,6 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install requests
-      - run: python scripts/fetch_planet_content.py
+      - run: python scripts/fetch_ai_news.py
         env:
           SENDKEY: ${{ secrets.SENDKEY }}
-      - name: 提交运营技巧状态
-        run: |
-          git config user.email "bot@auto-topic.local"
-          git config user.name "auto-topic-bot"
-          git add state_daily_tips.json
-          git commit -m "chore: 更新运营技巧状态 $(date +%F)" || echo "no changes"
-          git pull --rebase origin main || true
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
