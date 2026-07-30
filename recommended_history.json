@@ -1,25 +1,5 @@
 [
   {
-    "name": "doocs/advanced-java",
-    "date": "2026-07-16"
-  },
-  {
-    "name": "public-apis/public-apis",
-    "date": "2026-07-16"
-  },
-  {
-    "name": "EbookFoundation/free-programming-books",
-    "date": "2026-07-16"
-  },
-  {
-    "name": "nilbuild/developer-roadmap",
-    "date": "2026-07-16"
-  },
-  {
-    "name": "remoteintech/remote-jobs",
-    "date": "2026-07-16"
-  },
-  {
     "name": "vinta/awesome-python",
     "date": "2026-07-17"
   },
@@ -178,5 +158,17 @@
   {
     "name": "yangshun/tech-interview-handbook",
     "date": "2026-07-29"
+  },
+  {
+    "name": "awesome-selfhosted/awesome-selfhosted",
+    "date": "2026-07-30"
+  },
+  {
+    "name": "obra/superpowers",
+    "date": "2026-07-30"
+  },
+  {
+    "name": "trekhleb/javascript-algorithms",
+    "date": "2026-07-30"
   }
 ]

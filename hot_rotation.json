@@ -1,10 +1,12 @@
 {
   "week": "2026-07-27",
   "pushed": [
-    "openclaw/openclaw",
-    "vinta/awesome-python",
+    "awesome-selfhosted/awesome-selfhosted",
     "freeCodeCamp/freeCodeCamp",
-    "nilbuild/developer-roadmap"
+    "openclaw/openclaw",
+    "nilbuild/developer-roadmap",
+    "obra/superpowers",
+    "vinta/awesome-python"
   ],
-  "updated": "2026-07-29"
+  "updated": "2026-07-30"
 }
