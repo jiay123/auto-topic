@@ -1,25 +1,5 @@
 [
   {
-    "name": "vinta/awesome-python",
-    "date": "2026-07-17"
-  },
-  {
-    "name": "ossu/computer-science",
-    "date": "2026-07-17"
-  },
-  {
-    "name": "obra/superpowers",
-    "date": "2026-07-17"
-  },
-  {
-    "name": "9001/copyparty",
-    "date": "2026-07-17"
-  },
-  {
-    "name": "DigitalPlatDev/FreeDomain",
-    "date": "2026-07-17"
-  },
-  {
     "name": "torvalds/linux",
     "date": "2026-07-18"
   },
@@ -170,5 +150,17 @@
   {
     "name": "trekhleb/javascript-algorithms",
     "date": "2026-07-30"
+  },
+  {
+    "name": "torvalds/linux",
+    "date": "2026-07-31"
+  },
+  {
+    "name": "9001/copyparty",
+    "date": "2026-07-31"
+  },
+  {
+    "name": "react/react",
+    "date": "2026-07-31"
   }
 ]

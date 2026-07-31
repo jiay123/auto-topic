@@ -1,1 +1,26 @@
-{"projects": [{"name": "trekhleb/javascript-algorithms", "stars": 196345, "lang": "JavaScript", "description": "📝 Algorithms and data structures implemented in JavaScript with explanations and links to further readings", "url": "https://github.com/trekhleb/javascript-algorithms", "topics": ["algorithm", "algorithms", "computer-science", "data-structures", "interview", "interview-preparation", "javascript", "javascript-algorithms"], "updated": "2026-07-26"}, {"name": "awesome-selfhosted/awesome-selfhosted", "stars": 309208, "lang": null, "description": "A list of Free Software network services and web applications which can be hosted on your own servers", "url": "https://github.com/awesome-selfhosted/awesome-selfhosted", "topics": ["awesome", "awesome-list", "cloud", "free-software", "hosting", "privacy", "self-hosted", "selfhosted"], "updated": "2026-07-28"}, {"name": "obra/superpowers", "stars": 263345, "lang": "Shell", "description": "An agentic skills framework & software development methodology that works.", "url": "https://github.com/obra/superpowers", "topics": ["ai", "brainstorming", "coding", "obra", "sdlc", "skills", "subagent-driven-development", "superpowers"], "updated": "2026-07-28"}], "date": "2026-07-30"}
+{
+  "projects": [
+    {
+      "name": "9001/copyparty",
+      "stars": 46004,
+      "lang": "Python",
+      "description": "Portable file server with accelerated resumable uploads, dedup, WebDAV, SFTP, FTP, TFTP, zeroconf, media indexer, thumbnails++ all in one file",
+      "url": "https://github.com/9001/copyparty"
+    },
+    {
+      "name": "react/react",
+      "stars": 246789,
+      "lang": "JavaScript",
+      "description": "The library for web and native user interfaces.",
+      "url": "https://github.com/react/react"
+    },
+    {
+      "name": "torvalds/linux",
+      "stars": 241175,
+      "lang": "C",
+      "description": "Linux kernel source tree",
+      "url": "https://github.com/torvalds/linux"
+    }
+  ],
+  "date": "2026-07-31"
+}
