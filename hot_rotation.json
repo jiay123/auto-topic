@@ -1,14 +1,16 @@
 {
   "week": "2026-07-27",
   "pushed": [
-    "awesome-selfhosted/awesome-selfhosted",
-    "torvalds/linux",
-    "vinta/awesome-python",
     "freeCodeCamp/freeCodeCamp",
+    "vinta/awesome-python",
+    "affaan-m/ECC",
     "nilbuild/developer-roadmap",
+    "openclaw/openclaw",
+    "torvalds/linux",
+    "NousResearch/hermes-agent",
     "obra/superpowers",
-    "react/react",
-    "openclaw/openclaw"
+    "awesome-selfhosted/awesome-selfhosted",
+    "react/react"
   ],
-  "updated": "2026-07-31"
+  "updated": "2026-08-01"
 }

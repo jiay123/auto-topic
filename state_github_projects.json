@@ -1,26 +1,26 @@
 {
   "projects": [
     {
-      "name": "9001/copyparty",
-      "stars": 46004,
-      "lang": "Python",
-      "description": "Portable file server with accelerated resumable uploads, dedup, WebDAV, SFTP, FTP, TFTP, zeroconf, media indexer, thumbnails++ all in one file",
-      "url": "https://github.com/9001/copyparty"
+      "name": "n8n-io/n8n",
+      "stars": 198897,
+      "lang": "TypeScript",
+      "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
+      "url": "https://github.com/n8n-io/n8n"
     },
     {
-      "name": "react/react",
-      "stars": 246789,
+      "name": "affaan-m/ECC",
+      "stars": 236660,
       "lang": "JavaScript",
-      "description": "The library for web and native user interfaces.",
-      "url": "https://github.com/react/react"
+      "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
+      "url": "https://github.com/affaan-m/ECC"
     },
     {
-      "name": "torvalds/linux",
-      "stars": 241175,
-      "lang": "C",
-      "description": "Linux kernel source tree",
-      "url": "https://github.com/torvalds/linux"
+      "name": "NousResearch/hermes-agent",
+      "stars": 223461,
+      "lang": "Python",
+      "description": "The agent that grows with you",
+      "url": "https://github.com/NousResearch/hermes-agent"
     }
   ],
-  "date": "2026-07-31"
+  "date": "2026-08-01"
 }
