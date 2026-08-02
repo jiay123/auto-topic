@@ -1,13 +1,5 @@
 [
   {
-    "name": "freeCodeCamp/freeCodeCamp",
-    "date": "2026-07-19"
-  },
-  {
-    "name": "codecrafters-io/build-your-own-x",
-    "date": "2026-07-19"
-  },
-  {
     "name": "langgenius/dify",
     "date": "2026-07-20"
   },
@@ -162,5 +154,13 @@
   {
     "name": "affaan-m/ECC",
     "date": "2026-08-01"
+  },
+  {
+    "name": "EbookFoundation/free-programming-books",
+    "date": "2026-08-02"
+  },
+  {
+    "name": "freeCodeCamp/freeCodeCamp",
+    "date": "2026-08-02"
   }
 ]

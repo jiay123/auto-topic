@@ -1,16 +1,8 @@
 {
   "week": "2026-07-27",
   "pushed": [
-    "freeCodeCamp/freeCodeCamp",
-    "vinta/awesome-python",
-    "affaan-m/ECC",
-    "nilbuild/developer-roadmap",
-    "openclaw/openclaw",
-    "torvalds/linux",
-    "NousResearch/hermes-agent",
-    "obra/superpowers",
-    "awesome-selfhosted/awesome-selfhosted",
-    "react/react"
+    "EbookFoundation/free-programming-books",
+    "freeCodeCamp/freeCodeCamp"
   ],
-  "updated": "2026-08-01"
+  "updated": "2026-08-02"
 }

@@ -1,26 +1,19 @@
 {
   "projects": [
     {
-      "name": "n8n-io/n8n",
-      "stars": 198897,
+      "name": "freeCodeCamp/freeCodeCamp",
+      "stars": 453329,
       "lang": "TypeScript",
-      "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
-      "url": "https://github.com/n8n-io/n8n"
+      "description": "freeCodeCamp.org's open-source codebase and curriculum. Learn math, programming, and computer science for free.",
+      "url": "https://github.com/freeCodeCamp/freeCodeCamp"
     },
     {
-      "name": "affaan-m/ECC",
-      "stars": 236660,
-      "lang": "JavaScript",
-      "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-      "url": "https://github.com/affaan-m/ECC"
-    },
-    {
-      "name": "NousResearch/hermes-agent",
-      "stars": 223461,
+      "name": "EbookFoundation/free-programming-books",
+      "stars": 393519,
       "lang": "Python",
-      "description": "The agent that grows with you",
-      "url": "https://github.com/NousResearch/hermes-agent"
+      "description": ":books: Freely available programming books",
+      "url": "https://github.com/EbookFoundation/free-programming-books"
     }
   ],
-  "date": "2026-08-01"
+  "date": "2026-08-02"
 }
