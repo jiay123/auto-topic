@@ -1,17 +1,5 @@
 [
   {
-    "name": "rustdesk/rustdesk",
-    "date": "2026-07-21"
-  },
-  {
-    "name": "freeCodeCamp/freeCodeCamp",
-    "date": "2026-07-21"
-  },
-  {
-    "name": "openclaw/openclaw",
-    "date": "2026-07-21"
-  },
-  {
     "name": "awesome-selfhosted/awesome-selfhosted",
     "date": "2026-07-22"
   },
@@ -162,5 +150,13 @@
   {
     "name": "langgenius/dify",
     "date": "2026-08-03"
+  },
+  {
+    "name": "openclaw/openclaw",
+    "date": "2026-08-04"
+  },
+  {
+    "name": "freeCodeCamp/freeCodeCamp",
+    "date": "2026-08-04"
   }
 ]

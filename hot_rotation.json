@@ -1,5 +1,8 @@
 {
   "week": "2026-08-03",
-  "pushed": [],
-  "updated": "2026-08-03"
+  "pushed": [
+    "openclaw/openclaw",
+    "freeCodeCamp/freeCodeCamp"
+  ],
+  "updated": "2026-08-04"
 }

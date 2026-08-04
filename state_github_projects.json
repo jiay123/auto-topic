@@ -1,12 +1,19 @@
 {
   "projects": [
     {
-      "name": "langgenius/dify",
-      "stars": 151120,
+      "name": "freeCodeCamp/freeCodeCamp",
+      "stars": 453435,
       "lang": "TypeScript",
-      "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-      "url": "https://github.com/langgenius/dify"
+      "description": "freeCodeCamp.org's open-source codebase and curriculum. Learn math, programming, and computer science for free.",
+      "url": "https://github.com/freeCodeCamp/freeCodeCamp"
+    },
+    {
+      "name": "openclaw/openclaw",
+      "stars": 385049,
+      "lang": "TypeScript",
+      "description": "Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞 ",
+      "url": "https://github.com/openclaw/openclaw"
     }
   ],
-  "date": "2026-08-03"
+  "date": "2026-08-04"
 }
