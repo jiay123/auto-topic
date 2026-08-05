@@ -1,19 +1,19 @@
 {
   "projects": [
     {
-      "name": "freeCodeCamp/freeCodeCamp",
-      "stars": 453435,
+      "name": "nilbuild/developer-roadmap",
+      "stars": 363627,
       "lang": "TypeScript",
-      "description": "freeCodeCamp.org's open-source codebase and curriculum. Learn math, programming, and computer science for free.",
-      "url": "https://github.com/freeCodeCamp/freeCodeCamp"
+      "description": "Interactive roadmaps, guides and other educational content to help developers grow in their careers.",
+      "url": "https://github.com/nilbuild/developer-roadmap"
     },
     {
-      "name": "openclaw/openclaw",
-      "stars": 385049,
-      "lang": "TypeScript",
-      "description": "Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞 ",
-      "url": "https://github.com/openclaw/openclaw"
+      "name": "awesome-selfhosted/awesome-selfhosted",
+      "stars": 310692,
+      "lang": null,
+      "description": "A list of Free Software network services and web applications which can be hosted on your own servers",
+      "url": "https://github.com/awesome-selfhosted/awesome-selfhosted"
     }
   ],
-  "date": "2026-08-04"
+  "date": "2026-08-05"
 }

@@ -1,13 +1,5 @@
 [
   {
-    "name": "awesome-selfhosted/awesome-selfhosted",
-    "date": "2026-07-22"
-  },
-  {
-    "name": "nilbuild/developer-roadmap",
-    "date": "2026-07-22"
-  },
-  {
     "name": "EbookFoundation/free-programming-books",
     "date": "2026-07-23"
   },
@@ -158,5 +150,13 @@
   {
     "name": "freeCodeCamp/freeCodeCamp",
     "date": "2026-08-04"
+  },
+  {
+    "name": "nilbuild/developer-roadmap",
+    "date": "2026-08-05"
+  },
+  {
+    "name": "awesome-selfhosted/awesome-selfhosted",
+    "date": "2026-08-05"
   }
 ]
