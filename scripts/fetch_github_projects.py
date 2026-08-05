@@ -10,6 +10,17 @@ DATE_30D = (today - timedelta(days=30)).strftime("%Y-%m-%d")
 SENDKEY = os.environ.get("SENDKEY", "")
 GH_TOKEN = os.environ.get("GH_TOKEN", "")
 BASE = os.path.join(os.path.dirname(__file__), "..")
+if not SENDKEY or not GH_TOKEN:
+    try:
+        with open(os.path.join(BASE, ".env"), encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith("SENDKEY=") and not SENDKEY:
+                    SENDKEY = line.split("=", 1)[1]
+                elif line.startswith("GH_TOKEN=") and not GH_TOKEN:
+                    GH_TOKEN = line.split("=", 1)[1]
+    except:
+        pass
 STATE_FILE = os.path.join(BASE, "state_github_projects.json")
 HOT_FILE = os.path.join(BASE, "hot_rotation.json")
 HISTORY_FILE = os.path.join(BASE, "recommended_history.json")
@@ -65,7 +76,19 @@ CN_CARDS = [
 
 # ==================== 核心改进：优化排版 ====================
 
-def build_cn_card(repo):
+def get_category(repo):
+    """返回项目命中的分类标题；没命中返回项目名"""
+    desc = (repo.get("description") or "").lower()
+    topics = [t.lower() for t in repo.get("topics", [])]
+    name = (repo.get("name") or "").lower()
+    blob = f"{name} {desc} {' '.join(topics)}"
+    for card in CN_CARDS:
+        if any(k in blob for k in card["keys"]):
+            return card["title"]
+    return None
+
+
+def build_cn_card(repo, idx=None):
     """生成排版清晰的中文项目卡片，标题在上，要点分段，空行隔开"""
     desc = (repo.get("description") or "").lower()
     topics = [t.lower() for t in repo.get("topics", [])]
@@ -74,6 +97,7 @@ def build_cn_card(repo):
     stars = repo.get("stargazers_count", 0)
     stars_k = f"{stars/1000:.1f}K" if stars >= 1000 else str(stars)
     lang = repo.get("language") or "多语言"
+    repo_name = repo.get("full_name") or repo.get("name", "")
 
     title, points = None, None
     for card in CN_CARDS:
@@ -99,12 +123,19 @@ def build_cn_card(repo):
 
     url = repo.get("html_url", "")
 
-    # 排版优化：标题 + 空行 + 要点 + 空行 + 底部信息
+    head = f"【{idx}】📌 {repo_name}" if idx else f"📌 {repo_name}"
+    sub = f"🏷 {title}"
+
+    # 排版优化：编号+项目名 / 分类 / 每个要点单独成段（段间空行）/ 底部信息
     lines = [
-        f"📌 {title}",
+        head,
+        "",
+        sub,
         "",
         f"  · {points[0]}",
+        "",
         f"  · {points[1]}",
+        "",
         f"  · {points[2]}",
         "",
         f"  ⭐ {stars_k}  |  {lang}",
@@ -128,9 +159,7 @@ def build_message(items, recommends):
     ]
 
     for i, item in enumerate(items, 1):
-        lines.append(f"【{i}】")
-        lines.append("")
-        lines.append(build_cn_card(item))
+        lines.append(build_cn_card(item, i))
 
     if recommends:
         lines.append("")
@@ -143,6 +172,7 @@ def build_message(items, recommends):
             lines.append("")
 
     lines.append("— End —")
+    lines.append("")
     lines.append("明早8点见 👋")
 
     return "每日 GitHub 推荐", "\n".join(lines)
@@ -160,7 +190,7 @@ def load_history():
 
 def save_history(names):
     history = load_history()
-    cutoff = (today - timedelta(days=14)).strftime("%Y-%m-%d")
+    cutoff = (today - timedelta(days=7)).strftime("%Y-%m-%d")
     history = [h for h in history if h.get("date", "") > cutoff]
     for n in names:
         history.append({"name": n, "date": today.strftime("%Y-%m-%d")})
@@ -169,7 +199,7 @@ def save_history(names):
 
 def get_seen_names():
     history = load_history()
-    cutoff = (today - timedelta(days=14)).strftime("%Y-%m-%d")
+    cutoff = (today - timedelta(days=7)).strftime("%Y-%m-%d")
     return {h["name"] for h in history if h.get("date", "") > cutoff}
 
 def load_hot_rotation():
@@ -256,14 +286,16 @@ def main():
         f"money OR monetize OR automation OR agent stars:>500 pushed:>{DATE_7D}",
         f"stars:>800 pushed:>{DATE_7D}",
         f"topic:ai stars:>300 pushed:>{DATE_7D}",
+        f"notes OR docs OR markdown OR writing stars:>500 pushed:>{DATE_7D}",
+        f"image OR video OR design OR pdf stars:>500 pushed:>{DATE_7D}",
     ]
     all_repos = []
     for q in queries:
-        all_repos.extend(search_github(q, per_page=10))
+        all_repos.extend(search_github(q, per_page=15))
         time.sleep(0.5)
         seen = set()
         unique = [r for r in all_repos if not (r["full_name"] in seen or seen.add(r["full_name"]))]
-        if len(unique) >= 20:
+        if len(unique) >= 40:
             break
 
     hot_pool = get_hot_pool()
@@ -280,27 +312,30 @@ def main():
         s = score_repo(r) + random.uniform(0, 0.3)
         scored.append((s, r))
     scored.sort(key=lambda x: x[0], reverse=True)
-    data_picks = scored[:3]
 
-    # 合并，去重
+    # 分类去重后选取，保证每个分类只出现一次（先取分数高的，再补热门）
     seen_names = set()
+    used_cats = set()
     all_items = []
-    for _, r in data_picks:
-        if r.get("full_name") and r["full_name"] not in seen_names:
-            seen_names.add(r["full_name"])
-            all_items.append(r)
-    for r in hot_chosen:
-        if r.get("full_name") not in seen_names:
-            seen_names.add(r["full_name"])
-            all_items.append(r)
-    all_items = all_items[:5]
+    candidates = [r for _, r in scored] + hot_chosen
+    for r in candidates:
+        if len(all_items) >= 6:
+            break
+        if not r.get("full_name") or r["full_name"] in seen_names:
+            continue
+        cat = get_category(r) or r.get("name", "")
+        if cat in used_cats:
+            continue
+        used_cats.add(cat)
+        seen_names.add(r["full_name"])
+        all_items.append(r)
 
-    # 推荐2个写公众号（必须有至少2个）
-    top = [(s, r) for s, r in data_picks if r.get("full_name")]
-    top.sort(key=lambda x: x[0], reverse=True)
+    # 推荐2个写公众号（从已选项目里挑，分类不重复）
     recommends = []
-    for s, r in top[:2]:
-        card_title = build_cn_card(r).split("\n")[0].replace("📌 ", "")
+    for r in all_items:
+        if len(recommends) >= 2:
+            break
+        card_title = get_category(r) or r.get("name", "")
         recommends.append({"name": r["full_name"], "title": card_title, "url": r.get("html_url", "")})
 
     # 保存状态
