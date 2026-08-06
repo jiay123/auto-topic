@@ -1,10 +1,12 @@
 {
   "week": "2026-08-03",
   "pushed": [
+    "freeCodeCamp/freeCodeCamp",
+    "openclaw/openclaw",
     "nilbuild/developer-roadmap",
     "awesome-selfhosted/awesome-selfhosted",
-    "openclaw/openclaw",
-    "freeCodeCamp/freeCodeCamp"
+    "EbookFoundation/free-programming-books",
+    "public-apis/public-apis"
   ],
-  "updated": "2026-08-05"
+  "updated": "2026-08-06"
 }

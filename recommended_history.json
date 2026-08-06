@@ -1,113 +1,5 @@
 [
   {
-    "name": "EbookFoundation/free-programming-books",
-    "date": "2026-07-23"
-  },
-  {
-    "name": "Shubhamsaboo/awesome-llm-apps",
-    "date": "2026-07-23"
-  },
-  {
-    "name": "vinta/awesome-python",
-    "date": "2026-07-23"
-  },
-  {
-    "name": "react/react",
-    "date": "2026-07-24"
-  },
-  {
-    "name": "obra/superpowers",
-    "date": "2026-07-24"
-  },
-  {
-    "name": "public-apis/public-apis",
-    "date": "2026-07-25"
-  },
-  {
-    "name": "amruthpillai/reactive-resume",
-    "date": "2026-07-25"
-  },
-  {
-    "name": "torvalds/linux",
-    "date": "2026-07-25"
-  },
-  {
-    "name": "public-apis/public-apis",
-    "date": "2026-07-26"
-  },
-  {
-    "name": "Snailclimb/JavaGuide",
-    "date": "2026-07-26"
-  },
-  {
-    "name": "f/prompts.chat",
-    "date": "2026-07-26"
-  },
-  {
-    "name": "freeCodeCamp/freeCodeCamp",
-    "date": "2026-07-26"
-  },
-  {
-    "name": "santifer/career-ops",
-    "date": "2026-07-26"
-  },
-  {
-    "name": "karanpratapsingh/system-design",
-    "date": "2026-07-27"
-  },
-  {
-    "name": "sudheerj/reactjs-interview-questions",
-    "date": "2026-07-28"
-  },
-  {
-    "name": "nilbuild/developer-roadmap",
-    "date": "2026-07-28"
-  },
-  {
-    "name": "open-webui/open-webui",
-    "date": "2026-07-28"
-  },
-  {
-    "name": "TheAlgorithms/Python",
-    "date": "2026-07-28"
-  },
-  {
-    "name": "openclaw/openclaw",
-    "date": "2026-07-28"
-  },
-  {
-    "name": "vinta/awesome-python",
-    "date": "2026-07-29"
-  },
-  {
-    "name": "ripienaar/free-for-dev",
-    "date": "2026-07-29"
-  },
-  {
-    "name": "freeCodeCamp/freeCodeCamp",
-    "date": "2026-07-29"
-  },
-  {
-    "name": "youngyangyang04/leetcode-master",
-    "date": "2026-07-29"
-  },
-  {
-    "name": "yangshun/tech-interview-handbook",
-    "date": "2026-07-29"
-  },
-  {
-    "name": "awesome-selfhosted/awesome-selfhosted",
-    "date": "2026-07-30"
-  },
-  {
-    "name": "obra/superpowers",
-    "date": "2026-07-30"
-  },
-  {
-    "name": "trekhleb/javascript-algorithms",
-    "date": "2026-07-30"
-  },
-  {
     "name": "torvalds/linux",
     "date": "2026-07-31"
   },
@@ -158,5 +50,29 @@
   {
     "name": "awesome-selfhosted/awesome-selfhosted",
     "date": "2026-08-05"
+  },
+  {
+    "name": "ripienaar/free-for-dev",
+    "date": "2026-08-06"
+  },
+  {
+    "name": "mui/material-ui",
+    "date": "2026-08-06"
+  },
+  {
+    "name": "santifer/career-ops",
+    "date": "2026-08-06"
+  },
+  {
+    "name": "f/prompts.chat",
+    "date": "2026-08-06"
+  },
+  {
+    "name": "supabase/supabase",
+    "date": "2026-08-06"
+  },
+  {
+    "name": "remoteintech/remote-jobs",
+    "date": "2026-08-06"
   }
 ]
