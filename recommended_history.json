@@ -1,17 +1,5 @@
 [
   {
-    "name": "torvalds/linux",
-    "date": "2026-07-31"
-  },
-  {
-    "name": "9001/copyparty",
-    "date": "2026-07-31"
-  },
-  {
-    "name": "react/react",
-    "date": "2026-07-31"
-  },
-  {
     "name": "NousResearch/hermes-agent",
     "date": "2026-08-01"
   },
@@ -74,5 +62,29 @@
   {
     "name": "remoteintech/remote-jobs",
     "date": "2026-08-06"
+  },
+  {
+    "name": "public-apis/public-apis",
+    "date": "2026-08-07"
+  },
+  {
+    "name": "vinta/awesome-python",
+    "date": "2026-08-07"
+  },
+  {
+    "name": "amruthpillai/reactive-resume",
+    "date": "2026-08-07"
+  },
+  {
+    "name": "9001/copyparty",
+    "date": "2026-08-07"
+  },
+  {
+    "name": "TheAlgorithms/Python",
+    "date": "2026-08-07"
+  },
+  {
+    "name": "nanocoai/nanoclaw",
+    "date": "2026-08-07"
   }
 ]

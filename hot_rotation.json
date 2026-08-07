@@ -1,12 +1,14 @@
 {
   "week": "2026-08-03",
   "pushed": [
-    "freeCodeCamp/freeCodeCamp",
+    "EbookFoundation/free-programming-books",
+    "public-apis/public-apis",
+    "vinta/awesome-python",
     "openclaw/openclaw",
+    "freeCodeCamp/freeCodeCamp",
     "nilbuild/developer-roadmap",
     "awesome-selfhosted/awesome-selfhosted",
-    "EbookFoundation/free-programming-books",
-    "public-apis/public-apis"
+    "obra/superpowers"
   ],
-  "updated": "2026-08-06"
+  "updated": "2026-08-07"
 }
