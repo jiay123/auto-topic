@@ -1,47 +1,40 @@
 {
   "projects": [
     {
-      "name": "nanocoai/nanoclaw",
-      "stars": 30459,
-      "lang": "TypeScript",
-      "description": "A lightweight alternative to OpenClaw that runs in containers for security. Connects to WhatsApp, Telegram, Slack, Discord, Gmail and other messaging apps,, has memory, scheduled jobs, and runs directly on Anthropic's Agents SDK",
-      "url": "https://github.com/nanocoai/nanoclaw"
+      "name": "Snailclimb/JavaGuide",
+      "stars": 157609,
+      "lang": "JavaScript",
+      "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
+      "url": "https://github.com/Snailclimb/JavaGuide"
     },
     {
-      "name": "amruthpillai/reactive-resume",
-      "stars": 40054,
-      "lang": "TypeScript",
-      "description": "A one-of-a-kind resume builder that keeps your privacy in mind. Completely secure, customizable, portable, open-source and free forever. Try it out today!",
-      "url": "https://github.com/amruthpillai/reactive-resume"
-    },
-    {
-      "name": "TheAlgorithms/Python",
-      "stars": 223540,
+      "name": "open-webui/open-webui",
+      "stars": 148179,
       "lang": "Python",
-      "description": "All Algorithms implemented in Python",
-      "url": "https://github.com/TheAlgorithms/Python"
+      "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
+      "url": "https://github.com/open-webui/open-webui"
     },
     {
-      "name": "public-apis/public-apis",
-      "stars": 454774,
-      "lang": "Python",
-      "description": "A collective list of free APIs",
-      "url": "https://github.com/public-apis/public-apis"
+      "name": "sudheerj/reactjs-interview-questions",
+      "stars": 44724,
+      "lang": "JavaScript",
+      "description": "List of top 500 ReactJS Interview Questions & Answers....Coding exercise questions are coming soon!!",
+      "url": "https://github.com/sudheerj/reactjs-interview-questions"
     },
     {
-      "name": "9001/copyparty",
-      "stars": 46108,
-      "lang": "Python",
-      "description": "Portable file server with accelerated resumable uploads, dedup, WebDAV, SFTP, FTP, TFTP, zeroconf, media indexer, thumbnails++ all in one file",
-      "url": "https://github.com/9001/copyparty"
+      "name": "react/react",
+      "stars": 247109,
+      "lang": "JavaScript",
+      "description": "The library for web and native user interfaces.",
+      "url": "https://github.com/react/react"
     },
     {
-      "name": "vinta/awesome-python",
-      "stars": 312590,
-      "lang": "Python",
-      "description": "An opinionated list of Python frameworks, libraries, tools, and resources",
-      "url": "https://github.com/vinta/awesome-python"
+      "name": "torvalds/linux",
+      "stars": 242127,
+      "lang": "C",
+      "description": "Linux kernel source tree",
+      "url": "https://github.com/torvalds/linux"
     }
   ],
-  "date": "2026-08-07"
+  "date": "2026-08-08"
 }
