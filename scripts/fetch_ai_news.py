@@ -1,7 +1,7 @@
 """
 07:00 AI 资讯热点（昨天+今天）
 覆盖：OpenAI / 谷歌 / 千问 / 通义 / Kimi / 豆包 / 国内AI大模型动态
-数据源：量子位、机器之心、36kr、Hacker News、微博AI热搜
+数据源：量子位、IT之家、InfoQ（备用中文源）
 每天8-12条，每条带100-150字摘要，7天自动去重。
 """
 import requests
@@ -11,7 +11,8 @@ import sys
 import json
 import subprocess
 import concurrent.futures
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
 
 SENDKEY = os.environ.get("SENDKEY", "")
 if not SENDKEY:
@@ -68,19 +69,16 @@ def save_dedup(titles):
         _git("push")
 
 def is_recent(pubdate_str):
-    """判断发布时间是否在昨天或今天。"""
+    """判断发布时间是否在昨天或今天（按 UTC）。"""
     if not pubdate_str:
         return True
-    # 常见格式：2026-07-02T10:30:00Z 或 Wed, 02 Jul 2026
-    for fmt in ["%Y-%m-%d", "%Y-%m-%dT%H:%M:%SZ", "%a, %d %b %Y"]:
-        for try_str in [pubdate_str[:19], pubdate_str[:10]]:
-            try:
-                dt = datetime.strptime(try_str[:10], "%Y-%m-%d")
-                if dt.strftime("%Y-%m-%d") in [today, yesterday]:
-                    return True
-            except:
-                pass
-    return False
+    try:
+        dt = parsedate_to_datetime(pubdate_str)
+    except Exception:
+        return False
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(timezone.utc).strftime("%Y-%m-%d") in [today, yesterday]
 
 def fetch_summary(url, timeout=8):
     """抓取正文，提取100-150字摘要。"""
@@ -92,7 +90,7 @@ def fetch_summary(url, timeout=8):
             clean = re.sub(r"<[^>]+>", "", p).strip()
             if 40 < len(clean) < 600:
                 return clean[:150]
-        desc = re.findall(r'<meta[^>]+name=["\']description["\'][^>]+content=["\']([^"\']+)["\']', r.text, re.I)
+        desc = re.findall(r'<meta[^>]+(?:name=["\']description["\']|property=["\']og:description["\'])[^>]+content=["\']([^"\']+)["\']', r.text, re.I)
         if desc:
             return desc[0][:150]
     except:
@@ -100,53 +98,37 @@ def fetch_summary(url, timeout=8):
     return ""
 
 # --- 数据源 ---
+AI_KEYWORDS = ["AI", "大模型", "GPT", "ChatGPT", "人工智能", "DeepSeek", "豆包", "Kimi",
+               "千问", "通义", "OpenAI", "Claude", "Gemini", "文心", "讯飞", "智谱",
+               "Anthropic", "英伟达", "GPU", "芯片", "机器人", "智能体", "Agent", "Sora"]
+
 RSS_FEEDS = [
-    {"name": "量子位", "url": "https://www.qbitai.com/feed", "lang": "zh", "limit": 8},
-    {"name": "机器之心", "url": "https://rsshub.app/jiqizhixin", "lang": "zh", "limit": 6},
-    {"name": "36kr AI", "url": "https://36kr.com/feed", "lang": "zh", "limit": 5},
+    {"name": "量子位", "url": "https://www.qbitai.com/feed", "limit": 8},
+    {"name": "IT之家", "url": "https://www.ithome.com/rss/", "limit": 15, "keywords": AI_KEYWORDS},
+    {"name": "InfoQ", "url": "https://www.infoq.cn/feed", "limit": 8, "keywords": AI_KEYWORDS},
 ]
 
 def fetch_rss(source, dedup_titles):
     articles = []
     import xml.etree.ElementTree as ET
     try:
-        r = requests.get(source["url"], headers=HEADERS, timeout=12)
+        r = requests.get(source["url"], headers=HEADERS, timeout=15)
         r.encoding = "utf-8"
         root = ET.fromstring(r.text.encode("utf-8"))
+        keywords = source.get("keywords")
         for item in root.findall(".//item")[:source["limit"]]:
             title = item.findtext("title", "").strip()
             if not title or title in dedup_titles:
                 continue
+            if keywords and not any(k in title for k in keywords):
+                continue
             link = item.findtext("link", "").strip()
             pubdate = item.findtext("pubDate", "")[:22].strip()
-            if not is_recent(pubdate) and source["name"] != "36kr AI":
+            if not is_recent(pubdate):
                 continue
             articles.append({"title": title, "url": link, "source": source["name"], "pubdate": pubdate[:16]})
     except Exception as e:
         print(f"{source['name']} 抓取失败: {e}")
-    return articles
-
-def fetch_weibo_ai(dedup_titles):
-    """微博AI热搜，抓含AI关键词的热门话题。"""
-    articles = []
-    ai_keywords = ["AI", "大模型", "GPT", "ChatGPT", "人工智能", "DeepSeek", "豆包", "Kimi", "千问",
-                    "通义", "OpenAI", "Claude", "Gemini", "文心", "讯飞", "智谱"]
-    try:
-        r = requests.get("https://weibo.com/ajax/side/hotSearch", headers=HEADERS, timeout=8)
-        if r.status_code == 200:
-            data = r.json().get("data", {}).get("hotgov", {})
-            items = data.get("item") or data.get("trends", [])
-            for item in items:
-                raw_title = item.get("word", item.get("name", ""))
-                # 看标题是否含AI关键词
-                if any(kw in raw_title for kw in ai_keywords) or item.get("category", "") in ["AI", " tech"]:
-                    title = f"微博热搜｜{raw_title}"
-                    if title not in dedup_titles:
-                        articles.append({"title": title, "url": "https://s.weibo.com/weibo?q=" + requests.utils.quote(raw_title), "source": "微博AI热搜", "pubdate": ""})
-                    if len(articles) >= 3:
-                        break
-    except Exception as e:
-        print(f"微博热搜抓取失败: {e}")
     return articles
 
 def enrich_summaries(articles):
@@ -174,14 +156,13 @@ def build_message(articles):
     lines = [
         f"老贾，今天是{date_cn}（{weekday}）早上好。以下是今天和昨天的 AI 资讯热点：\n",
         f"📅 内容范围：{yesterday} ~ {today}（昨天+今天）",
-        f"来源：量子位 · 机器之心 · 36kr · 微博AI热搜",
+        "来源：量子位 · IT之家 · InfoQ",
         "筛选：仅保留含 AI / 大模型 / 国内大厂动态 的当天资讯",
         "",
         "---",
     ]
 
-    emoji_map = {"量子位": "🔬", "机器之心": "🤖", "36kr AI": "📊",
-                 "微博AI热搜": "🔥"}
+    emoji_map = {"量子位": "🔬", "IT之家": "💻", "InfoQ": "📡"}
     idx = 1
     for a in articles:
         emoji = emoji_map.get(a["source"], "📌")
@@ -221,9 +202,6 @@ def main():
         futures = [ex.submit(fetch_rss, src, dedup_titles) for src in RSS_FEEDS]
         for f in concurrent.futures.as_completed(futures):
             all_articles.extend(f.result())
-
-    # 2. 微博AI热搜（只作补充，3条）
-    all_articles.extend(fetch_weibo_ai(dedup_titles))
 
     # 去重（同标题）
     seen = set()
