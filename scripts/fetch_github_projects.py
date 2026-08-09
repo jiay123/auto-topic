@@ -1,5 +1,5 @@
 """Optimize fetch_github_projects.py - better formatting, clear sections"""
-import os, sys, requests, json, random, time
+import os, sys, re, requests, json, random, time
 from datetime import datetime, timedelta
 
 today = datetime.now()
@@ -227,6 +227,51 @@ def search_github(query, per_page=10):
         except: pass
     return []
 
+def fetch_trending(limit=10):
+    """抓 GitHub Trending 今日榜作为兜底（不需要 token / API 配额）。"""
+    url = "https://github.com/trending?since=daily"
+    try:
+        r = requests.get(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126.0.0.0"}, timeout=15)
+        if r.status_code != 200:
+            print("Trending 抓取失败:", r.status_code)
+            return []
+        text = r.text
+        blocks = re.findall(r'<article class="Box-row[^"]*".*?</article>', text, re.DOTALL)
+        repos = []
+        for b in blocks[:limit]:
+            m = re.search(r'href="/([^/"]+/[^/"]+)"', b)
+            if not m:
+                continue
+            full_name = m.group(1)
+            mdesc = re.search(r'<p class="col-9[^"]*"[^>]*>\s*(.*?)\s*</p>', b, re.DOTALL)
+            desc = ""
+            if mdesc:
+                desc = re.sub(r"<[^>]+>", "", mdesc.group(1)).strip()
+            mstars = re.search(r'href="[^"]*stargazers[^"]*".*?([\d,.kK]+)\s*</a>', b, re.DOTALL)
+            stars = 0
+            if mstars:
+                s = mstars.group(1).strip().replace(",", "").replace(" ", "")
+                try:
+                    stars = int(float(s.replace("k", "")) * 1000) if s.lower().endswith("k") else int(s)
+                except:
+                    stars = 0
+            mlang = re.search(r'<span itemprop="programmingLanguage">([^<]+)</span>', b)
+            lang = mlang.group(1).strip() if mlang else ""
+            repos.append({
+                "full_name": full_name,
+                "name": full_name.split("/")[1],
+                "description": desc,
+                "stargazers_count": stars,
+                "language": lang,
+                "topics": [],
+                "html_url": f"https://github.com/{full_name}",
+            })
+        print(f"Trending 兜底抓到 {len(repos)} 个项目")
+        return repos
+    except Exception as e:
+        print("Trending 抓取失败:", e)
+        return []
+
 def score_repo(repo):
     score = 0
     stars = repo["stargazers_count"]
@@ -290,15 +335,24 @@ def main():
         f"image OR video OR design OR pdf stars:>500 pushed:>{DATE_7D}",
     ]
     all_repos = []
-    for q in queries:
-        all_repos.extend(search_github(q, per_page=15))
-        time.sleep(0.5)
-        seen = set()
-        unique = [r for r in all_repos if not (r["full_name"] in seen or seen.add(r["full_name"]))]
-        if len(unique) >= 40:
-            break
+    if not GH_TOKEN:
+        print("未配置 GH_TOKEN，使用 GitHub Trending 兜底")
+        all_repos = fetch_trending()
+    else:
+        for q in queries:
+            all_repos.extend(search_github(q, per_page=15))
+            time.sleep(0.5)
+            seen = set()
+            unique = [r for r in all_repos if not (r["full_name"] in seen or seen.add(r["full_name"]))]
+            if len(unique) >= 40:
+                break
+        if len(all_repos) < 5:
+            print("搜索池不足，补充 GitHub Trending 兜底")
+            all_repos.extend(fetch_trending())
 
-    hot_pool = get_hot_pool()
+    hot_pool = []
+    if GH_TOKEN:
+        hot_pool = get_hot_pool()
     rotation = load_hot_rotation()
     if rotation.get("week") != WEEK_MONDAY or len(rotation.get("pushed", [])) >= 10:
         rotation = {"week": WEEK_MONDAY, "pushed": []}
