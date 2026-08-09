@@ -9,6 +9,7 @@ import re
 import os
 import sys
 import json
+import html
 import subprocess
 import concurrent.futures
 from datetime import datetime, timedelta, timezone
@@ -106,6 +107,8 @@ RSS_FEEDS = [
     {"name": "量子位", "url": "https://www.qbitai.com/feed", "limit": 8},
     {"name": "IT之家", "url": "https://www.ithome.com/rss/", "limit": 15, "keywords": AI_KEYWORDS},
     {"name": "InfoQ", "url": "https://www.infoq.cn/feed", "limit": 8, "keywords": AI_KEYWORDS},
+    {"name": "钛媒体", "url": "https://www.tmtpost.com/rss", "limit": 12, "keywords": AI_KEYWORDS},
+    {"name": "新浪科技", "url": "https://rss.sina.com.cn/tech/rollnews.xml", "limit": 12, "keywords": AI_KEYWORDS},
 ]
 
 def fetch_rss(source, dedup_titles):
@@ -113,8 +116,16 @@ def fetch_rss(source, dedup_titles):
     import xml.etree.ElementTree as ET
     try:
         r = requests.get(source["url"], headers=HEADERS, timeout=15)
-        r.encoding = "utf-8"
-        root = ET.fromstring(r.text.encode("utf-8"))
+        raw = r.content
+        enc = "utf-8"
+        m = re.search(rb'encoding=["\']([^"\']+)["\']', raw[:200])
+        if m:
+            enc = m.group(1).decode("utf-8", errors="replace")
+        try:
+            text = raw.decode(enc)
+        except Exception:
+            text = raw.decode("utf-8", errors="replace")
+        root = ET.fromstring(text)
         keywords = source.get("keywords")
         for item in root.findall(".//item")[:source["limit"]]:
             title = item.findtext("title", "").strip()
@@ -129,6 +140,26 @@ def fetch_rss(source, dedup_titles):
             articles.append({"title": title, "url": link, "source": source["name"], "pubdate": pubdate[:16]})
     except Exception as e:
         print(f"{source['name']} 抓取失败: {e}")
+    return articles
+
+def fetch_weibo_ai(dedup_titles):
+    """微博AI热搜：hot_band 接口无需登录，按AI关键词过滤，最多3条。"""
+    articles = []
+    try:
+        r = requests.get("https://weibo.com/ajax/statuses/hot_band", headers=HEADERS, timeout=10)
+        if r.status_code == 200:
+            items = r.json().get("data", {}).get("band_list", [])
+            for item in items:
+                raw_title = item.get("note") or item.get("word") or ""
+                if any(kw in raw_title for kw in AI_KEYWORDS):
+                    title = f"微博热搜｜{raw_title}"
+                    if title in dedup_titles:
+                        continue
+                    articles.append({"title": title, "url": "https://s.weibo.com/weibo?q=" + requests.utils.quote(raw_title), "source": "微博热搜", "pubdate": ""})
+                    if len(articles) >= 3:
+                        break
+    except Exception as e:
+        print(f"微博热搜抓取失败: {e}")
     return articles
 
 def enrich_summaries(articles):
@@ -156,20 +187,21 @@ def build_message(articles):
     lines = [
         f"老贾，今天是{date_cn}（{weekday}）早上好。以下是今天和昨天的 AI 资讯热点：\n",
         f"📅 内容范围：{yesterday} ~ {today}（昨天+今天）",
-        "来源：量子位 · IT之家 · InfoQ",
+        "来源：量子位 · IT之家 · InfoQ · 钛媒体 · 新浪科技 · 微博热搜",
         "筛选：仅保留含 AI / 大模型 / 国内大厂动态 的当天资讯",
         "",
         "---",
     ]
 
-    emoji_map = {"量子位": "🔬", "IT之家": "💻", "InfoQ": "📡"}
+    emoji_map = {"量子位": "🔬", "IT之家": "💻", "InfoQ": "📡",
+                 "钛媒体": "📰", "新浪科技": "🌐", "微博热搜": "🔥"}
     idx = 1
     for a in articles:
         emoji = emoji_map.get(a["source"], "📌")
-        lines.append(f"### {emoji} {a['title']}")
+        lines.append(f"### {emoji} {html.unescape(a['title'])}")
         if a.get("pubdate"):
             lines.append(f"**时间：** {a['pubdate']}")
-        summary = a.get("summary", "").strip()
+        summary = html.unescape(a.get("summary", "")).strip()
         if summary:
             lines.append(summary)
         lines.append(f"来源：[{a['source']}]({a['url']})")
@@ -198,10 +230,13 @@ def main():
     all_articles = []
 
     # 1. 并行抓RSS
-    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as ex:
         futures = [ex.submit(fetch_rss, src, dedup_titles) for src in RSS_FEEDS]
         for f in concurrent.futures.as_completed(futures):
             all_articles.extend(f.result())
+
+    # 2. 微博AI热搜（只作补充，3条）
+    all_articles.extend(fetch_weibo_ai(dedup_titles))
 
     # 去重（同标题）
     seen = set()
