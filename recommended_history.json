@@ -1,9 +1,5 @@
 [
   {
-    "name": "langgenius/dify",
-    "date": "2026-08-03"
-  },
-  {
     "name": "openclaw/openclaw",
     "date": "2026-08-04"
   },
@@ -106,5 +102,17 @@
   {
     "name": "MadsLorentzen/ai-job-search",
     "date": "2026-08-09"
+  },
+  {
+    "name": "langgenius/dify",
+    "date": "2026-08-10"
+  },
+  {
+    "name": "x1xhlol/system-prompts-and-models-of-ai-tools",
+    "date": "2026-08-10"
+  },
+  {
+    "name": "youngyangyang04/leetcode-master",
+    "date": "2026-08-10"
   }
 ]
