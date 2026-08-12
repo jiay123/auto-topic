@@ -1,8 +1,10 @@
 {
   "week": "2026-08-10",
   "pushed": [
+    "public-apis/public-apis",
+    "affaan-m/ECC",
     "openclaw/openclaw",
-    "affaan-m/ECC"
+    "freeCodeCamp/freeCodeCamp"
   ],
-  "updated": "2026-08-11"
+  "updated": "2026-08-12"
 }

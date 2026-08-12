@@ -1,13 +1,5 @@
 [
   {
-    "name": "nilbuild/developer-roadmap",
-    "date": "2026-08-05"
-  },
-  {
-    "name": "awesome-selfhosted/awesome-selfhosted",
-    "date": "2026-08-05"
-  },
-  {
     "name": "ripienaar/free-for-dev",
     "date": "2026-08-06"
   },
@@ -122,5 +114,21 @@
   {
     "name": "n8n-io/n8n",
     "date": "2026-08-11"
+  },
+  {
+    "name": "public-apis/public-apis",
+    "date": "2026-08-12"
+  },
+  {
+    "name": "Shubhamsaboo/awesome-llm-apps",
+    "date": "2026-08-12"
+  },
+  {
+    "name": "nilbuild/developer-roadmap",
+    "date": "2026-08-12"
+  },
+  {
+    "name": "awesome-selfhosted/awesome-selfhosted",
+    "date": "2026-08-12"
   }
 ]

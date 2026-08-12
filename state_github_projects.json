@@ -1,33 +1,33 @@
 {
   "projects": [
     {
-      "name": "langchain-ai/langchain",
-      "stars": 143919,
+      "name": "Shubhamsaboo/awesome-llm-apps",
+      "stars": 132171,
       "lang": "Python",
-      "description": "The agent engineering platform.",
-      "url": "https://github.com/langchain-ai/langchain"
+      "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
+      "url": "https://github.com/Shubhamsaboo/awesome-llm-apps"
     },
     {
-      "name": "yangshun/tech-interview-handbook",
-      "stars": 141733,
+      "name": "nilbuild/developer-roadmap",
+      "stars": 364181,
       "lang": "TypeScript",
-      "description": "Curated coding interview preparation materials for busy software engineers",
-      "url": "https://github.com/yangshun/tech-interview-handbook"
+      "description": "Interactive roadmaps, guides and other educational content to help developers grow in their careers.",
+      "url": "https://github.com/nilbuild/developer-roadmap"
     },
     {
-      "name": "n8n-io/n8n",
-      "stars": 200145,
-      "lang": "TypeScript",
-      "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
-      "url": "https://github.com/n8n-io/n8n"
+      "name": "awesome-selfhosted/awesome-selfhosted",
+      "stars": 312075,
+      "lang": null,
+      "description": "A list of Free Software network services and web applications which can be hosted on your own servers",
+      "url": "https://github.com/awesome-selfhosted/awesome-selfhosted"
     },
     {
-      "name": "openclaw/openclaw",
-      "stars": 385828,
-      "lang": "TypeScript",
-      "description": "Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞 ",
-      "url": "https://github.com/openclaw/openclaw"
+      "name": "public-apis/public-apis",
+      "stars": 455519,
+      "lang": "Python",
+      "description": "A collective list of free APIs",
+      "url": "https://github.com/public-apis/public-apis"
     }
   ],
-  "date": "2026-08-11"
+  "date": "2026-08-12"
 }
