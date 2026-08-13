@@ -1,29 +1,5 @@
 [
   {
-    "name": "ripienaar/free-for-dev",
-    "date": "2026-08-06"
-  },
-  {
-    "name": "mui/material-ui",
-    "date": "2026-08-06"
-  },
-  {
-    "name": "santifer/career-ops",
-    "date": "2026-08-06"
-  },
-  {
-    "name": "f/prompts.chat",
-    "date": "2026-08-06"
-  },
-  {
-    "name": "supabase/supabase",
-    "date": "2026-08-06"
-  },
-  {
-    "name": "remoteintech/remote-jobs",
-    "date": "2026-08-06"
-  },
-  {
     "name": "public-apis/public-apis",
     "date": "2026-08-07"
   },
@@ -130,5 +106,29 @@
   {
     "name": "awesome-selfhosted/awesome-selfhosted",
     "date": "2026-08-12"
+  },
+  {
+    "name": "santifer/career-ops",
+    "date": "2026-08-13"
+  },
+  {
+    "name": "supabase/supabase",
+    "date": "2026-08-13"
+  },
+  {
+    "name": "mui/material-ui",
+    "date": "2026-08-13"
+  },
+  {
+    "name": "DigitalPlatDev/FreeDomain",
+    "date": "2026-08-13"
+  },
+  {
+    "name": "f/prompts.chat",
+    "date": "2026-08-13"
+  },
+  {
+    "name": "remoteintech/remote-jobs",
+    "date": "2026-08-13"
   }
 ]

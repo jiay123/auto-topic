@@ -1,10 +1,12 @@
 {
   "week": "2026-08-10",
   "pushed": [
-    "public-apis/public-apis",
     "affaan-m/ECC",
     "openclaw/openclaw",
+    "public-apis/public-apis",
+    "awesome-selfhosted/awesome-selfhosted",
+    "EbookFoundation/free-programming-books",
     "freeCodeCamp/freeCodeCamp"
   ],
-  "updated": "2026-08-12"
+  "updated": "2026-08-13"
 }
