@@ -1,29 +1,5 @@
 [
   {
-    "name": "public-apis/public-apis",
-    "date": "2026-08-07"
-  },
-  {
-    "name": "vinta/awesome-python",
-    "date": "2026-08-07"
-  },
-  {
-    "name": "amruthpillai/reactive-resume",
-    "date": "2026-08-07"
-  },
-  {
-    "name": "9001/copyparty",
-    "date": "2026-08-07"
-  },
-  {
-    "name": "TheAlgorithms/Python",
-    "date": "2026-08-07"
-  },
-  {
-    "name": "nanocoai/nanoclaw",
-    "date": "2026-08-07"
-  },
-  {
     "name": "Snailclimb/JavaGuide",
     "date": "2026-08-08"
   },
@@ -130,5 +106,25 @@
   {
     "name": "remoteintech/remote-jobs",
     "date": "2026-08-13"
+  },
+  {
+    "name": "nanocoai/nanoclaw",
+    "date": "2026-08-14"
+  },
+  {
+    "name": "TheAlgorithms/Python",
+    "date": "2026-08-14"
+  },
+  {
+    "name": "amruthpillai/reactive-resume",
+    "date": "2026-08-14"
+  },
+  {
+    "name": "ripienaar/free-for-dev",
+    "date": "2026-08-14"
+  },
+  {
+    "name": "9001/copyparty",
+    "date": "2026-08-14"
   }
 ]
