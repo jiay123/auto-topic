@@ -1,25 +1,5 @@
 [
   {
-    "name": "Snailclimb/JavaGuide",
-    "date": "2026-08-08"
-  },
-  {
-    "name": "torvalds/linux",
-    "date": "2026-08-08"
-  },
-  {
-    "name": "sudheerj/reactjs-interview-questions",
-    "date": "2026-08-08"
-  },
-  {
-    "name": "react/react",
-    "date": "2026-08-08"
-  },
-  {
-    "name": "open-webui/open-webui",
-    "date": "2026-08-08"
-  },
-  {
     "name": "public-apis/public-apis",
     "date": "2026-08-09"
   },
@@ -126,5 +106,25 @@
   {
     "name": "9001/copyparty",
     "date": "2026-08-14"
+  },
+  {
+    "name": "react/react",
+    "date": "2026-08-15"
+  },
+  {
+    "name": "Snailclimb/JavaGuide",
+    "date": "2026-08-15"
+  },
+  {
+    "name": "torvalds/linux",
+    "date": "2026-08-15"
+  },
+  {
+    "name": "open-webui/open-webui",
+    "date": "2026-08-15"
+  },
+  {
+    "name": "sudheerj/reactjs-interview-questions",
+    "date": "2026-08-15"
   }
 ]
