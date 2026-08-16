@@ -1,25 +1,5 @@
 [
   {
-    "name": "public-apis/public-apis",
-    "date": "2026-08-09"
-  },
-  {
-    "name": "trekhleb/javascript-algorithms",
-    "date": "2026-08-09"
-  },
-  {
-    "name": "EbookFoundation/free-programming-books",
-    "date": "2026-08-09"
-  },
-  {
-    "name": "rustdesk/rustdesk",
-    "date": "2026-08-09"
-  },
-  {
-    "name": "MadsLorentzen/ai-job-search",
-    "date": "2026-08-09"
-  },
-  {
     "name": "langgenius/dify",
     "date": "2026-08-10"
   },
@@ -126,5 +106,25 @@
   {
     "name": "sudheerj/reactjs-interview-questions",
     "date": "2026-08-15"
+  },
+  {
+    "name": "trekhleb/javascript-algorithms",
+    "date": "2026-08-16"
+  },
+  {
+    "name": "rustdesk/rustdesk",
+    "date": "2026-08-16"
+  },
+  {
+    "name": "MadsLorentzen/ai-job-search",
+    "date": "2026-08-16"
+  },
+  {
+    "name": "public-apis/public-apis",
+    "date": "2026-08-16"
+  },
+  {
+    "name": "EbookFoundation/free-programming-books",
+    "date": "2026-08-16"
   }
 ]

@@ -1,40 +1,40 @@
 {
   "projects": [
     {
-      "name": "Snailclimb/JavaGuide",
-      "stars": 157762,
-      "lang": "JavaScript",
-      "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-      "url": "https://github.com/Snailclimb/JavaGuide"
+      "name": "MadsLorentzen/ai-job-search",
+      "stars": 31837,
+      "lang": "TypeScript",
+      "description": "The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews. Fork it and own it.",
+      "url": "https://github.com/MadsLorentzen/ai-job-search"
     },
     {
-      "name": "open-webui/open-webui",
-      "stars": 148809,
+      "name": "EbookFoundation/free-programming-books",
+      "stars": 394474,
       "lang": "Python",
-      "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-      "url": "https://github.com/open-webui/open-webui"
+      "description": ":books: Freely available programming books",
+      "url": "https://github.com/EbookFoundation/free-programming-books"
     },
     {
-      "name": "sudheerj/reactjs-interview-questions",
-      "stars": 44730,
+      "name": "trekhleb/javascript-algorithms",
+      "stars": 196468,
       "lang": "JavaScript",
-      "description": "List of top 500 ReactJS Interview Questions & Answers....Coding exercise questions are coming soon!!",
-      "url": "https://github.com/sudheerj/reactjs-interview-questions"
+      "description": "📝 Algorithms and data structures implemented in JavaScript with explanations and links to further readings",
+      "url": "https://github.com/trekhleb/javascript-algorithms"
     },
     {
-      "name": "react/react",
-      "stars": 247233,
-      "lang": "JavaScript",
-      "description": "The library for web and native user interfaces.",
-      "url": "https://github.com/react/react"
+      "name": "rustdesk/rustdesk",
+      "stars": 120895,
+      "lang": "Rust",
+      "description": "An open-source remote desktop application designed for self-hosting, as an alternative to TeamViewer.",
+      "url": "https://github.com/rustdesk/rustdesk"
     },
     {
-      "name": "torvalds/linux",
-      "stars": 242854,
-      "lang": "C",
-      "description": "Linux kernel source tree",
-      "url": "https://github.com/torvalds/linux"
+      "name": "public-apis/public-apis",
+      "stars": 460202,
+      "lang": "Python",
+      "description": "A collective list of free APIs",
+      "url": "https://github.com/public-apis/public-apis"
     }
   ],
-  "date": "2026-08-15"
+  "date": "2026-08-16"
 }
