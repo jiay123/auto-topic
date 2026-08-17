@@ -1,40 +1,26 @@
 {
   "projects": [
     {
-      "name": "MadsLorentzen/ai-job-search",
-      "stars": 31837,
+      "name": "x1xhlol/system-prompts-and-models-of-ai-tools",
+      "stars": 142878,
+      "lang": null,
+      "description": "FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, VSCode Agent, Warp.dev, Windsurf, Xcode, Z.ai Code, Dia & v0. (And other Open Sourced) System Prompts, Internal Tools & AI Models",
+      "url": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools"
+    },
+    {
+      "name": "langgenius/dify",
+      "stars": 152643,
       "lang": "TypeScript",
-      "description": "The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews. Fork it and own it.",
-      "url": "https://github.com/MadsLorentzen/ai-job-search"
+      "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
+      "url": "https://github.com/langgenius/dify"
     },
     {
-      "name": "EbookFoundation/free-programming-books",
-      "stars": 394474,
-      "lang": "Python",
-      "description": ":books: Freely available programming books",
-      "url": "https://github.com/EbookFoundation/free-programming-books"
-    },
-    {
-      "name": "trekhleb/javascript-algorithms",
-      "stars": 196468,
+      "name": "yangshun/front-end-interview-handbook",
+      "stars": 43988,
       "lang": "JavaScript",
-      "description": "📝 Algorithms and data structures implemented in JavaScript with explanations and links to further readings",
-      "url": "https://github.com/trekhleb/javascript-algorithms"
-    },
-    {
-      "name": "rustdesk/rustdesk",
-      "stars": 120895,
-      "lang": "Rust",
-      "description": "An open-source remote desktop application designed for self-hosting, as an alternative to TeamViewer.",
-      "url": "https://github.com/rustdesk/rustdesk"
-    },
-    {
-      "name": "public-apis/public-apis",
-      "stars": 460202,
-      "lang": "Python",
-      "description": "A collective list of free APIs",
-      "url": "https://github.com/public-apis/public-apis"
+      "description": "Front End interview preparation materials for busy engineers (updated for 2026)",
+      "url": "https://github.com/yangshun/front-end-interview-handbook"
     }
   ],
-  "date": "2026-08-16"
+  "date": "2026-08-17"
 }

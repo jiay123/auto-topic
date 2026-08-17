@@ -1,17 +1,5 @@
 [
   {
-    "name": "langgenius/dify",
-    "date": "2026-08-10"
-  },
-  {
-    "name": "x1xhlol/system-prompts-and-models-of-ai-tools",
-    "date": "2026-08-10"
-  },
-  {
-    "name": "youngyangyang04/leetcode-master",
-    "date": "2026-08-10"
-  },
-  {
     "name": "openclaw/openclaw",
     "date": "2026-08-11"
   },
@@ -126,5 +114,17 @@
   {
     "name": "EbookFoundation/free-programming-books",
     "date": "2026-08-16"
+  },
+  {
+    "name": "langgenius/dify",
+    "date": "2026-08-17"
+  },
+  {
+    "name": "yangshun/front-end-interview-handbook",
+    "date": "2026-08-17"
+  },
+  {
+    "name": "x1xhlol/system-prompts-and-models-of-ai-tools",
+    "date": "2026-08-17"
   }
 ]
