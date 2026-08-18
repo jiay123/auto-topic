@@ -1,26 +1,33 @@
 {
   "projects": [
     {
-      "name": "x1xhlol/system-prompts-and-models-of-ai-tools",
-      "stars": 142878,
-      "lang": null,
-      "description": "FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, VSCode Agent, Warp.dev, Windsurf, Xcode, Z.ai Code, Dia & v0. (And other Open Sourced) System Prompts, Internal Tools & AI Models",
-      "url": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools"
+      "name": "farion1231/cc-switch",
+      "stars": 127856,
+      "lang": "Rust",
+      "description": "A cross-platform desktop All-in-One assistant for Claude Code, Codex, OpenCode, OpenClaw, Grok Build & Hermes Agent. Only official website: ccswitch.io",
+      "url": "https://github.com/farion1231/cc-switch"
     },
     {
-      "name": "langgenius/dify",
-      "stars": 152643,
+      "name": "youngyangyang04/leetcode-master",
+      "stars": 62197,
+      "lang": "Shell",
+      "description": "《代码随想录》LeetCode 刷题攻略：200道经典题目刷题顺序，共60w字的详细图解，视频难点剖析，50余张思维导图，支持C++，Java，Python，Go，JavaScript等多语言版本，从此算法学习不再迷茫！🔥🔥 来看看，你会发现相见恨晚！🚀 ",
+      "url": "https://github.com/youngyangyang04/leetcode-master"
+    },
+    {
+      "name": "n8n-io/n8n",
+      "stars": 201004,
       "lang": "TypeScript",
-      "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-      "url": "https://github.com/langgenius/dify"
+      "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
+      "url": "https://github.com/n8n-io/n8n"
     },
     {
-      "name": "yangshun/front-end-interview-handbook",
-      "stars": 43988,
-      "lang": "JavaScript",
-      "description": "Front End interview preparation materials for busy engineers (updated for 2026)",
-      "url": "https://github.com/yangshun/front-end-interview-handbook"
+      "name": "openclaw/openclaw",
+      "stars": 386563,
+      "lang": "TypeScript",
+      "description": "Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞 ",
+      "url": "https://github.com/openclaw/openclaw"
     }
   ],
-  "date": "2026-08-17"
+  "date": "2026-08-18"
 }

@@ -1,5 +1,8 @@
 {
   "week": "2026-08-17",
-  "pushed": [],
-  "updated": "2026-08-17"
+  "pushed": [
+    "NousResearch/hermes-agent",
+    "openclaw/openclaw"
+  ],
+  "updated": "2026-08-18"
 }
