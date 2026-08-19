@@ -1,21 +1,5 @@
 [
   {
-    "name": "public-apis/public-apis",
-    "date": "2026-08-12"
-  },
-  {
-    "name": "Shubhamsaboo/awesome-llm-apps",
-    "date": "2026-08-12"
-  },
-  {
-    "name": "nilbuild/developer-roadmap",
-    "date": "2026-08-12"
-  },
-  {
-    "name": "awesome-selfhosted/awesome-selfhosted",
-    "date": "2026-08-12"
-  },
-  {
     "name": "santifer/career-ops",
     "date": "2026-08-13"
   },
@@ -126,5 +110,25 @@
   {
     "name": "farion1231/cc-switch",
     "date": "2026-08-18"
+  },
+  {
+    "name": "public-apis/public-apis",
+    "date": "2026-08-19"
+  },
+  {
+    "name": "nilbuild/developer-roadmap",
+    "date": "2026-08-19"
+  },
+  {
+    "name": "awesome-selfhosted/awesome-selfhosted",
+    "date": "2026-08-19"
+  },
+  {
+    "name": "sindresorhus/awesome",
+    "date": "2026-08-19"
+  },
+  {
+    "name": "langchain-ai/langchain",
+    "date": "2026-08-19"
   }
 ]

@@ -1,8 +1,10 @@
 {
   "week": "2026-08-17",
   "pushed": [
+    "openclaw/openclaw",
     "NousResearch/hermes-agent",
-    "openclaw/openclaw"
+    "public-apis/public-apis",
+    "sindresorhus/awesome"
   ],
-  "updated": "2026-08-18"
+  "updated": "2026-08-19"
 }
