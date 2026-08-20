@@ -1,29 +1,5 @@
 [
   {
-    "name": "santifer/career-ops",
-    "date": "2026-08-13"
-  },
-  {
-    "name": "supabase/supabase",
-    "date": "2026-08-13"
-  },
-  {
-    "name": "mui/material-ui",
-    "date": "2026-08-13"
-  },
-  {
-    "name": "DigitalPlatDev/FreeDomain",
-    "date": "2026-08-13"
-  },
-  {
-    "name": "f/prompts.chat",
-    "date": "2026-08-13"
-  },
-  {
-    "name": "remoteintech/remote-jobs",
-    "date": "2026-08-13"
-  },
-  {
     "name": "nanocoai/nanoclaw",
     "date": "2026-08-14"
   },
@@ -130,5 +106,29 @@
   {
     "name": "langchain-ai/langchain",
     "date": "2026-08-19"
+  },
+  {
+    "name": "supabase/supabase",
+    "date": "2026-08-20"
+  },
+  {
+    "name": "remoteintech/remote-jobs",
+    "date": "2026-08-20"
+  },
+  {
+    "name": "EbookFoundation/free-programming-books",
+    "date": "2026-08-20"
+  },
+  {
+    "name": "mui/material-ui",
+    "date": "2026-08-20"
+  },
+  {
+    "name": "santifer/career-ops",
+    "date": "2026-08-20"
+  },
+  {
+    "name": "f/prompts.chat",
+    "date": "2026-08-20"
   }
 ]
