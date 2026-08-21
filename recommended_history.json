@@ -1,25 +1,5 @@
 [
   {
-    "name": "nanocoai/nanoclaw",
-    "date": "2026-08-14"
-  },
-  {
-    "name": "TheAlgorithms/Python",
-    "date": "2026-08-14"
-  },
-  {
-    "name": "amruthpillai/reactive-resume",
-    "date": "2026-08-14"
-  },
-  {
-    "name": "ripienaar/free-for-dev",
-    "date": "2026-08-14"
-  },
-  {
-    "name": "9001/copyparty",
-    "date": "2026-08-14"
-  },
-  {
     "name": "react/react",
     "date": "2026-08-15"
   },
@@ -130,5 +110,25 @@
   {
     "name": "f/prompts.chat",
     "date": "2026-08-20"
+  },
+  {
+    "name": "yangshun/tech-interview-handbook",
+    "date": "2026-08-21"
+  },
+  {
+    "name": "ripienaar/free-for-dev",
+    "date": "2026-08-21"
+  },
+  {
+    "name": "amruthpillai/reactive-resume",
+    "date": "2026-08-21"
+  },
+  {
+    "name": "nanocoai/nanoclaw",
+    "date": "2026-08-21"
+  },
+  {
+    "name": "9001/copyparty",
+    "date": "2026-08-21"
   }
 ]

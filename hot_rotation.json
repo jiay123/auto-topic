@@ -1,12 +1,14 @@
 {
   "week": "2026-08-17",
   "pushed": [
-    "freeCodeCamp/freeCodeCamp",
-    "public-apis/public-apis",
-    "EbookFoundation/free-programming-books",
+    "awesome-selfhosted/awesome-selfhosted",
+    "nilbuild/developer-roadmap",
+    "NousResearch/hermes-agent",
     "openclaw/openclaw",
-    "sindresorhus/awesome",
-    "NousResearch/hermes-agent"
+    "EbookFoundation/free-programming-books",
+    "public-apis/public-apis",
+    "freeCodeCamp/freeCodeCamp",
+    "sindresorhus/awesome"
   ],
-  "updated": "2026-08-20"
+  "updated": "2026-08-21"
 }
