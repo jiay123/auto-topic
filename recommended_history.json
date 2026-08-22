@@ -1,25 +1,5 @@
 [
   {
-    "name": "react/react",
-    "date": "2026-08-15"
-  },
-  {
-    "name": "Snailclimb/JavaGuide",
-    "date": "2026-08-15"
-  },
-  {
-    "name": "torvalds/linux",
-    "date": "2026-08-15"
-  },
-  {
-    "name": "open-webui/open-webui",
-    "date": "2026-08-15"
-  },
-  {
-    "name": "sudheerj/reactjs-interview-questions",
-    "date": "2026-08-15"
-  },
-  {
     "name": "trekhleb/javascript-algorithms",
     "date": "2026-08-16"
   },
@@ -130,5 +110,21 @@
   {
     "name": "9001/copyparty",
     "date": "2026-08-21"
+  },
+  {
+    "name": "Snailclimb/JavaGuide",
+    "date": "2026-08-22"
+  },
+  {
+    "name": "open-webui/open-webui",
+    "date": "2026-08-22"
+  },
+  {
+    "name": "TheAlgorithms/Python",
+    "date": "2026-08-22"
+  },
+  {
+    "name": "vinta/awesome-python",
+    "date": "2026-08-22"
   }
 ]
