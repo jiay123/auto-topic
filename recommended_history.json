@@ -1,25 +1,5 @@
 [
   {
-    "name": "trekhleb/javascript-algorithms",
-    "date": "2026-08-16"
-  },
-  {
-    "name": "rustdesk/rustdesk",
-    "date": "2026-08-16"
-  },
-  {
-    "name": "MadsLorentzen/ai-job-search",
-    "date": "2026-08-16"
-  },
-  {
-    "name": "public-apis/public-apis",
-    "date": "2026-08-16"
-  },
-  {
-    "name": "EbookFoundation/free-programming-books",
-    "date": "2026-08-16"
-  },
-  {
     "name": "langgenius/dify",
     "date": "2026-08-17"
   },
@@ -126,5 +106,25 @@
   {
     "name": "vinta/awesome-python",
     "date": "2026-08-22"
+  },
+  {
+    "name": "sindresorhus/awesome",
+    "date": "2026-08-23"
+  },
+  {
+    "name": "MadsLorentzen/ai-job-search",
+    "date": "2026-08-23"
+  },
+  {
+    "name": "rustdesk/rustdesk",
+    "date": "2026-08-23"
+  },
+  {
+    "name": "sudheerj/reactjs-interview-questions",
+    "date": "2026-08-23"
+  },
+  {
+    "name": "public-apis/public-apis",
+    "date": "2026-08-23"
   }
 ]

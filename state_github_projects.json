@@ -1,33 +1,40 @@
 {
   "projects": [
     {
-      "name": "Snailclimb/JavaGuide",
-      "stars": 157935,
+      "name": "MadsLorentzen/ai-job-search",
+      "stars": 32919,
+      "lang": "Python",
+      "description": "The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews. Fork it and own it.",
+      "url": "https://github.com/MadsLorentzen/ai-job-search"
+    },
+    {
+      "name": "sudheerj/reactjs-interview-questions",
+      "stars": 44745,
       "lang": "JavaScript",
-      "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-      "url": "https://github.com/Snailclimb/JavaGuide"
+      "description": "List of top 500 ReactJS Interview Questions & Answers....Coding exercise questions are coming soon!!",
+      "url": "https://github.com/sudheerj/reactjs-interview-questions"
     },
     {
-      "name": "open-webui/open-webui",
-      "stars": 149517,
-      "lang": "Python",
-      "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-      "url": "https://github.com/open-webui/open-webui"
+      "name": "rustdesk/rustdesk",
+      "stars": 121506,
+      "lang": "Rust",
+      "description": "An open-source remote desktop application designed for self-hosting, as an alternative to TeamViewer.",
+      "url": "https://github.com/rustdesk/rustdesk"
     },
     {
-      "name": "TheAlgorithms/Python",
-      "stars": 223931,
-      "lang": "Python",
-      "description": "All Algorithms implemented in Python",
-      "url": "https://github.com/TheAlgorithms/Python"
+      "name": "sindresorhus/awesome",
+      "stars": 499003,
+      "lang": null,
+      "description": "😎 Awesome lists about all kinds of interesting topics [NOTE: Pull requests are temporarily disabled until I have a chance to catch up with the existing ones]",
+      "url": "https://github.com/sindresorhus/awesome"
     },
     {
-      "name": "vinta/awesome-python",
-      "stars": 315364,
+      "name": "public-apis/public-apis",
+      "stars": 468655,
       "lang": "Python",
-      "description": "The definitive list that answers \"I want to do X in Python, which tool should I use?\"",
-      "url": "https://github.com/vinta/awesome-python"
+      "description": "A collective list of free APIs",
+      "url": "https://github.com/public-apis/public-apis"
     }
   ],
-  "date": "2026-08-22"
+  "date": "2026-08-23"
 }

@@ -1,16 +1,8 @@
 {
   "week": "2026-08-17",
   "pushed": [
-    "obra/superpowers",
-    "NousResearch/hermes-agent",
-    "openclaw/openclaw",
-    "public-apis/public-apis",
-    "awesome-selfhosted/awesome-selfhosted",
-    "freeCodeCamp/freeCodeCamp",
     "sindresorhus/awesome",
-    "nilbuild/developer-roadmap",
-    "EbookFoundation/free-programming-books",
-    "vinta/awesome-python"
+    "public-apis/public-apis"
   ],
-  "updated": "2026-08-22"
+  "updated": "2026-08-23"
 }
