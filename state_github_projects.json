@@ -1,40 +1,26 @@
 {
   "projects": [
     {
-      "name": "MadsLorentzen/ai-job-search",
-      "stars": 32919,
-      "lang": "Python",
-      "description": "The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews. Fork it and own it.",
-      "url": "https://github.com/MadsLorentzen/ai-job-search"
+      "name": "nexu-io/open-design",
+      "stars": 90755,
+      "lang": "TypeScript",
+      "description": "🎨 Best DeepSeek Harness Design Plugin. The open-source Claude Design alternative. 🖥️ Local-first desktop app. 🖼️ Your coding agent becomes the design engine: prototypes, landing pages, dashboards, slides, images & video — real files, HTML/PDF/PPTX/MP4 export. 🤖 Claude Code / Codex / Cursor / DeepSeek Harness / OpenCode & 20+ CLIs via BYOK.",
+      "url": "https://github.com/nexu-io/open-design"
     },
     {
-      "name": "sudheerj/reactjs-interview-questions",
-      "stars": 44745,
+      "name": "langgenius/dify",
+      "stars": 153293,
+      "lang": "TypeScript",
+      "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
+      "url": "https://github.com/langgenius/dify"
+    },
+    {
+      "name": "yangshun/front-end-interview-handbook",
+      "stars": 43993,
       "lang": "JavaScript",
-      "description": "List of top 500 ReactJS Interview Questions & Answers....Coding exercise questions are coming soon!!",
-      "url": "https://github.com/sudheerj/reactjs-interview-questions"
-    },
-    {
-      "name": "rustdesk/rustdesk",
-      "stars": 121506,
-      "lang": "Rust",
-      "description": "An open-source remote desktop application designed for self-hosting, as an alternative to TeamViewer.",
-      "url": "https://github.com/rustdesk/rustdesk"
-    },
-    {
-      "name": "sindresorhus/awesome",
-      "stars": 499003,
-      "lang": null,
-      "description": "😎 Awesome lists about all kinds of interesting topics [NOTE: Pull requests are temporarily disabled until I have a chance to catch up with the existing ones]",
-      "url": "https://github.com/sindresorhus/awesome"
-    },
-    {
-      "name": "public-apis/public-apis",
-      "stars": 468655,
-      "lang": "Python",
-      "description": "A collective list of free APIs",
-      "url": "https://github.com/public-apis/public-apis"
+      "description": "Front End interview preparation materials for busy engineers (updated for 2026)",
+      "url": "https://github.com/yangshun/front-end-interview-handbook"
     }
   ],
-  "date": "2026-08-23"
+  "date": "2026-08-24"
 }

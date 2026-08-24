@@ -1,17 +1,5 @@
 [
   {
-    "name": "langgenius/dify",
-    "date": "2026-08-17"
-  },
-  {
-    "name": "yangshun/front-end-interview-handbook",
-    "date": "2026-08-17"
-  },
-  {
-    "name": "x1xhlol/system-prompts-and-models-of-ai-tools",
-    "date": "2026-08-17"
-  },
-  {
     "name": "youngyangyang04/leetcode-master",
     "date": "2026-08-18"
   },
@@ -126,5 +114,17 @@
   {
     "name": "public-apis/public-apis",
     "date": "2026-08-23"
+  },
+  {
+    "name": "nexu-io/open-design",
+    "date": "2026-08-24"
+  },
+  {
+    "name": "yangshun/front-end-interview-handbook",
+    "date": "2026-08-24"
+  },
+  {
+    "name": "langgenius/dify",
+    "date": "2026-08-24"
   }
 ]
