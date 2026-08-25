@@ -1,5 +1,8 @@
 {
   "week": "2026-08-24",
-  "pushed": [],
-  "updated": "2026-08-24"
+  "pushed": [
+    "openclaw/openclaw",
+    "affaan-m/ECC"
+  ],
+  "updated": "2026-08-25"
 }

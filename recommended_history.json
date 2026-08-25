@@ -1,21 +1,5 @@
 [
   {
-    "name": "youngyangyang04/leetcode-master",
-    "date": "2026-08-18"
-  },
-  {
-    "name": "n8n-io/n8n",
-    "date": "2026-08-18"
-  },
-  {
-    "name": "openclaw/openclaw",
-    "date": "2026-08-18"
-  },
-  {
-    "name": "farion1231/cc-switch",
-    "date": "2026-08-18"
-  },
-  {
     "name": "public-apis/public-apis",
     "date": "2026-08-19"
   },
@@ -126,5 +110,21 @@
   {
     "name": "langgenius/dify",
     "date": "2026-08-24"
+  },
+  {
+    "name": "n8n-io/n8n",
+    "date": "2026-08-25"
+  },
+  {
+    "name": "youngyangyang04/leetcode-master",
+    "date": "2026-08-25"
+  },
+  {
+    "name": "farion1231/cc-switch",
+    "date": "2026-08-25"
+  },
+  {
+    "name": "openclaw/openclaw",
+    "date": "2026-08-25"
   }
 ]
