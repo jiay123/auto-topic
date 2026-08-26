@@ -1,33 +1,33 @@
 {
   "projects": [
     {
-      "name": "farion1231/cc-switch",
-      "stars": 129183,
-      "lang": "Rust",
-      "description": "A cross-platform desktop All-in-One assistant for Claude Code, Codex, OpenCode, OpenClaw, Grok Build & Hermes Agent. Only official website: ccswitch.io",
-      "url": "https://github.com/farion1231/cc-switch"
+      "name": "langchain-ai/langchain",
+      "stars": 144985,
+      "lang": "Python",
+      "description": "The agent engineering platform.",
+      "url": "https://github.com/langchain-ai/langchain"
     },
     {
-      "name": "youngyangyang04/leetcode-master",
-      "stars": 62266,
-      "lang": "Shell",
-      "description": "《代码随想录》LeetCode 刷题攻略：200道经典题目刷题顺序，共60w字的详细图解，视频难点剖析，50余张思维导图，支持C++，Java，Python，Go，JavaScript等多语言版本，从此算法学习不再迷茫！🔥🔥 来看看，你会发现相见恨晚！🚀 ",
-      "url": "https://github.com/youngyangyang04/leetcode-master"
-    },
-    {
-      "name": "n8n-io/n8n",
-      "stars": 202311,
+      "name": "nilbuild/developer-roadmap",
+      "stars": 365400,
       "lang": "TypeScript",
-      "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
-      "url": "https://github.com/n8n-io/n8n"
+      "description": "Interactive roadmaps, guides and other educational content to help developers grow in their careers.",
+      "url": "https://github.com/nilbuild/developer-roadmap"
     },
     {
-      "name": "openclaw/openclaw",
-      "stars": 387442,
-      "lang": "TypeScript",
-      "description": "Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞 ",
-      "url": "https://github.com/openclaw/openclaw"
+      "name": "awesome-selfhosted/awesome-selfhosted",
+      "stars": 315084,
+      "lang": null,
+      "description": "A list of Free Software network services and web applications which can be hosted on your own servers",
+      "url": "https://github.com/awesome-selfhosted/awesome-selfhosted"
+    },
+    {
+      "name": "vinta/awesome-python",
+      "stars": 316070,
+      "lang": "Python",
+      "description": "The definitive list that answers \"I want to do X in Python, which tool should I use?\"",
+      "url": "https://github.com/vinta/awesome-python"
     }
   ],
-  "date": "2026-08-25"
+  "date": "2026-08-26"
 }

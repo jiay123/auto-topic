@@ -1,25 +1,5 @@
 [
   {
-    "name": "public-apis/public-apis",
-    "date": "2026-08-19"
-  },
-  {
-    "name": "nilbuild/developer-roadmap",
-    "date": "2026-08-19"
-  },
-  {
-    "name": "awesome-selfhosted/awesome-selfhosted",
-    "date": "2026-08-19"
-  },
-  {
-    "name": "sindresorhus/awesome",
-    "date": "2026-08-19"
-  },
-  {
-    "name": "langchain-ai/langchain",
-    "date": "2026-08-19"
-  },
-  {
     "name": "supabase/supabase",
     "date": "2026-08-20"
   },
@@ -126,5 +106,21 @@
   {
     "name": "openclaw/openclaw",
     "date": "2026-08-25"
+  },
+  {
+    "name": "langchain-ai/langchain",
+    "date": "2026-08-26"
+  },
+  {
+    "name": "nilbuild/developer-roadmap",
+    "date": "2026-08-26"
+  },
+  {
+    "name": "awesome-selfhosted/awesome-selfhosted",
+    "date": "2026-08-26"
+  },
+  {
+    "name": "vinta/awesome-python",
+    "date": "2026-08-26"
   }
 ]
