@@ -1,10 +1,12 @@
 {
   "week": "2026-08-24",
   "pushed": [
-    "openclaw/openclaw",
+    "react/react",
     "affaan-m/ECC",
-    "vinta/awesome-python",
-    "freeCodeCamp/freeCodeCamp"
+    "public-apis/public-apis",
+    "freeCodeCamp/freeCodeCamp",
+    "openclaw/openclaw",
+    "vinta/awesome-python"
   ],
-  "updated": "2026-08-26"
+  "updated": "2026-08-27"
 }
