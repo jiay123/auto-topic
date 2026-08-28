@@ -1,25 +1,5 @@
 [
   {
-    "name": "yangshun/tech-interview-handbook",
-    "date": "2026-08-21"
-  },
-  {
-    "name": "ripienaar/free-for-dev",
-    "date": "2026-08-21"
-  },
-  {
-    "name": "amruthpillai/reactive-resume",
-    "date": "2026-08-21"
-  },
-  {
-    "name": "nanocoai/nanoclaw",
-    "date": "2026-08-21"
-  },
-  {
-    "name": "9001/copyparty",
-    "date": "2026-08-21"
-  },
-  {
     "name": "Snailclimb/JavaGuide",
     "date": "2026-08-22"
   },
@@ -122,5 +102,29 @@
   {
     "name": "remoteintech/remote-jobs",
     "date": "2026-08-27"
+  },
+  {
+    "name": "9001/copyparty",
+    "date": "2026-08-28"
+  },
+  {
+    "name": "ripienaar/free-for-dev",
+    "date": "2026-08-28"
+  },
+  {
+    "name": "yangshun/tech-interview-handbook",
+    "date": "2026-08-28"
+  },
+  {
+    "name": "Shubhamsaboo/awesome-llm-apps",
+    "date": "2026-08-28"
+  },
+  {
+    "name": "amruthpillai/reactive-resume",
+    "date": "2026-08-28"
+  },
+  {
+    "name": "torvalds/linux",
+    "date": "2026-08-28"
   }
 ]
