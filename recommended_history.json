@@ -1,21 +1,5 @@
 [
   {
-    "name": "Snailclimb/JavaGuide",
-    "date": "2026-08-22"
-  },
-  {
-    "name": "open-webui/open-webui",
-    "date": "2026-08-22"
-  },
-  {
-    "name": "TheAlgorithms/Python",
-    "date": "2026-08-22"
-  },
-  {
-    "name": "vinta/awesome-python",
-    "date": "2026-08-22"
-  },
-  {
     "name": "sindresorhus/awesome",
     "date": "2026-08-23"
   },
@@ -126,5 +110,17 @@
   {
     "name": "torvalds/linux",
     "date": "2026-08-28"
+  },
+  {
+    "name": "Snailclimb/JavaGuide",
+    "date": "2026-08-29"
+  },
+  {
+    "name": "open-webui/open-webui",
+    "date": "2026-08-29"
+  },
+  {
+    "name": "TheAlgorithms/Python",
+    "date": "2026-08-29"
   }
 ]
