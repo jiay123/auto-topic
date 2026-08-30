@@ -1,25 +1,5 @@
 [
   {
-    "name": "sindresorhus/awesome",
-    "date": "2026-08-23"
-  },
-  {
-    "name": "MadsLorentzen/ai-job-search",
-    "date": "2026-08-23"
-  },
-  {
-    "name": "rustdesk/rustdesk",
-    "date": "2026-08-23"
-  },
-  {
-    "name": "sudheerj/reactjs-interview-questions",
-    "date": "2026-08-23"
-  },
-  {
-    "name": "public-apis/public-apis",
-    "date": "2026-08-23"
-  },
-  {
     "name": "nexu-io/open-design",
     "date": "2026-08-24"
   },
@@ -122,5 +102,25 @@
   {
     "name": "TheAlgorithms/Python",
     "date": "2026-08-29"
+  },
+  {
+    "name": "MadsLorentzen/ai-job-search",
+    "date": "2026-08-30"
+  },
+  {
+    "name": "rustdesk/rustdesk",
+    "date": "2026-08-30"
+  },
+  {
+    "name": "EbookFoundation/free-programming-books",
+    "date": "2026-08-30"
+  },
+  {
+    "name": "public-apis/public-apis",
+    "date": "2026-08-30"
+  },
+  {
+    "name": "sudheerj/reactjs-interview-questions",
+    "date": "2026-08-30"
   }
 ]
