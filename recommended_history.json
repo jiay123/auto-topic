@@ -1,17 +1,5 @@
 [
   {
-    "name": "nexu-io/open-design",
-    "date": "2026-08-24"
-  },
-  {
-    "name": "yangshun/front-end-interview-handbook",
-    "date": "2026-08-24"
-  },
-  {
-    "name": "langgenius/dify",
-    "date": "2026-08-24"
-  },
-  {
     "name": "n8n-io/n8n",
     "date": "2026-08-25"
   },
@@ -122,5 +110,17 @@
   {
     "name": "sudheerj/reactjs-interview-questions",
     "date": "2026-08-30"
+  },
+  {
+    "name": "langgenius/dify",
+    "date": "2026-08-31"
+  },
+  {
+    "name": "poteto/hiring-without-whiteboards",
+    "date": "2026-08-31"
+  },
+  {
+    "name": "nexu-io/open-design",
+    "date": "2026-08-31"
   }
 ]
