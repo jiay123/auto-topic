@@ -1,26 +1,40 @@
 {
   "projects": [
     {
-      "name": "nexu-io/open-design",
-      "stars": 92888,
-      "lang": null,
-      "description": "🎨 Best DeepSeek Harness Design Plugin. The open-source Claude Design alternative. 🖥️ Local-first desktop app. 🖼️ Your coding agent becomes the design engine: prototypes, landing pages, dashboards, slides, images & video — real files, HTML/PDF/PPTX/MP4 export. 🤖 Claude Code / Codex / Cursor / DeepSeek Harness / OpenCode & 20+ CLIs via BYOK.",
-      "url": "https://github.com/nexu-io/open-design"
+      "name": "farion1231/cc-switch",
+      "stars": 130425,
+      "lang": "Rust",
+      "description": "A cross-platform desktop All-in-One assistant for Claude Code, Codex, OpenCode, OpenClaw, Grok Build & Hermes Agent. Only official website: ccswitch.io",
+      "url": "https://github.com/farion1231/cc-switch"
     },
     {
-      "name": "langgenius/dify",
-      "stars": 153940,
+      "name": "youngyangyang04/leetcode-master",
+      "stars": 62342,
+      "lang": "Shell",
+      "description": "《代码随想录》LeetCode 刷题攻略：200道经典题目刷题顺序，共60w字的详细图解，视频难点剖析，50余张思维导图，支持C++，Java，Python，Go，JavaScript等多语言版本，从此算法学习不再迷茫！🔥🔥 来看看，你会发现相见恨晚！🚀 ",
+      "url": "https://github.com/youngyangyang04/leetcode-master"
+    },
+    {
+      "name": "n8n-io/n8n",
+      "stars": 202981,
       "lang": "TypeScript",
-      "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-      "url": "https://github.com/langgenius/dify"
+      "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
+      "url": "https://github.com/n8n-io/n8n"
     },
     {
-      "name": "poteto/hiring-without-whiteboards",
-      "stars": 51860,
-      "lang": "JavaScript",
-      "description": "⭐️  Companies that don't have a broken hiring process",
-      "url": "https://github.com/poteto/hiring-without-whiteboards"
+      "name": "openclaw/openclaw",
+      "stars": 388363,
+      "lang": "TypeScript",
+      "description": "Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞 ",
+      "url": "https://github.com/openclaw/openclaw"
+    },
+    {
+      "name": "torvalds/linux",
+      "stars": 245498,
+      "lang": "C",
+      "description": "Linux kernel source tree",
+      "url": "https://github.com/torvalds/linux"
     }
   ],
-  "date": "2026-08-31"
+  "date": "2026-09-01"
 }
