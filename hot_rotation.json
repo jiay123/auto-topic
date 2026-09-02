@@ -1,8 +1,10 @@
 {
   "week": "2026-08-31",
   "pushed": [
-    "openclaw/openclaw",
-    "torvalds/linux"
+    "public-apis/public-apis",
+    "sindresorhus/awesome",
+    "torvalds/linux",
+    "openclaw/openclaw"
   ],
-  "updated": "2026-09-01"
+  "updated": "2026-09-02"
 }
