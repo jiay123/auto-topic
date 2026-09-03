@@ -1,29 +1,5 @@
 [
   {
-    "name": "f/prompts.chat",
-    "date": "2026-08-27"
-  },
-  {
-    "name": "public-apis/public-apis",
-    "date": "2026-08-27"
-  },
-  {
-    "name": "mui/material-ui",
-    "date": "2026-08-27"
-  },
-  {
-    "name": "santifer/career-ops",
-    "date": "2026-08-27"
-  },
-  {
-    "name": "supabase/supabase",
-    "date": "2026-08-27"
-  },
-  {
-    "name": "remoteintech/remote-jobs",
-    "date": "2026-08-27"
-  },
-  {
     "name": "9001/copyparty",
     "date": "2026-08-28"
   },
@@ -130,5 +106,29 @@
   {
     "name": "sindresorhus/awesome",
     "date": "2026-09-02"
+  },
+  {
+    "name": "nanocoai/nanoclaw",
+    "date": "2026-09-03"
+  },
+  {
+    "name": "mui/material-ui",
+    "date": "2026-09-03"
+  },
+  {
+    "name": "remoteintech/remote-jobs",
+    "date": "2026-09-03"
+  },
+  {
+    "name": "EbookFoundation/free-programming-books",
+    "date": "2026-09-03"
+  },
+  {
+    "name": "f/prompts.chat",
+    "date": "2026-09-03"
+  },
+  {
+    "name": "supabase/supabase",
+    "date": "2026-09-03"
   }
 ]
