@@ -1,29 +1,5 @@
 [
   {
-    "name": "9001/copyparty",
-    "date": "2026-08-28"
-  },
-  {
-    "name": "ripienaar/free-for-dev",
-    "date": "2026-08-28"
-  },
-  {
-    "name": "yangshun/tech-interview-handbook",
-    "date": "2026-08-28"
-  },
-  {
-    "name": "Shubhamsaboo/awesome-llm-apps",
-    "date": "2026-08-28"
-  },
-  {
-    "name": "amruthpillai/reactive-resume",
-    "date": "2026-08-28"
-  },
-  {
-    "name": "torvalds/linux",
-    "date": "2026-08-28"
-  },
-  {
     "name": "Snailclimb/JavaGuide",
     "date": "2026-08-29"
   },
@@ -130,5 +106,29 @@
   {
     "name": "supabase/supabase",
     "date": "2026-09-03"
+  },
+  {
+    "name": "vinta/awesome-python",
+    "date": "2026-09-04"
+  },
+  {
+    "name": "langchain-ai/langchain",
+    "date": "2026-09-04"
+  },
+  {
+    "name": "ripienaar/free-for-dev",
+    "date": "2026-09-04"
+  },
+  {
+    "name": "9001/copyparty",
+    "date": "2026-09-04"
+  },
+  {
+    "name": "amruthpillai/reactive-resume",
+    "date": "2026-09-04"
+  },
+  {
+    "name": "yangshun/tech-interview-handbook",
+    "date": "2026-09-04"
   }
 ]
