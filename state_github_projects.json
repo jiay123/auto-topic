@@ -1,47 +1,26 @@
 {
   "projects": [
     {
-      "name": "amruthpillai/reactive-resume",
-      "stars": 42162,
-      "lang": "TypeScript",
-      "description": "A one-of-a-kind resume builder that keeps your privacy in mind. Completely secure, customizable, portable, open-source and free forever. Try it out today!",
-      "url": "https://github.com/amruthpillai/reactive-resume"
+      "name": "Snailclimb/JavaGuide",
+      "stars": 158278,
+      "lang": "JavaScript",
+      "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
+      "url": "https://github.com/Snailclimb/JavaGuide"
     },
     {
-      "name": "langchain-ai/langchain",
-      "stars": 145605,
+      "name": "open-webui/open-webui",
+      "stars": 150968,
       "lang": "Python",
-      "description": "The agent engineering platform.",
-      "url": "https://github.com/langchain-ai/langchain"
+      "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
+      "url": "https://github.com/open-webui/open-webui"
     },
     {
-      "name": "yangshun/tech-interview-handbook",
-      "stars": 142415,
-      "lang": "TypeScript",
-      "description": "Curated coding interview preparation materials for busy software engineers",
-      "url": "https://github.com/yangshun/tech-interview-handbook"
-    },
-    {
-      "name": "ripienaar/free-for-dev",
-      "stars": 136491,
-      "lang": "HTML",
-      "description": "A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev",
-      "url": "https://github.com/ripienaar/free-for-dev"
-    },
-    {
-      "name": "9001/copyparty",
-      "stars": 46495,
-      "lang": "Python",
-      "description": "Portable file server with accelerated resumable uploads, dedup, WebDAV, SFTP, FTP, TFTP, zeroconf, media indexer, thumbnails++ all in one file",
-      "url": "https://github.com/9001/copyparty"
-    },
-    {
-      "name": "vinta/awesome-python",
-      "stars": 318089,
-      "lang": "Python",
-      "description": "The definitive list that answers \"I want to do X in Python, which tool should I use?\"",
-      "url": "https://github.com/vinta/awesome-python"
+      "name": "yangshun/front-end-interview-handbook",
+      "stars": 43997,
+      "lang": "JavaScript",
+      "description": "Front End interview preparation materials for busy engineers (updated for 2026)",
+      "url": "https://github.com/yangshun/front-end-interview-handbook"
     }
   ],
-  "date": "2026-09-04"
+  "date": "2026-09-05"
 }

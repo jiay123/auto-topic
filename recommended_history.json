@@ -1,17 +1,5 @@
 [
   {
-    "name": "Snailclimb/JavaGuide",
-    "date": "2026-08-29"
-  },
-  {
-    "name": "open-webui/open-webui",
-    "date": "2026-08-29"
-  },
-  {
-    "name": "TheAlgorithms/Python",
-    "date": "2026-08-29"
-  },
-  {
     "name": "MadsLorentzen/ai-job-search",
     "date": "2026-08-30"
   },
@@ -130,5 +118,17 @@
   {
     "name": "yangshun/tech-interview-handbook",
     "date": "2026-09-04"
+  },
+  {
+    "name": "yangshun/front-end-interview-handbook",
+    "date": "2026-09-05"
+  },
+  {
+    "name": "open-webui/open-webui",
+    "date": "2026-09-05"
+  },
+  {
+    "name": "Snailclimb/JavaGuide",
+    "date": "2026-09-05"
   }
 ]
