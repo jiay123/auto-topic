@@ -1,16 +1,8 @@
 {
   "week": "2026-08-31",
   "pushed": [
-    "obra/superpowers",
-    "nilbuild/developer-roadmap",
-    "vinta/awesome-python",
-    "awesome-selfhosted/awesome-selfhosted",
-    "torvalds/linux",
-    "public-apis/public-apis",
-    "freeCodeCamp/freeCodeCamp",
-    "openclaw/openclaw",
-    "EbookFoundation/free-programming-books",
-    "sindresorhus/awesome"
+    "sindresorhus/awesome",
+    "public-apis/public-apis"
   ],
-  "updated": "2026-09-05"
+  "updated": "2026-09-06"
 }

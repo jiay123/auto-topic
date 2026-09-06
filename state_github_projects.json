@@ -1,26 +1,40 @@
 {
   "projects": [
     {
-      "name": "Snailclimb/JavaGuide",
-      "stars": 158278,
-      "lang": "JavaScript",
-      "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-      "url": "https://github.com/Snailclimb/JavaGuide"
-    },
-    {
-      "name": "open-webui/open-webui",
-      "stars": 150968,
+      "name": "MadsLorentzen/ai-job-search",
+      "stars": 40911,
       "lang": "Python",
-      "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-      "url": "https://github.com/open-webui/open-webui"
+      "description": "The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews. Fork it and own it.",
+      "url": "https://github.com/MadsLorentzen/ai-job-search"
     },
     {
-      "name": "yangshun/front-end-interview-handbook",
-      "stars": 43997,
-      "lang": "JavaScript",
-      "description": "Front End interview preparation materials for busy engineers (updated for 2026)",
-      "url": "https://github.com/yangshun/front-end-interview-handbook"
+      "name": "TheAlgorithms/Python",
+      "stars": 224292,
+      "lang": "Python",
+      "description": "All Algorithms implemented in Python",
+      "url": "https://github.com/TheAlgorithms/Python"
+    },
+    {
+      "name": "rustdesk/rustdesk",
+      "stars": 122705,
+      "lang": "Rust",
+      "description": "An open-source remote desktop application designed for self-hosting, as an alternative to TeamViewer.",
+      "url": "https://github.com/rustdesk/rustdesk"
+    },
+    {
+      "name": "sindresorhus/awesome",
+      "stars": 503360,
+      "lang": null,
+      "description": "😎 Awesome lists about all kinds of interesting topics [NOTE: Pull requests are temporarily disabled until I have a chance to catch up with the existing ones]",
+      "url": "https://github.com/sindresorhus/awesome"
+    },
+    {
+      "name": "public-apis/public-apis",
+      "stars": 475953,
+      "lang": "Python",
+      "description": "A collective list of free APIs",
+      "url": "https://github.com/public-apis/public-apis"
     }
   ],
-  "date": "2026-09-05"
+  "date": "2026-09-06"
 }
