@@ -1,40 +1,26 @@
 {
   "projects": [
     {
-      "name": "MadsLorentzen/ai-job-search",
-      "stars": 40911,
-      "lang": "Python",
-      "description": "The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews. Fork it and own it.",
-      "url": "https://github.com/MadsLorentzen/ai-job-search"
+      "name": "nexu-io/open-design",
+      "stars": 94511,
+      "lang": "TypeScript",
+      "description": "🎨 Best DeepSeek Harness Design Plugin. The open-source Claude Design alternative. 🖥️ Local-first desktop app. 🖼️ Your coding agent becomes the design engine: prototypes, landing pages, dashboards, slides, images & video — real files, HTML/PDF/PPTX/MP4 export. 🤖 Claude Code / Codex / Cursor / DeepSeek Harness / OpenCode & 20+ CLIs via BYOK.",
+      "url": "https://github.com/nexu-io/open-design"
     },
     {
-      "name": "TheAlgorithms/Python",
-      "stars": 224292,
-      "lang": "Python",
-      "description": "All Algorithms implemented in Python",
-      "url": "https://github.com/TheAlgorithms/Python"
+      "name": "langgenius/dify",
+      "stars": 154665,
+      "lang": "TypeScript",
+      "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
+      "url": "https://github.com/langgenius/dify"
     },
     {
-      "name": "rustdesk/rustdesk",
-      "stars": 122705,
-      "lang": "Rust",
-      "description": "An open-source remote desktop application designed for self-hosting, as an alternative to TeamViewer.",
-      "url": "https://github.com/rustdesk/rustdesk"
-    },
-    {
-      "name": "sindresorhus/awesome",
-      "stars": 503360,
-      "lang": null,
-      "description": "😎 Awesome lists about all kinds of interesting topics [NOTE: Pull requests are temporarily disabled until I have a chance to catch up with the existing ones]",
-      "url": "https://github.com/sindresorhus/awesome"
-    },
-    {
-      "name": "public-apis/public-apis",
-      "stars": 475953,
-      "lang": "Python",
-      "description": "A collective list of free APIs",
-      "url": "https://github.com/public-apis/public-apis"
+      "name": "poteto/hiring-without-whiteboards",
+      "stars": 51951,
+      "lang": "JavaScript",
+      "description": "⭐️  Companies that don't have a broken hiring process",
+      "url": "https://github.com/poteto/hiring-without-whiteboards"
     }
   ],
-  "date": "2026-09-06"
+  "date": "2026-09-07"
 }
