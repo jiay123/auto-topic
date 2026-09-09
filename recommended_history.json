@@ -1,25 +1,5 @@
 [
   {
-    "name": "nilbuild/developer-roadmap",
-    "date": "2026-09-02"
-  },
-  {
-    "name": "public-apis/public-apis",
-    "date": "2026-09-02"
-  },
-  {
-    "name": "awesome-selfhosted/awesome-selfhosted",
-    "date": "2026-09-02"
-  },
-  {
-    "name": "career-ops-hq/career-ops",
-    "date": "2026-09-02"
-  },
-  {
-    "name": "sindresorhus/awesome",
-    "date": "2026-09-02"
-  },
-  {
     "name": "nanocoai/nanoclaw",
     "date": "2026-09-03"
   },
@@ -126,5 +106,21 @@
   {
     "name": "sudheerj/reactjs-interview-questions",
     "date": "2026-09-08"
+  },
+  {
+    "name": "career-ops-hq/career-ops",
+    "date": "2026-09-09"
+  },
+  {
+    "name": "liquidslr/leetcode-company-wise-problems",
+    "date": "2026-09-09"
+  },
+  {
+    "name": "public-apis/public-apis",
+    "date": "2026-09-09"
+  },
+  {
+    "name": "awesome-selfhosted/awesome-selfhosted",
+    "date": "2026-09-09"
   }
 ]
