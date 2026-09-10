@@ -1,29 +1,5 @@
 [
   {
-    "name": "nanocoai/nanoclaw",
-    "date": "2026-09-03"
-  },
-  {
-    "name": "mui/material-ui",
-    "date": "2026-09-03"
-  },
-  {
-    "name": "remoteintech/remote-jobs",
-    "date": "2026-09-03"
-  },
-  {
-    "name": "EbookFoundation/free-programming-books",
-    "date": "2026-09-03"
-  },
-  {
-    "name": "f/prompts.chat",
-    "date": "2026-09-03"
-  },
-  {
-    "name": "supabase/supabase",
-    "date": "2026-09-03"
-  },
-  {
     "name": "vinta/awesome-python",
     "date": "2026-09-04"
   },
@@ -122,5 +98,29 @@
   {
     "name": "awesome-selfhosted/awesome-selfhosted",
     "date": "2026-09-09"
+  },
+  {
+    "name": "remoteintech/remote-jobs",
+    "date": "2026-09-10"
+  },
+  {
+    "name": "mui/material-ui",
+    "date": "2026-09-10"
+  },
+  {
+    "name": "EbookFoundation/free-programming-books",
+    "date": "2026-09-10"
+  },
+  {
+    "name": "supabase/supabase",
+    "date": "2026-09-10"
+  },
+  {
+    "name": "nanocoai/nanoclaw",
+    "date": "2026-09-10"
+  },
+  {
+    "name": "f/prompts.chat",
+    "date": "2026-09-10"
   }
 ]
