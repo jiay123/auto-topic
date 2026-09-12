@@ -1,17 +1,5 @@
 [
   {
-    "name": "yangshun/front-end-interview-handbook",
-    "date": "2026-09-05"
-  },
-  {
-    "name": "open-webui/open-webui",
-    "date": "2026-09-05"
-  },
-  {
-    "name": "Snailclimb/JavaGuide",
-    "date": "2026-09-05"
-  },
-  {
     "name": "rustdesk/rustdesk",
     "date": "2026-09-06"
   },
@@ -118,5 +106,25 @@
   {
     "name": "9001/copyparty",
     "date": "2026-09-11"
+  },
+  {
+    "name": "torvalds/linux",
+    "date": "2026-09-12"
+  },
+  {
+    "name": "aishwaryanr/awesome-generative-ai-guide",
+    "date": "2026-09-12"
+  },
+  {
+    "name": "open-webui/open-webui",
+    "date": "2026-09-12"
+  },
+  {
+    "name": "Snailclimb/JavaGuide",
+    "date": "2026-09-12"
+  },
+  {
+    "name": "react/react",
+    "date": "2026-09-12"
   }
 ]
