@@ -1,40 +1,33 @@
 {
   "projects": [
     {
-      "name": "Snailclimb/JavaGuide",
-      "stars": 158461,
-      "lang": "JavaScript",
-      "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-      "url": "https://github.com/Snailclimb/JavaGuide"
-    },
-    {
-      "name": "aishwaryanr/awesome-generative-ai-guide",
-      "stars": 29367,
-      "lang": "HTML",
-      "description": "A one stop repository for generative AI research updates, interview resources, notebooks and much more!",
-      "url": "https://github.com/aishwaryanr/awesome-generative-ai-guide"
-    },
-    {
-      "name": "open-webui/open-webui",
-      "stars": 151684,
+      "name": "MadsLorentzen/ai-job-search",
+      "stars": 41998,
       "lang": "Python",
-      "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-      "url": "https://github.com/open-webui/open-webui"
+      "description": "The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews. Fork it and own it.",
+      "url": "https://github.com/MadsLorentzen/ai-job-search"
     },
     {
-      "name": "react/react",
-      "stars": 250048,
-      "lang": "JavaScript",
-      "description": "The library for web and native user interfaces.",
-      "url": "https://github.com/react/react"
+      "name": "reactive-resume/reactive-resume",
+      "stars": 42569,
+      "lang": "TypeScript",
+      "description": "A one-of-a-kind resume builder that keeps your privacy in mind. Completely secure, customizable, portable, open-source and free forever. Try it out today!",
+      "url": "https://github.com/reactive-resume/reactive-resume"
     },
     {
-      "name": "torvalds/linux",
-      "stars": 248310,
-      "lang": "C",
-      "description": "Linux kernel source tree",
-      "url": "https://github.com/torvalds/linux"
+      "name": "TheAlgorithms/Python",
+      "stars": 224520,
+      "lang": "Python",
+      "description": "All Algorithms implemented in Python",
+      "url": "https://github.com/TheAlgorithms/Python"
+    },
+    {
+      "name": "public-apis/public-apis",
+      "stars": 479464,
+      "lang": "Python",
+      "description": "A collective list of free APIs",
+      "url": "https://github.com/public-apis/public-apis"
     }
   ],
-  "date": "2026-09-12"
+  "date": "2026-09-13"
 }

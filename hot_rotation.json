@@ -1,16 +1,8 @@
 {
   "week": "2026-09-07",
   "pushed": [
-    "EbookFoundation/free-programming-books",
     "public-apis/public-apis",
-    "obra/superpowers",
-    "nilbuild/developer-roadmap",
-    "torvalds/linux",
-    "affaan-m/ECC",
-    "awesome-selfhosted/awesome-selfhosted",
-    "freeCodeCamp/freeCodeCamp",
-    "openclaw/openclaw",
-    "react/react"
+    "freeCodeCamp/freeCodeCamp"
   ],
-  "updated": "2026-09-12"
+  "updated": "2026-09-13"
 }

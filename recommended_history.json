@@ -1,25 +1,5 @@
 [
   {
-    "name": "rustdesk/rustdesk",
-    "date": "2026-09-06"
-  },
-  {
-    "name": "public-apis/public-apis",
-    "date": "2026-09-06"
-  },
-  {
-    "name": "MadsLorentzen/ai-job-search",
-    "date": "2026-09-06"
-  },
-  {
-    "name": "sindresorhus/awesome",
-    "date": "2026-09-06"
-  },
-  {
-    "name": "TheAlgorithms/Python",
-    "date": "2026-09-06"
-  },
-  {
     "name": "poteto/hiring-without-whiteboards",
     "date": "2026-09-07"
   },
@@ -126,5 +106,21 @@
   {
     "name": "react/react",
     "date": "2026-09-12"
+  },
+  {
+    "name": "MadsLorentzen/ai-job-search",
+    "date": "2026-09-13"
+  },
+  {
+    "name": "TheAlgorithms/Python",
+    "date": "2026-09-13"
+  },
+  {
+    "name": "reactive-resume/reactive-resume",
+    "date": "2026-09-13"
+  },
+  {
+    "name": "public-apis/public-apis",
+    "date": "2026-09-13"
   }
 ]
