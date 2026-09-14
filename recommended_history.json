@@ -1,17 +1,5 @@
 [
   {
-    "name": "poteto/hiring-without-whiteboards",
-    "date": "2026-09-07"
-  },
-  {
-    "name": "nexu-io/open-design",
-    "date": "2026-09-07"
-  },
-  {
-    "name": "langgenius/dify",
-    "date": "2026-09-07"
-  },
-  {
     "name": "openclaw/openclaw",
     "date": "2026-09-08"
   },
@@ -122,5 +110,17 @@
   {
     "name": "public-apis/public-apis",
     "date": "2026-09-13"
+  },
+  {
+    "name": "nexu-io/open-design",
+    "date": "2026-09-14"
+  },
+  {
+    "name": "langgenius/dify",
+    "date": "2026-09-14"
+  },
+  {
+    "name": "poteto/hiring-without-whiteboards",
+    "date": "2026-09-14"
   }
 ]
