@@ -1,21 +1,5 @@
 [
   {
-    "name": "openclaw/openclaw",
-    "date": "2026-09-08"
-  },
-  {
-    "name": "farion1231/cc-switch",
-    "date": "2026-09-08"
-  },
-  {
-    "name": "n8n-io/n8n",
-    "date": "2026-09-08"
-  },
-  {
-    "name": "sudheerj/reactjs-interview-questions",
-    "date": "2026-09-08"
-  },
-  {
     "name": "career-ops-hq/career-ops",
     "date": "2026-09-09"
   },
@@ -122,5 +106,21 @@
   {
     "name": "poteto/hiring-without-whiteboards",
     "date": "2026-09-14"
+  },
+  {
+    "name": "farion1231/cc-switch",
+    "date": "2026-09-15"
+  },
+  {
+    "name": "rustdesk/rustdesk",
+    "date": "2026-09-15"
+  },
+  {
+    "name": "openclaw/openclaw",
+    "date": "2026-09-15"
+  },
+  {
+    "name": "donnemartin/system-design-primer",
+    "date": "2026-09-15"
   }
 ]
