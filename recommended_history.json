@@ -1,29 +1,5 @@
 [
   {
-    "name": "remoteintech/remote-jobs",
-    "date": "2026-09-10"
-  },
-  {
-    "name": "mui/material-ui",
-    "date": "2026-09-10"
-  },
-  {
-    "name": "EbookFoundation/free-programming-books",
-    "date": "2026-09-10"
-  },
-  {
-    "name": "supabase/supabase",
-    "date": "2026-09-10"
-  },
-  {
-    "name": "nanocoai/nanoclaw",
-    "date": "2026-09-10"
-  },
-  {
-    "name": "f/prompts.chat",
-    "date": "2026-09-10"
-  },
-  {
     "name": "nilbuild/developer-roadmap",
     "date": "2026-09-11"
   },
@@ -126,5 +102,25 @@
   {
     "name": "awesome-selfhosted/awesome-selfhosted",
     "date": "2026-09-16"
+  },
+  {
+    "name": "nanocoai/nanoclaw",
+    "date": "2026-09-17"
+  },
+  {
+    "name": "n8n-io/n8n",
+    "date": "2026-09-17"
+  },
+  {
+    "name": "supabase/supabase",
+    "date": "2026-09-17"
+  },
+  {
+    "name": "mui/material-ui",
+    "date": "2026-09-17"
+  },
+  {
+    "name": "remoteintech/remote-jobs",
+    "date": "2026-09-17"
   }
 ]
