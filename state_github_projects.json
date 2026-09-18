@@ -1,40 +1,47 @@
 {
   "projects": [
     {
-      "name": "nanocoai/nanoclaw",
-      "stars": 30789,
+      "name": "langchain-ai/langchain",
+      "stars": 146561,
+      "lang": "Python",
+      "description": "The agent engineering platform.",
+      "url": "https://github.com/langchain-ai/langchain"
+    },
+    {
+      "name": "nilbuild/developer-roadmap",
+      "stars": 367556,
       "lang": "TypeScript",
-      "description": "A lightweight alternative to OpenClaw that runs in containers for security. Connects to WhatsApp, Telegram, Slack, Discord, Gmail and other messaging apps,, has memory, scheduled jobs, and runs directly on Anthropic's Agents SDK",
-      "url": "https://github.com/nanocoai/nanoclaw"
+      "description": "Interactive roadmaps, guides and other educational content to help developers grow in their careers.",
+      "url": "https://github.com/nilbuild/developer-roadmap"
     },
     {
-      "name": "supabase/supabase",
-      "stars": 109810,
+      "name": "ripienaar/free-for-dev",
+      "stars": 137712,
+      "lang": "HTML",
+      "description": "A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev",
+      "url": "https://github.com/ripienaar/free-for-dev"
+    },
+    {
+      "name": "9001/copyparty",
+      "stars": 46725,
+      "lang": "Python",
+      "description": "Portable file server with accelerated resumable uploads, dedup, WebDAV, SFTP, FTP, TFTP, zeroconf, media indexer, thumbnails++ all in one file",
+      "url": "https://github.com/9001/copyparty"
+    },
+    {
+      "name": "immich-app/immich",
+      "stars": 114485,
       "lang": "TypeScript",
-      "description": "The Postgres development platform. Supabase gives you a dedicated Postgres database to build your web, mobile, and AI applications.",
-      "url": "https://github.com/supabase/supabase"
+      "description": "High performance self-hosted photo and video management solution.",
+      "url": "https://github.com/immich-app/immich"
     },
     {
-      "name": "mui/material-ui",
-      "stars": 99050,
-      "lang": "JavaScript",
-      "description": "Material UI: Comprehensive React component library that implements Google's Material Design. Free forever.",
-      "url": "https://github.com/mui/material-ui"
-    },
-    {
-      "name": "remoteintech/remote-jobs",
-      "stars": 40831,
-      "lang": "JavaScript",
-      "description": "Source for remoteintech.company — a community-maintained directory of remote-friendly tech companies",
-      "url": "https://github.com/remoteintech/remote-jobs"
-    },
-    {
-      "name": "n8n-io/n8n",
-      "stars": 204691,
-      "lang": "TypeScript",
-      "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
-      "url": "https://github.com/n8n-io/n8n"
+      "name": "vinta/awesome-python",
+      "stars": 321370,
+      "lang": "Python",
+      "description": "The definitive list that answers \"I want to do X in Python, which tool should I use?\"",
+      "url": "https://github.com/vinta/awesome-python"
     }
   ],
-  "date": "2026-09-17"
+  "date": "2026-09-18"
 }

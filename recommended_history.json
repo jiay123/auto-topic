@@ -1,25 +1,5 @@
 [
   {
-    "name": "nilbuild/developer-roadmap",
-    "date": "2026-09-11"
-  },
-  {
-    "name": "ripienaar/free-for-dev",
-    "date": "2026-09-11"
-  },
-  {
-    "name": "langchain-ai/langchain",
-    "date": "2026-09-11"
-  },
-  {
-    "name": "reactive-resume/app",
-    "date": "2026-09-11"
-  },
-  {
-    "name": "9001/copyparty",
-    "date": "2026-09-11"
-  },
-  {
     "name": "torvalds/linux",
     "date": "2026-09-12"
   },
@@ -122,5 +102,29 @@
   {
     "name": "remoteintech/remote-jobs",
     "date": "2026-09-17"
+  },
+  {
+    "name": "ripienaar/free-for-dev",
+    "date": "2026-09-18"
+  },
+  {
+    "name": "9001/copyparty",
+    "date": "2026-09-18"
+  },
+  {
+    "name": "langchain-ai/langchain",
+    "date": "2026-09-18"
+  },
+  {
+    "name": "vinta/awesome-python",
+    "date": "2026-09-18"
+  },
+  {
+    "name": "nilbuild/developer-roadmap",
+    "date": "2026-09-18"
+  },
+  {
+    "name": "immich-app/immich",
+    "date": "2026-09-18"
   }
 ]
