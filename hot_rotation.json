@@ -1,14 +1,16 @@
 {
   "week": "2026-09-14",
   "pushed": [
+    "mattpocock/skills",
+    "donnemartin/system-design-primer",
+    "obra/superpowers",
+    "nilbuild/developer-roadmap",
+    "openclaw/openclaw",
     "awesome-selfhosted/awesome-selfhosted",
+    "freeCodeCamp/freeCodeCamp",
     "EbookFoundation/free-programming-books",
     "public-apis/public-apis",
-    "openclaw/openclaw",
-    "vinta/awesome-python",
-    "freeCodeCamp/freeCodeCamp",
-    "nilbuild/developer-roadmap",
-    "donnemartin/system-design-primer"
+    "vinta/awesome-python"
   ],
-  "updated": "2026-09-18"
+  "updated": "2026-09-19"
 }

@@ -1,25 +1,5 @@
 [
   {
-    "name": "torvalds/linux",
-    "date": "2026-09-12"
-  },
-  {
-    "name": "aishwaryanr/awesome-generative-ai-guide",
-    "date": "2026-09-12"
-  },
-  {
-    "name": "open-webui/open-webui",
-    "date": "2026-09-12"
-  },
-  {
-    "name": "Snailclimb/JavaGuide",
-    "date": "2026-09-12"
-  },
-  {
-    "name": "react/react",
-    "date": "2026-09-12"
-  },
-  {
     "name": "MadsLorentzen/ai-job-search",
     "date": "2026-09-13"
   },
@@ -126,5 +106,17 @@
   {
     "name": "immich-app/immich",
     "date": "2026-09-18"
+  },
+  {
+    "name": "Snailclimb/JavaGuide",
+    "date": "2026-09-19"
+  },
+  {
+    "name": "aishwaryanr/awesome-generative-ai-guide",
+    "date": "2026-09-19"
+  },
+  {
+    "name": "open-webui/open-webui",
+    "date": "2026-09-19"
   }
 ]
