@@ -1,21 +1,5 @@
 [
   {
-    "name": "MadsLorentzen/ai-job-search",
-    "date": "2026-09-13"
-  },
-  {
-    "name": "TheAlgorithms/Python",
-    "date": "2026-09-13"
-  },
-  {
-    "name": "reactive-resume/reactive-resume",
-    "date": "2026-09-13"
-  },
-  {
-    "name": "public-apis/public-apis",
-    "date": "2026-09-13"
-  },
-  {
     "name": "nexu-io/open-design",
     "date": "2026-09-14"
   },
@@ -118,5 +102,21 @@
   {
     "name": "open-webui/open-webui",
     "date": "2026-09-19"
+  },
+  {
+    "name": "MadsLorentzen/ai-job-search",
+    "date": "2026-09-20"
+  },
+  {
+    "name": "public-apis/public-apis",
+    "date": "2026-09-20"
+  },
+  {
+    "name": "reactive-resume/reactive-resume",
+    "date": "2026-09-20"
+  },
+  {
+    "name": "TheAlgorithms/Python",
+    "date": "2026-09-20"
   }
 ]
