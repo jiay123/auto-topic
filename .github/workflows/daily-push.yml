@@ -2,6 +2,8 @@ name: 每日推送
 
 on:
   schedule:
+    # 06:00 北京时间 = 22:00 UTC
+    - cron: '0 22 * * *'
     # 07:00 北京时间 = 23:00 UTC
     - cron: '0 23 * * *'
     # 08:00 北京时间 = 00:00 UTC
@@ -9,6 +11,18 @@ on:
   workflow_dispatch:
 
 jobs:
+  daily-reminder:
+    if: ${{ github.event.schedule == '0 22 * * *' || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - run: python scripts/fetch_daily_reminder.py
+        env:
+          SENDKEY: ${{ secrets.SENDKEY }}
   github-projects:
     if: ${{ github.event.schedule == '0 0 * * *' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
