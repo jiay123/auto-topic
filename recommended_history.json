@@ -1,17 +1,5 @@
 [
   {
-    "name": "nexu-io/open-design",
-    "date": "2026-09-14"
-  },
-  {
-    "name": "langgenius/dify",
-    "date": "2026-09-14"
-  },
-  {
-    "name": "poteto/hiring-without-whiteboards",
-    "date": "2026-09-14"
-  },
-  {
     "name": "farion1231/cc-switch",
     "date": "2026-09-15"
   },
@@ -118,5 +106,17 @@
   {
     "name": "TheAlgorithms/Python",
     "date": "2026-09-20"
+  },
+  {
+    "name": "langgenius/dify",
+    "date": "2026-09-21"
+  },
+  {
+    "name": "sudheerj/reactjs-interview-questions",
+    "date": "2026-09-21"
+  },
+  {
+    "name": "nexu-io/open-design",
+    "date": "2026-09-21"
   }
 ]
