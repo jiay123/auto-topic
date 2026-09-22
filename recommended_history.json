@@ -1,21 +1,5 @@
 [
   {
-    "name": "farion1231/cc-switch",
-    "date": "2026-09-15"
-  },
-  {
-    "name": "rustdesk/rustdesk",
-    "date": "2026-09-15"
-  },
-  {
-    "name": "openclaw/openclaw",
-    "date": "2026-09-15"
-  },
-  {
-    "name": "donnemartin/system-design-primer",
-    "date": "2026-09-15"
-  },
-  {
     "name": "public-apis/public-apis",
     "date": "2026-09-16"
   },
@@ -118,5 +102,21 @@
   {
     "name": "nexu-io/open-design",
     "date": "2026-09-21"
+  },
+  {
+    "name": "donnemartin/system-design-primer",
+    "date": "2026-09-22"
+  },
+  {
+    "name": "farion1231/cc-switch",
+    "date": "2026-09-22"
+  },
+  {
+    "name": "rustdesk/rustdesk",
+    "date": "2026-09-22"
+  },
+  {
+    "name": "openclaw/openclaw",
+    "date": "2026-09-22"
   }
 ]
