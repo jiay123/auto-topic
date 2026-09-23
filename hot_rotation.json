@@ -1,8 +1,10 @@
 {
   "week": "2026-09-21",
   "pushed": [
-    "NousResearch/hermes-agent",
-    "openclaw/openclaw"
+    "freeCodeCamp/freeCodeCamp",
+    "EbookFoundation/free-programming-books",
+    "openclaw/openclaw",
+    "NousResearch/hermes-agent"
   ],
-  "updated": "2026-09-22"
+  "updated": "2026-09-23"
 }
