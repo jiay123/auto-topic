@@ -35,17 +35,19 @@ def main():
         return
     now_cn = datetime.now(timezone(timedelta(hours=8)))
     plan = load_today_plan()
-    title = "小叮当提醒：%d月%d日 %s 今天3件事" % (now_cn.month, now_cn.day, WEEKDAYS[now_cn.weekday()])
+    weekday_ch = WEEKDAYS[now_cn.weekday()]
+    title = "小叮当提醒：老贾，今天%d月%d日%s 开干！" % (now_cn.month, now_cn.day, weekday_ch)
 
     body_lines = []
     if plan:
-        body_lines.append("【今日计划】")
         body_lines.append(plan)
+        body_lines.append("")
+        body_lines.append("-----")
         body_lines.append("")
     body_lines.append("【每天3件事】")
     body_lines.append("1. 发视频：今天发哪集，问小叮当要")
     body_lines.append("2. 发星球：今天发哪篇，问小叮当要")
-    body_lines.append("3. 评论区置顶：这集讲的是'是什么'，完整'怎么做'我拆在星球里了（搜：老贾的AI工具箱）。不卖课套路，只收跑通的方法，进来翻两篇不合适再走。")
+    body_lines.append("3. 评论区置顶：这集全程用的都是免费开源工具，一分钱没花。想跟老贾一样自己做的，评论区扣“工具”，我挨个回。翻我往期也全是0成本玩法。")
     body_lines.append("")
     body_lines.append("发完找小叮当报播放数据，我更新台账。")
     body = "\n".join(body_lines)
