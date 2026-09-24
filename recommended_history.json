@@ -1,25 +1,5 @@
 [
   {
-    "name": "nanocoai/nanoclaw",
-    "date": "2026-09-17"
-  },
-  {
-    "name": "n8n-io/n8n",
-    "date": "2026-09-17"
-  },
-  {
-    "name": "supabase/supabase",
-    "date": "2026-09-17"
-  },
-  {
-    "name": "mui/material-ui",
-    "date": "2026-09-17"
-  },
-  {
-    "name": "remoteintech/remote-jobs",
-    "date": "2026-09-17"
-  },
-  {
     "name": "ripienaar/free-for-dev",
     "date": "2026-09-18"
   },
@@ -114,5 +94,29 @@
   {
     "name": "awesome-selfhosted/awesome-selfhosted",
     "date": "2026-09-23"
+  },
+  {
+    "name": "supabase/supabase",
+    "date": "2026-09-24"
+  },
+  {
+    "name": "mui/material-ui",
+    "date": "2026-09-24"
+  },
+  {
+    "name": "remoteintech/remote-jobs",
+    "date": "2026-09-24"
+  },
+  {
+    "name": "n8n-io/n8n",
+    "date": "2026-09-24"
+  },
+  {
+    "name": "public-apis/public-apis",
+    "date": "2026-09-24"
+  },
+  {
+    "name": "nanocoai/nanoclaw",
+    "date": "2026-09-24"
   }
 ]
