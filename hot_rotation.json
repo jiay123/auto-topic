@@ -3,10 +3,12 @@
   "pushed": [
     "EbookFoundation/free-programming-books",
     "openclaw/openclaw",
-    "nilbuild/developer-roadmap",
+    "NousResearch/hermes-agent",
+    "awesome-selfhosted/awesome-selfhosted",
+    "vinta/awesome-python",
     "public-apis/public-apis",
     "freeCodeCamp/freeCodeCamp",
-    "NousResearch/hermes-agent"
+    "nilbuild/developer-roadmap"
   ],
-  "updated": "2026-09-24"
+  "updated": "2026-09-25"
 }

@@ -1,29 +1,5 @@
 [
   {
-    "name": "ripienaar/free-for-dev",
-    "date": "2026-09-18"
-  },
-  {
-    "name": "9001/copyparty",
-    "date": "2026-09-18"
-  },
-  {
-    "name": "langchain-ai/langchain",
-    "date": "2026-09-18"
-  },
-  {
-    "name": "vinta/awesome-python",
-    "date": "2026-09-18"
-  },
-  {
-    "name": "nilbuild/developer-roadmap",
-    "date": "2026-09-18"
-  },
-  {
-    "name": "immich-app/immich",
-    "date": "2026-09-18"
-  },
-  {
     "name": "Snailclimb/JavaGuide",
     "date": "2026-09-19"
   },
@@ -118,5 +94,29 @@
   {
     "name": "nanocoai/nanoclaw",
     "date": "2026-09-24"
+  },
+  {
+    "name": "ripienaar/free-for-dev",
+    "date": "2026-09-25"
+  },
+  {
+    "name": "langchain-ai/langchain",
+    "date": "2026-09-25"
+  },
+  {
+    "name": "immich-app/immich",
+    "date": "2026-09-25"
+  },
+  {
+    "name": "9001/copyparty",
+    "date": "2026-09-25"
+  },
+  {
+    "name": "vinta/awesome-python",
+    "date": "2026-09-25"
+  },
+  {
+    "name": "nilbuild/developer-roadmap",
+    "date": "2026-09-25"
   }
 ]
