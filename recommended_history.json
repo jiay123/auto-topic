@@ -1,17 +1,5 @@
 [
   {
-    "name": "Snailclimb/JavaGuide",
-    "date": "2026-09-19"
-  },
-  {
-    "name": "aishwaryanr/awesome-generative-ai-guide",
-    "date": "2026-09-19"
-  },
-  {
-    "name": "open-webui/open-webui",
-    "date": "2026-09-19"
-  },
-  {
     "name": "MadsLorentzen/ai-job-search",
     "date": "2026-09-20"
   },
@@ -118,5 +106,17 @@
   {
     "name": "nilbuild/developer-roadmap",
     "date": "2026-09-25"
+  },
+  {
+    "name": "Snailclimb/JavaGuide",
+    "date": "2026-09-26"
+  },
+  {
+    "name": "open-webui/open-webui",
+    "date": "2026-09-26"
+  },
+  {
+    "name": "poteto/hiring-without-whiteboards",
+    "date": "2026-09-26"
   }
 ]

@@ -1,47 +1,26 @@
 {
   "projects": [
     {
-      "name": "langchain-ai/langchain",
-      "stars": 147020,
+      "name": "Snailclimb/JavaGuide",
+      "stars": 158873,
+      "lang": "JavaScript",
+      "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
+      "url": "https://github.com/Snailclimb/JavaGuide"
+    },
+    {
+      "name": "open-webui/open-webui",
+      "stars": 153199,
       "lang": "Python",
-      "description": "The agent engineering platform.",
-      "url": "https://github.com/langchain-ai/langchain"
+      "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
+      "url": "https://github.com/open-webui/open-webui"
     },
     {
-      "name": "nilbuild/developer-roadmap",
-      "stars": 368051,
-      "lang": "TypeScript",
-      "description": "Interactive roadmaps, guides and other educational content to help developers grow in their careers.",
-      "url": "https://github.com/nilbuild/developer-roadmap"
-    },
-    {
-      "name": "ripienaar/free-for-dev",
-      "stars": 138319,
-      "lang": "HTML",
-      "description": "A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev",
-      "url": "https://github.com/ripienaar/free-for-dev"
-    },
-    {
-      "name": "9001/copyparty",
-      "stars": 46783,
-      "lang": "Python",
-      "description": "Portable file server with accelerated resumable uploads, dedup, WebDAV, SFTP, FTP, TFTP, zeroconf, media indexer, thumbnails++ all in one file",
-      "url": "https://github.com/9001/copyparty"
-    },
-    {
-      "name": "immich-app/immich",
-      "stars": 114992,
-      "lang": "TypeScript",
-      "description": "High performance self-hosted photo and video management solution.",
-      "url": "https://github.com/immich-app/immich"
-    },
-    {
-      "name": "vinta/awesome-python",
-      "stars": 322816,
-      "lang": "Python",
-      "description": "The definitive list that answers \"I want to do X in Python, which tool should I use?\"",
-      "url": "https://github.com/vinta/awesome-python"
+      "name": "poteto/hiring-without-whiteboards",
+      "stars": 52202,
+      "lang": "JavaScript",
+      "description": "⭐️  Companies that don't have a broken hiring process",
+      "url": "https://github.com/poteto/hiring-without-whiteboards"
     }
   ],
-  "date": "2026-09-25"
+  "date": "2026-09-26"
 }
