@@ -1,16 +1,5 @@
 {
   "week": "2026-09-21",
-  "pushed": [
-    "openclaw/openclaw",
-    "public-apis/public-apis",
-    "freeCodeCamp/freeCodeCamp",
-    "mattpocock/skills",
-    "vinta/awesome-python",
-    "obra/superpowers",
-    "EbookFoundation/free-programming-books",
-    "NousResearch/hermes-agent",
-    "awesome-selfhosted/awesome-selfhosted",
-    "nilbuild/developer-roadmap"
-  ],
-  "updated": "2026-09-26"
+  "pushed": [],
+  "updated": "2026-09-27"
 }

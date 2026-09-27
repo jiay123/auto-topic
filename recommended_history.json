@@ -1,21 +1,5 @@
 [
   {
-    "name": "MadsLorentzen/ai-job-search",
-    "date": "2026-09-20"
-  },
-  {
-    "name": "public-apis/public-apis",
-    "date": "2026-09-20"
-  },
-  {
-    "name": "reactive-resume/reactive-resume",
-    "date": "2026-09-20"
-  },
-  {
-    "name": "TheAlgorithms/Python",
-    "date": "2026-09-20"
-  },
-  {
     "name": "langgenius/dify",
     "date": "2026-09-21"
   },
@@ -118,5 +102,29 @@
   {
     "name": "poteto/hiring-without-whiteboards",
     "date": "2026-09-26"
+  },
+  {
+    "name": "microsoft/vscode",
+    "date": "2026-09-27"
+  },
+  {
+    "name": "block/buzz",
+    "date": "2026-09-27"
+  },
+  {
+    "name": "sponsors/rohitg00",
+    "date": "2026-09-27"
+  },
+  {
+    "name": "paperclipai/paperclip",
+    "date": "2026-09-27"
+  },
+  {
+    "name": "NVIDIA/Model-Optimizer",
+    "date": "2026-09-27"
+  },
+  {
+    "name": "sponsors/zhaoxuya520",
+    "date": "2026-09-27"
   }
 ]
