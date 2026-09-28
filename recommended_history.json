@@ -1,17 +1,5 @@
 [
   {
-    "name": "langgenius/dify",
-    "date": "2026-09-21"
-  },
-  {
-    "name": "sudheerj/reactjs-interview-questions",
-    "date": "2026-09-21"
-  },
-  {
-    "name": "nexu-io/open-design",
-    "date": "2026-09-21"
-  },
-  {
     "name": "donnemartin/system-design-primer",
     "date": "2026-09-22"
   },
@@ -126,5 +114,25 @@
   {
     "name": "sponsors/zhaoxuya520",
     "date": "2026-09-27"
+  },
+  {
+    "name": "vercel-labs/scriptc",
+    "date": "2026-09-28"
+  },
+  {
+    "name": "debpalash/VoiceStudio",
+    "date": "2026-09-28"
+  },
+  {
+    "name": "InfinityLoop1308/PipePipe",
+    "date": "2026-09-28"
+  },
+  {
+    "name": "willfaust/Madeira",
+    "date": "2026-09-28"
+  },
+  {
+    "name": "mvschwarz/openrig",
+    "date": "2026-09-28"
   }
 ]
