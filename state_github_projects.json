@@ -1,40 +1,33 @@
 {
   "projects": [
     {
-      "name": "InfinityLoop1308/PipePipe",
-      "stars": 6646,
-      "lang": "Shell",
-      "description": "An open-source Android app to let you browse YouTube and other services freely.",
-      "url": "https://github.com/InfinityLoop1308/PipePipe"
+      "name": "NawfalMotii79/PLFM_RADAR",
+      "stars": 25837,
+      "lang": "PLSQL",
+      "description": "Open-source, low-cost 10.5 GHz PLFM phased array RADAR system",
+      "url": "https://github.com/NawfalMotii79/PLFM_RADAR"
     },
     {
-      "name": "debpalash/VoiceStudio",
-      "stars": 40597,
+      "name": "byoungd/up",
+      "stars": 64920,
+      "lang": "JavaScript",
+      "description": "An advanced guide which might benefit you a lot 🎉 . 韩先凯的人生进阶指南 人生进阶指南 离谱的人生 人生进阶 AI学习 AI指南 韩先凯的AI学习指南 英语学习指南/英语学习教程/英语学习/学英语",
+      "url": "https://github.com/byoungd/up"
+    },
+    {
+      "name": "vectorize-io/hindsight",
+      "stars": 41346,
       "lang": "Python",
-      "description": "VoiceStudio is the open-source, fully-local ElevenLabs alternative — voice cloning, voice design, video dubbing, dictation, transcription &amp; audiobook creation in 646 languages.",
-      "url": "https://github.com/debpalash/VoiceStudio"
+      "description": "Hindsight: Agent Memory That Learns",
+      "url": "https://github.com/vectorize-io/hindsight"
     },
     {
-      "name": "mvschwarz/openrig",
-      "stars": 1107,
-      "lang": "TypeScript",
-      "description": "Multi-agent harness that runs Claude Code and Codex together as one system",
-      "url": "https://github.com/mvschwarz/openrig"
-    },
-    {
-      "name": "willfaust/Madeira",
-      "stars": 861,
-      "lang": "C",
-      "description": "Run x86-64 Windows PC games on jailed iOS via FEX-Emu + Wine + DXMT",
-      "url": "https://github.com/willfaust/Madeira"
-    },
-    {
-      "name": "vercel-labs/scriptc",
-      "stars": 5464,
-      "lang": "TypeScript",
-      "description": "TypeScript-to-Native Compiler",
-      "url": "https://github.com/vercel-labs/scriptc"
+      "name": "cs341-illinois/coursebook",
+      "stars": 2606,
+      "lang": "TeX",
+      "description": "Open Source Introductory Systems Programming Textbook for the University of Illinois",
+      "url": "https://github.com/cs341-illinois/coursebook"
     }
   ],
-  "date": "2026-09-28"
+  "date": "2026-09-29"
 }
