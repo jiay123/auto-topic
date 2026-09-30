@@ -103,23 +103,29 @@ def build_cn_card(repo, idx=None):
     for card in CN_CARDS:
         if any(k in blob for k in card["keys"]):
             title = card["title"]
-            points = card["points"]
             break
+
+    # 要点一律用项目自己的真实描述/真实数据，绝不套用编好的话术
+    pts = []
+    if repo.get("description"):
+        d = repo["description"].strip()
+        # 英文描述太长不适合微信竖排，截断到可读长度
+        pts.append(d[:110] + ("…" if len(d) > 110 else ""))
+    if topics:
+        tag_cn = "、".join(topics[:3])
+        pts.append(f"标签：{tag_cn}")
+    else:
+        pts.append(f"{lang} 写的，{stars_k} 星")
+    if repo.get("language"):
+        pts.append(f"主要语言：{repo['language']}")
+    while len(pts) < 3:
+        pts.append("详见项目主页 README")
+    points = pts[:3]
 
     if not title:
         raw_name = repo.get("name", "").replace("-", " ").replace("_", " ")
         topic_str = "、".join(topics[:3]) if topics else ""
         title = raw_name if not topic_str else f"{raw_name}（{topic_str}）"
-        pts = []
-        if stars >= 3000:
-            pts.append(f"{stars//1000}K 星热门项目，社区活跃")
-        else:
-            pts.append("开源免费，感兴趣可以看看")
-        if repo.get("description"):
-            pts.append(repo.get("description")[:60])
-        while len(pts) < 3:
-            pts.append("点下面链接进项目主页查看详情")
-        points = pts[:3]
 
     url = repo.get("html_url", "")
 
@@ -230,6 +236,10 @@ def search_github(query, per_page=10):
 def fetch_trending(limit=10):
     """抓 GitHub Trending 今日榜作为兜底（不需要 token / API 配额）。"""
     url = "https://github.com/trending?since=daily"
+    # Trending 页面里混着 /sponsors/xxx、/login、/features 等非仓库路径，必须白名单过滤
+    NON_REPO_OWNERS = {"sponsors", "login", "features", "topics", "collections",
+                       "trending", "events", "marketplace", "settings", "notifications",
+                       "orgs", "users", "explore", "about", "pricing", "search"}
     try:
         r = requests.get(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126.0.0.0"}, timeout=15)
         if r.status_code != 200:
@@ -243,6 +253,14 @@ def fetch_trending(limit=10):
             if not m:
                 continue
             full_name = m.group(1)
+            # 只认 真正的 owner/repo：owner 不能是站点保留路径，repo 段不能带子路径特征
+            if full_name.count("/") != 1:
+                continue
+            owner, _, repo_seg = full_name.partition("/")
+            if owner.lower() in NON_REPO_OWNERS or not repo_seg:
+                continue
+            if repo_seg.lower() in {"sponsors", "join", "orgs", "organizations"}:
+                continue
             mdesc = re.search(r'<p class="col-9[^"]*"[^>]*>\s*(.*?)\s*</p>', b, re.DOTALL)
             desc = ""
             if mdesc:
@@ -257,6 +275,9 @@ def fetch_trending(limit=10):
                     stars = 0
             mlang = re.search(r'<span itemprop="programmingLanguage">([^<]+)</span>', b)
             lang = mlang.group(1).strip() if mlang else ""
+            # 没有星数说明没解析出来，跳过（宁缺毋滥）
+            if stars <= 0:
+                continue
             repos.append({
                 "full_name": full_name,
                 "name": full_name.split("/")[1],
@@ -272,7 +293,41 @@ def fetch_trending(limit=10):
         print("Trending 抓取失败:", e)
         return []
 
+def is_noise(repo):
+    """滤掉跟老贾受众（想0成本玩AI的人）无关的项目：教材、课程、awesome清单、赞助页、镜像站。
+    判据是仓库名/描述/owner 的强特征词，命中即丢，宁缺毋滥。"""
+    name = (repo.get("name") or "").lower()
+    owner = (repo.get("full_name") or "").split("/")[0].lower()
+    desc = (repo.get("description") or "").lower()
+    blob = f"{name} {desc}"
+
+    NOISE = [
+        # 教材 / 课程 / 教程类
+        "textbook", "coursebook", "curriculum", "syllabus", "lecture", "course",
+        "tutorial", "教程", "教材", "课程", "课件", "习题",
+        "for-beginners", "beginners", "learning", "learn-", "100-days", "bootcamp",
+        "awesome", "cheatsheet", "cheat-sheet", "interview", "roadmap",
+        "road-map", "book", "books", "notes", "note-taking", "study",
+        "sponsor", "sponsors", "mirror", "-ghproxy", "gh-proxy",
+    ]
+    for k in NOISE:
+        if k in name or k in desc:
+            return True
+
+    # owner 是 sponsors/组织大账号，且没描述 → 基本是页面不是项目
+    if owner in {"sponsors", "awesome"} and not repo.get("description"):
+        return True
+
+    # 没有任何描述且不是 Star 很高的老牌项目 → 信息不足，不推
+    if not repo.get("description") and repo.get("stargazers_count", 0) < 5000:
+        return True
+
+    return False
+
+
 def score_repo(repo):
+    if is_noise(repo):
+        return -999
     score = 0
     stars = repo["stargazers_count"]
     topics = repo.get("topics", [])
@@ -336,8 +391,17 @@ def main():
     ]
     all_repos = []
     if not GH_TOKEN:
-        print("未配置 GH_TOKEN，使用 GitHub Trending 兜底")
-        all_repos = fetch_trending()
+        # 没配 token：GitHub Search API 限流很紧（未认证 10次/分），只跑 2 个最有效的查询，
+        # 再用 Trending 兜底补量。宁可少而准，不要凑数。
+        print("未配置 GH_TOKEN，走免 token 模式（精简查询 + Trending 兜底）")
+        for q in [f"topic:ai stars:>400 pushed:>{DATE_7D}",
+                  f"alternative OR self-hosted stars:>800 pushed:>{DATE_7D}"]:
+            try:
+                all_repos.extend(search_github(q, per_page=20))
+            except Exception as e:
+                print(f"搜索失败(免token): {str(e)[:60]}")
+            time.sleep(3.0)
+        all_repos.extend(fetch_trending())
     else:
         for q in queries:
             all_repos.extend(search_github(q, per_page=15))
