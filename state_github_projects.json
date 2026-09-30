@@ -1,33 +1,26 @@
 {
   "projects": [
     {
-      "name": "NawfalMotii79/PLFM_RADAR",
-      "stars": 25837,
-      "lang": "PLSQL",
-      "description": "Open-source, low-cost 10.5 GHz PLFM phased array RADAR system",
-      "url": "https://github.com/NawfalMotii79/PLFM_RADAR"
+      "name": "averygan/reclip",
+      "stars": 10269,
+      "lang": "HTML",
+      "description": "Download videos from almost any website. Lightweight, self-hosted media downloader with a clean web UI.",
+      "url": "https://github.com/averygan/reclip"
     },
     {
-      "name": "byoungd/up",
-      "stars": 64920,
-      "lang": "JavaScript",
-      "description": "An advanced guide which might benefit you a lot 🎉 . 韩先凯的人生进阶指南 人生进阶指南 离谱的人生 人生进阶 AI学习 AI指南 韩先凯的AI学习指南 英语学习指南/英语学习教程/英语学习/学英语",
-      "url": "https://github.com/byoungd/up"
+      "name": "NVIDIA/OpenShell",
+      "stars": 10804,
+      "lang": "Rust",
+      "description": "OpenShell is the safe, private runtime for autonomous AI agents.",
+      "url": "https://github.com/NVIDIA/OpenShell"
     },
     {
-      "name": "vectorize-io/hindsight",
-      "stars": 41346,
-      "lang": "Python",
-      "description": "Hindsight: Agent Memory That Learns",
-      "url": "https://github.com/vectorize-io/hindsight"
-    },
-    {
-      "name": "cs341-illinois/coursebook",
-      "stars": 2606,
-      "lang": "TeX",
-      "description": "Open Source Introductory Systems Programming Textbook for the University of Illinois",
-      "url": "https://github.com/cs341-illinois/coursebook"
+      "name": "t8y2/dbx",
+      "stars": 22324,
+      "lang": "Rust",
+      "description": "25 MB lightweight cross-platform database client for 100+ databases, including MySQL, PostgreSQL, SQLite, Redis, MongoDB, DuckDB, SQL Server, and Dameng. Built-in AI, MCP Server, CLI, desktop and Docker. | 轻量级跨平台数据库管理工具，支持 MySQL、PostgreSQL、SQLite、Redis、MongoDB、达梦等 100+ 数据库，提供桌面端、Docker、CLI、内置 AI 助手和 MCP。",
+      "url": "https://github.com/t8y2/dbx"
     }
   ],
-  "date": "2026-09-29"
+  "date": "2026-09-30"
 }

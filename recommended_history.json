@@ -1,21 +1,5 @@
 [
   {
-    "name": "EbookFoundation/free-programming-books",
-    "date": "2026-09-23"
-  },
-  {
-    "name": "lukasz-madon/awesome-remote-job",
-    "date": "2026-09-23"
-  },
-  {
-    "name": "career-ops-hq/career-ops",
-    "date": "2026-09-23"
-  },
-  {
-    "name": "awesome-selfhosted/awesome-selfhosted",
-    "date": "2026-09-23"
-  },
-  {
     "name": "supabase/supabase",
     "date": "2026-09-24"
   },
@@ -134,5 +118,17 @@
   {
     "name": "NawfalMotii79/PLFM_RADAR",
     "date": "2026-09-29"
+  },
+  {
+    "name": "averygan/reclip",
+    "date": "2026-09-30"
+  },
+  {
+    "name": "NVIDIA/OpenShell",
+    "date": "2026-09-30"
+  },
+  {
+    "name": "t8y2/dbx",
+    "date": "2026-09-30"
   }
 ]
