@@ -1,29 +1,5 @@
 [
   {
-    "name": "supabase/supabase",
-    "date": "2026-09-24"
-  },
-  {
-    "name": "mui/material-ui",
-    "date": "2026-09-24"
-  },
-  {
-    "name": "remoteintech/remote-jobs",
-    "date": "2026-09-24"
-  },
-  {
-    "name": "n8n-io/n8n",
-    "date": "2026-09-24"
-  },
-  {
-    "name": "public-apis/public-apis",
-    "date": "2026-09-24"
-  },
-  {
-    "name": "nanocoai/nanoclaw",
-    "date": "2026-09-24"
-  },
-  {
     "name": "ripienaar/free-for-dev",
     "date": "2026-09-25"
   },
@@ -130,5 +106,9 @@
   {
     "name": "t8y2/dbx",
     "date": "2026-09-30"
+  },
+  {
+    "name": "harry0703/MoneyPrinterTurbo",
+    "date": "2026-10-01"
   }
 ]

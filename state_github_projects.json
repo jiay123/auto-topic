@@ -1,26 +1,12 @@
 {
   "projects": [
     {
-      "name": "averygan/reclip",
-      "stars": 10269,
-      "lang": "HTML",
-      "description": "Download videos from almost any website. Lightweight, self-hosted media downloader with a clean web UI.",
-      "url": "https://github.com/averygan/reclip"
-    },
-    {
-      "name": "NVIDIA/OpenShell",
-      "stars": 10804,
-      "lang": "Rust",
-      "description": "OpenShell is the safe, private runtime for autonomous AI agents.",
-      "url": "https://github.com/NVIDIA/OpenShell"
-    },
-    {
-      "name": "t8y2/dbx",
-      "stars": 22324,
-      "lang": "Rust",
-      "description": "25 MB lightweight cross-platform database client for 100+ databases, including MySQL, PostgreSQL, SQLite, Redis, MongoDB, DuckDB, SQL Server, and Dameng. Built-in AI, MCP Server, CLI, desktop and Docker. | 轻量级跨平台数据库管理工具，支持 MySQL、PostgreSQL、SQLite、Redis、MongoDB、达梦等 100+ 数据库，提供桌面端、Docker、CLI、内置 AI 助手和 MCP。",
-      "url": "https://github.com/t8y2/dbx"
+      "name": "harry0703/MoneyPrinterTurbo",
+      "stars": 127648,
+      "lang": "Python",
+      "description": "利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or keyword with an automated AI workflow.",
+      "url": "https://github.com/harry0703/MoneyPrinterTurbo"
     }
   ],
-  "date": "2026-09-30"
+  "date": "2026-10-01"
 }
