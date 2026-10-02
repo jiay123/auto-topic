@@ -22,4 +22,5 @@ __pycache__/
 # 文档（本地维护）
 *.md
 !CLAUDE.md
+!README.md
 !.github/
