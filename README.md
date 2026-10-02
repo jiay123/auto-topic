@@ -6,17 +6,15 @@
 
 ## 它做什么
 
-一天六个时间点，每个时间点推一条内容，全部自动抓取 + 自动去重：
+**一天三次推送**，全部自动抓取 + 自动去重：
 
 | 时间 | 推什么 | 脚本 |
 |------|--------|------|
 | 06:00 | **今日待办** — 扫视频台账自动得出今天该发哪集、哪集要重做、哪集等数据 | `fetch_daily_reminder.py` |
 | 07:00 | **AI 资讯头条** — 抓 AI 新闻源，挑出当天最值得看的一条 | `fetch_ai_news.py` |
 | 09:00 | **GitHub 项目推荐** — 每天 3 个新项目，带星数、语言、用途 | `fetch_github_projects.py` |
-| 11:00 | **今日选题** — 从候选池里挑一个，并记录轮换避免重复 | `fetch_article_pick.py` |
-| 15:00 | **傍晚提示** — 当天剩余时间够做多少事 | `fetch_evening_tip.py` |
-| 17:00 | **数据回灌** — 提醒把昨天视频的播放/点赞数据填回台账 | `fetch_daily_review.py` |
-| — | **星球内容草稿** — 从素材库抓素材，供知识星球日更 | `fetch_planet_content.py` |
+
+> **诚实说明**：仓库里还有 `fetch_article_pick.py`（今日选题）、`fetch_evening_tip.py`（傍晚提示）、`fetch_daily_review.py`（数据回灌）、`fetch_planet_content.py`（星球草稿）四个脚本，**代码写完了但没有挂进 workflow，所以不会真的推送**。想启用的话在 `.github/workflows/daily-push.yml` 里照 `daily-reminder` 那个 job 复制一份、改 cron 就行。上面这张表只写实际在跑的。
 
 推送走 [Server 酱](https://sct.ftqq.com/) 的微信服务号，零成本、不占手机内存、不用装 App。
 
@@ -87,6 +85,8 @@ auto-topic/
 ├── today_plan.txt                      # 今日计划缓存
 └── article_data.json
 ```
+
+**注意**：目录里 11 个脚本，但只有 3 个挂在 workflow 里实际运行（`fetch_daily_reminder` / `fetch_ai_news` / `fetch_github_projects`）。其余是写好待启用的，文件名前面没标状态，别照着目录数功能。
 
 ## 为什么用 GitHub Actions
 
