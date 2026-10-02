@@ -1,29 +1,5 @@
 [
   {
-    "name": "ripienaar/free-for-dev",
-    "date": "2026-09-25"
-  },
-  {
-    "name": "langchain-ai/langchain",
-    "date": "2026-09-25"
-  },
-  {
-    "name": "immich-app/immich",
-    "date": "2026-09-25"
-  },
-  {
-    "name": "9001/copyparty",
-    "date": "2026-09-25"
-  },
-  {
-    "name": "vinta/awesome-python",
-    "date": "2026-09-25"
-  },
-  {
-    "name": "nilbuild/developer-roadmap",
-    "date": "2026-09-25"
-  },
-  {
     "name": "Snailclimb/JavaGuide",
     "date": "2026-09-26"
   },
@@ -110,5 +86,17 @@
   {
     "name": "harry0703/MoneyPrinterTurbo",
     "date": "2026-10-01"
+  },
+  {
+    "name": "firebase/firebase-ios-sdk",
+    "date": "2026-10-02"
+  },
+  {
+    "name": "earendil-works/pi",
+    "date": "2026-10-02"
+  },
+  {
+    "name": "cursor/plugins",
+    "date": "2026-10-02"
   }
 ]
