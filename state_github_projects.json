@@ -1,47 +1,19 @@
 {
   "projects": [
     {
-      "name": "nexu-io/open-design",
-      "stars": 98993,
+      "name": "heygen-com/hyperframes",
+      "stars": 55968,
       "lang": "TypeScript",
-      "description": "🎨 Best DeepSeek Harness Design Plugin. The open-source Claude Design alternative. 🖥️ Local-first desktop app. 🖼️ Your coding agent becomes the design engine: prototypes, landing pages, dashboards, slides, images & video — real files, HTML/PDF/PPTX/MP4 export. 🤖 Claude Code / Codex / Cursor / DeepSeek Harness / OpenCode & 20+ CLIs via BYOK.",
-      "url": "https://github.com/nexu-io/open-design"
+      "description": "Write HTML. Render video. Built for agents.",
+      "url": "https://github.com/heygen-com/hyperframes"
     },
     {
-      "name": "supabase/supabase",
-      "stars": 110962,
-      "lang": "TypeScript",
-      "description": "The Postgres development platform. Supabase gives you a dedicated Postgres database to build your web, mobile, and AI applications.",
-      "url": "https://github.com/supabase/supabase"
-    },
-    {
-      "name": "AppFlowy-IO/AppFlowy",
-      "stars": 77038,
-      "lang": "Dart",
-      "description": "Bring projects, wikis, and teams together with AI. AppFlowy is the AI collaborative workspace where you achieve more without losing control of your data. The leading open source Notion alternative.",
-      "url": "https://github.com/AppFlowy-IO/AppFlowy"
-    },
-    {
-      "name": "nocodb/nocodb",
-      "stars": 65141,
-      "lang": "TypeScript",
-      "description": "🔥 🔥 🔥 A Free & Self-hostable Airtable Alternative",
-      "url": "https://github.com/nocodb/nocodb"
-    },
-    {
-      "name": "hoppscotch/hoppscotch",
-      "stars": 80557,
-      "lang": "TypeScript",
-      "description": "Open-Source API Development Ecosystem • https://hoppscotch.io • Offline, On-Prem & Cloud • Web, Desktop & CLI • Open-Source Alternative to Postman, Insomnia",
-      "url": "https://github.com/hoppscotch/hoppscotch"
-    },
-    {
-      "name": "localsend/localsend",
-      "stars": 93116,
-      "lang": "Dart",
-      "description": "An open-source cross-platform alternative to AirDrop",
-      "url": "https://github.com/localsend/localsend"
+      "name": "pbakaus/impeccable",
+      "stars": 74433,
+      "lang": "JavaScript",
+      "description": "The design language that makes your AI harness better at design.",
+      "url": "https://github.com/pbakaus/impeccable"
     }
   ],
-  "date": "2026-10-01"
+  "date": "2026-10-03"
 }

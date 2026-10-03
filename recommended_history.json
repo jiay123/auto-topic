@@ -1,41 +1,5 @@
 [
   {
-    "name": "ripienaar/free-for-dev",
-    "date": "2026-09-25"
-  },
-  {
-    "name": "langchain-ai/langchain",
-    "date": "2026-09-25"
-  },
-  {
-    "name": "immich-app/immich",
-    "date": "2026-09-25"
-  },
-  {
-    "name": "9001/copyparty",
-    "date": "2026-09-25"
-  },
-  {
-    "name": "vinta/awesome-python",
-    "date": "2026-09-25"
-  },
-  {
-    "name": "nilbuild/developer-roadmap",
-    "date": "2026-09-25"
-  },
-  {
-    "name": "Snailclimb/JavaGuide",
-    "date": "2026-09-26"
-  },
-  {
-    "name": "open-webui/open-webui",
-    "date": "2026-09-26"
-  },
-  {
-    "name": "poteto/hiring-without-whiteboards",
-    "date": "2026-09-26"
-  },
-  {
     "name": "microsoft/vscode",
     "date": "2026-09-27"
   },
@@ -130,5 +94,13 @@
   {
     "name": "nexu-io/open-design",
     "date": "2026-10-01"
+  },
+  {
+    "name": "heygen-com/hyperframes",
+    "date": "2026-10-03"
+  },
+  {
+    "name": "pbakaus/impeccable",
+    "date": "2026-10-03"
   }
 ]
