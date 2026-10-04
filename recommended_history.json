@@ -1,29 +1,5 @@
 [
   {
-    "name": "microsoft/vscode",
-    "date": "2026-09-27"
-  },
-  {
-    "name": "block/buzz",
-    "date": "2026-09-27"
-  },
-  {
-    "name": "sponsors/rohitg00",
-    "date": "2026-09-27"
-  },
-  {
-    "name": "paperclipai/paperclip",
-    "date": "2026-09-27"
-  },
-  {
-    "name": "NVIDIA/Model-Optimizer",
-    "date": "2026-09-27"
-  },
-  {
-    "name": "sponsors/zhaoxuya520",
-    "date": "2026-09-27"
-  },
-  {
     "name": "vercel-labs/scriptc",
     "date": "2026-09-28"
   },
@@ -102,5 +78,17 @@
   {
     "name": "pbakaus/impeccable",
     "date": "2026-10-03"
+  },
+  {
+    "name": "cloudflare/cloudflare-os",
+    "date": "2026-10-04"
+  },
+  {
+    "name": "Effect-TS/effect",
+    "date": "2026-10-04"
+  },
+  {
+    "name": "pingdotgg/t3code",
+    "date": "2026-10-04"
   }
 ]

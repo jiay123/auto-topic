@@ -1,19 +1,26 @@
 {
   "projects": [
     {
-      "name": "heygen-com/hyperframes",
-      "stars": 55968,
+      "name": "cloudflare/cloudflare-os",
+      "stars": 10620,
       "lang": "TypeScript",
-      "description": "Write HTML. Render video. Built for agents.",
-      "url": "https://github.com/heygen-com/hyperframes"
+      "description": "Agent workspace built on Cloudflare Workers for creating documents, building apps, and running agents with your company’s context and systems.",
+      "url": "https://github.com/cloudflare/cloudflare-os"
     },
     {
-      "name": "pbakaus/impeccable",
-      "stars": 74433,
-      "lang": "JavaScript",
-      "description": "The design language that makes your AI harness better at design.",
-      "url": "https://github.com/pbakaus/impeccable"
+      "name": "Effect-TS/effect",
+      "stars": 16862,
+      "lang": "TypeScript",
+      "description": "Build production-ready applications in TypeScript",
+      "url": "https://github.com/Effect-TS/effect"
+    },
+    {
+      "name": "pingdotgg/t3code",
+      "stars": 24769,
+      "lang": "TypeScript",
+      "description": "",
+      "url": "https://github.com/pingdotgg/t3code"
     }
   ],
-  "date": "2026-10-03"
+  "date": "2026-10-04"
 }
