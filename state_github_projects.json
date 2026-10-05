@@ -1,26 +1,26 @@
 {
   "projects": [
     {
-      "name": "cloudflare/cloudflare-os",
-      "stars": 10620,
-      "lang": "TypeScript",
-      "description": "Agent workspace built on Cloudflare Workers for creating documents, building apps, and running agents with your company’s context and systems.",
-      "url": "https://github.com/cloudflare/cloudflare-os"
+      "name": "earthtojake/text-to-cad",
+      "stars": 16952,
+      "lang": "Python",
+      "description": "Give your agent CAD superpowers.",
+      "url": "https://github.com/earthtojake/text-to-cad"
     },
     {
-      "name": "Effect-TS/effect",
-      "stars": 16862,
+      "name": "tester-army/e2e",
+      "stars": 3353,
       "lang": "TypeScript",
-      "description": "Build production-ready applications in TypeScript",
-      "url": "https://github.com/Effect-TS/effect"
+      "description": "Next generation e2e testing framework for web and mobile apps.",
+      "url": "https://github.com/tester-army/e2e"
     },
     {
-      "name": "pingdotgg/t3code",
-      "stars": 24769,
-      "lang": "TypeScript",
-      "description": "",
-      "url": "https://github.com/pingdotgg/t3code"
+      "name": "getsentry/sentry",
+      "stars": 45420,
+      "lang": "Python",
+      "description": "Developer-first error tracking and performance monitoring",
+      "url": "https://github.com/getsentry/sentry"
     }
   ],
-  "date": "2026-10-04"
+  "date": "2026-10-05"
 }

@@ -1,25 +1,5 @@
 [
   {
-    "name": "vercel-labs/scriptc",
-    "date": "2026-09-28"
-  },
-  {
-    "name": "debpalash/VoiceStudio",
-    "date": "2026-09-28"
-  },
-  {
-    "name": "InfinityLoop1308/PipePipe",
-    "date": "2026-09-28"
-  },
-  {
-    "name": "willfaust/Madeira",
-    "date": "2026-09-28"
-  },
-  {
-    "name": "mvschwarz/openrig",
-    "date": "2026-09-28"
-  },
-  {
     "name": "vectorize-io/hindsight",
     "date": "2026-09-29"
   },
@@ -90,5 +70,17 @@
   {
     "name": "pingdotgg/t3code",
     "date": "2026-10-04"
+  },
+  {
+    "name": "earthtojake/text-to-cad",
+    "date": "2026-10-05"
+  },
+  {
+    "name": "getsentry/sentry",
+    "date": "2026-10-05"
+  },
+  {
+    "name": "tester-army/e2e",
+    "date": "2026-10-05"
   }
 ]
