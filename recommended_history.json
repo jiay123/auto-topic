@@ -1,21 +1,5 @@
 [
   {
-    "name": "vectorize-io/hindsight",
-    "date": "2026-09-29"
-  },
-  {
-    "name": "byoungd/up",
-    "date": "2026-09-29"
-  },
-  {
-    "name": "cs341-illinois/coursebook",
-    "date": "2026-09-29"
-  },
-  {
-    "name": "NawfalMotii79/PLFM_RADAR",
-    "date": "2026-09-29"
-  },
-  {
     "name": "averygan/reclip",
     "date": "2026-09-30"
   },
@@ -82,5 +66,9 @@
   {
     "name": "tester-army/e2e",
     "date": "2026-10-05"
+  },
+  {
+    "name": "michael-denyer/pstack-claude",
+    "date": "2026-10-06"
   }
 ]

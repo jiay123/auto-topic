@@ -1,26 +1,12 @@
 {
   "projects": [
     {
-      "name": "earthtojake/text-to-cad",
-      "stars": 16952,
-      "lang": "Python",
-      "description": "Give your agent CAD superpowers.",
-      "url": "https://github.com/earthtojake/text-to-cad"
-    },
-    {
-      "name": "tester-army/e2e",
-      "stars": 3353,
-      "lang": "TypeScript",
-      "description": "Next generation e2e testing framework for web and mobile apps.",
-      "url": "https://github.com/tester-army/e2e"
-    },
-    {
-      "name": "getsentry/sentry",
-      "stars": 45420,
-      "lang": "Python",
-      "description": "Developer-first error tracking and performance monitoring",
-      "url": "https://github.com/getsentry/sentry"
+      "name": "michael-denyer/pstack-claude",
+      "stars": 1474,
+      "lang": "JavaScript",
+      "description": "Claude Code, Codex, Copilot, Pi, OpenCode, Gemini, and Prime Agent versions of Poteto's pstack. Rigorous agent workflows with Cursor primitives translated for other harnesses.",
+      "url": "https://github.com/michael-denyer/pstack-claude"
     }
   ],
-  "date": "2026-10-05"
+  "date": "2026-10-06"
 }
