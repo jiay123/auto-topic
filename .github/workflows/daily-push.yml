@@ -1,28 +1,17 @@
 name: 每日推送
 
+# 🔥 2026-10-06 老贾定：每天只发两条（AI 资讯 + GitHub 项目），去掉了 06:00 的待办提醒。
+#    原因：06:00 那条要读老贾本机的视频台账路径，GitHub runner 上根本不存在，
+#    实际从来没推送成功过，属于白占一条。
 on:
   schedule:
-    # 06:00 北京时间 = 22:00 UTC
-    - cron: '0 22 * * *'
-    # 07:00 北京时间 = 23:00 UTC
+    # 07:00 北京时间 = 23:00 UTC —— AI 热点速递
     - cron: '0 23 * * *'
-    # 08:00 北京时间 = 00:00 UTC
+    # 08:00 北京时间 = 00:00 UTC —— GitHub 开源项目推荐
     - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
-  daily-reminder:
-    if: ${{ github.event.schedule == '0 22 * * *' || github.event_name == 'workflow_dispatch' }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - run: pip install requests
-      - run: python scripts/fetch_daily_reminder.py
-        env:
-          SENDKEY: ${{ secrets.SENDKEY }}
   github-projects:
     if: ${{ github.event.schedule == '0 0 * * *' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
