@@ -1,12 +1,19 @@
 {
   "projects": [
     {
-      "name": "michael-denyer/pstack-claude",
-      "stars": 1474,
-      "lang": "JavaScript",
-      "description": "Claude Code, Codex, Copilot, Pi, OpenCode, Gemini, and Prime Agent versions of Poteto's pstack. Rigorous agent workflows with Cursor primitives translated for other harnesses.",
-      "url": "https://github.com/michael-denyer/pstack-claude"
+      "name": "morluto/rea",
+      "stars": 10203,
+      "lang": "TypeScript",
+      "description": "Reverse engineer anything with agents, from app behavior down to native binaries.",
+      "url": "https://github.com/morluto/rea"
+    },
+    {
+      "name": "deepseek-ai/DeepGEMM",
+      "stars": 8768,
+      "lang": "Cuda",
+      "description": "DeepGEMM: clean and efficient BLAS kernel library on GPU",
+      "url": "https://github.com/deepseek-ai/DeepGEMM"
     }
   ],
-  "date": "2026-10-06"
+  "date": "2026-10-07"
 }

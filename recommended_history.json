@@ -1,17 +1,5 @@
 [
   {
-    "name": "averygan/reclip",
-    "date": "2026-09-30"
-  },
-  {
-    "name": "NVIDIA/OpenShell",
-    "date": "2026-09-30"
-  },
-  {
-    "name": "t8y2/dbx",
-    "date": "2026-09-30"
-  },
-  {
     "name": "hoppscotch/hoppscotch",
     "date": "2026-10-01"
   },
@@ -70,5 +58,13 @@
   {
     "name": "michael-denyer/pstack-claude",
     "date": "2026-10-06"
+  },
+  {
+    "name": "morluto/rea",
+    "date": "2026-10-07"
+  },
+  {
+    "name": "deepseek-ai/DeepGEMM",
+    "date": "2026-10-07"
   }
 ]
