@@ -1,29 +1,5 @@
 [
   {
-    "name": "hoppscotch/hoppscotch",
-    "date": "2026-10-01"
-  },
-  {
-    "name": "AppFlowy-IO/AppFlowy",
-    "date": "2026-10-01"
-  },
-  {
-    "name": "nocodb/nocodb",
-    "date": "2026-10-01"
-  },
-  {
-    "name": "localsend/localsend",
-    "date": "2026-10-01"
-  },
-  {
-    "name": "supabase/supabase",
-    "date": "2026-10-01"
-  },
-  {
-    "name": "nexu-io/open-design",
-    "date": "2026-10-01"
-  },
-  {
     "name": "heygen-com/hyperframes",
     "date": "2026-10-03"
   },
@@ -66,5 +42,13 @@
   {
     "name": "deepseek-ai/DeepGEMM",
     "date": "2026-10-07"
+  },
+  {
+    "name": "ayghri/i-have-adhd",
+    "date": "2026-10-08"
+  },
+  {
+    "name": "EpicGames/raddebugger",
+    "date": "2026-10-08"
   }
 ]

@@ -1,19 +1,19 @@
 {
   "projects": [
     {
-      "name": "morluto/rea",
-      "stars": 10203,
-      "lang": "TypeScript",
-      "description": "Reverse engineer anything with agents, from app behavior down to native binaries.",
-      "url": "https://github.com/morluto/rea"
+      "name": "ayghri/i-have-adhd",
+      "stars": 55309,
+      "lang": "Python",
+      "description": "A skill to stop your coding agent from burying the answer. ADHD-friendly output.",
+      "url": "https://github.com/ayghri/i-have-adhd"
     },
     {
-      "name": "deepseek-ai/DeepGEMM",
-      "stars": 8768,
-      "lang": "Cuda",
-      "description": "DeepGEMM: clean and efficient BLAS kernel library on GPU",
-      "url": "https://github.com/deepseek-ai/DeepGEMM"
+      "name": "EpicGames/raddebugger",
+      "stars": 7922,
+      "lang": "C",
+      "description": "A native, user-mode, multi-process, graphical debugger.",
+      "url": "https://github.com/EpicGames/raddebugger"
     }
   ],
-  "date": "2026-10-07"
+  "date": "2026-10-08"
 }
