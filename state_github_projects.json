@@ -1,19 +1,33 @@
 {
   "projects": [
     {
-      "name": "ayghri/i-have-adhd",
-      "stars": 55309,
+      "name": "anthropics/knowledge-work-plugins",
+      "stars": 27780,
       "lang": "Python",
-      "description": "A skill to stop your coding agent from burying the answer. ADHD-friendly output.",
-      "url": "https://github.com/ayghri/i-have-adhd"
+      "description": "Open source repository of plugins primarily intended for knowledge workers to use in Claude Cowork",
+      "url": "https://github.com/anthropics/knowledge-work-plugins"
     },
     {
-      "name": "EpicGames/raddebugger",
-      "stars": 7922,
-      "lang": "C",
-      "description": "A native, user-mode, multi-process, graphical debugger.",
-      "url": "https://github.com/EpicGames/raddebugger"
+      "name": "boykopovar/AnyPS5",
+      "stars": 16629,
+      "lang": "C++",
+      "description": "Tool for automatic PS5 executables porting to Linux and Windows",
+      "url": "https://github.com/boykopovar/AnyPS5"
+    },
+    {
+      "name": "storytold/artcraft",
+      "stars": 8616,
+      "lang": "Rust",
+      "description": "ArtCraft is an intentional crafting engine for artists, designers, and filmmakers",
+      "url": "https://github.com/storytold/artcraft"
+    },
+    {
+      "name": "liquidslr/system-design-notes",
+      "stars": 24845,
+      "lang": "",
+      "description": "Notes of the book System Desgin Interview - An Insider's Guide",
+      "url": "https://github.com/liquidslr/system-design-notes"
     }
   ],
-  "date": "2026-10-08"
+  "date": "2026-10-09"
 }
