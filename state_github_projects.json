@@ -1,33 +1,19 @@
 {
   "projects": [
     {
-      "name": "anthropics/knowledge-work-plugins",
-      "stars": 27780,
+      "name": "alibaba/open-code-review",
+      "stars": 45428,
+      "lang": "Go",
+      "description": "Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI &amp; Anthropic compatible.",
+      "url": "https://github.com/alibaba/open-code-review"
+    },
+    {
+      "name": "Robbyant/lingbot-map",
+      "stars": 17783,
       "lang": "Python",
-      "description": "Open source repository of plugins primarily intended for knowledge workers to use in Claude Cowork",
-      "url": "https://github.com/anthropics/knowledge-work-plugins"
-    },
-    {
-      "name": "boykopovar/AnyPS5",
-      "stars": 16629,
-      "lang": "C++",
-      "description": "Tool for automatic PS5 executables porting to Linux and Windows",
-      "url": "https://github.com/boykopovar/AnyPS5"
-    },
-    {
-      "name": "storytold/artcraft",
-      "stars": 8616,
-      "lang": "Rust",
-      "description": "ArtCraft is an intentional crafting engine for artists, designers, and filmmakers",
-      "url": "https://github.com/storytold/artcraft"
-    },
-    {
-      "name": "liquidslr/system-design-notes",
-      "stars": 24845,
-      "lang": "",
-      "description": "Notes of the book System Desgin Interview - An Insider's Guide",
-      "url": "https://github.com/liquidslr/system-design-notes"
+      "description": "[ECCV 2026 Best Paper Award Candidate] LingBot-Map: Geometric Context Transformer for Streaming 3D Reconstruction",
+      "url": "https://github.com/Robbyant/lingbot-map"
     }
   ],
-  "date": "2026-10-09"
+  "date": "2026-10-10"
 }
