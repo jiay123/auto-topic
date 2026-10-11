@@ -1,17 +1,5 @@
 [
   {
-    "name": "cloudflare/cloudflare-os",
-    "date": "2026-10-04"
-  },
-  {
-    "name": "Effect-TS/effect",
-    "date": "2026-10-04"
-  },
-  {
-    "name": "pingdotgg/t3code",
-    "date": "2026-10-04"
-  },
-  {
     "name": "earthtojake/text-to-cad",
     "date": "2026-10-05"
   },
@@ -66,5 +54,21 @@
   {
     "name": "Robbyant/lingbot-map",
     "date": "2026-10-10"
+  },
+  {
+    "name": "flutter/flutter",
+    "date": "2026-10-11"
+  },
+  {
+    "name": "hugohe3/ppt-master",
+    "date": "2026-10-11"
+  },
+  {
+    "name": "pytorch/pytorch",
+    "date": "2026-10-11"
+  },
+  {
+    "name": "tensorflow/tensorflow",
+    "date": "2026-10-11"
   }
 ]

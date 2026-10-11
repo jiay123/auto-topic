@@ -1,19 +1,33 @@
 {
   "projects": [
     {
-      "name": "alibaba/open-code-review",
-      "stars": 45428,
-      "lang": "Go",
-      "description": "Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI &amp; Anthropic compatible.",
-      "url": "https://github.com/alibaba/open-code-review"
+      "name": "flutter/flutter",
+      "stars": 179600,
+      "lang": "Dart",
+      "description": "Flutter makes it easy and fast to build beautiful apps for mobile and beyond",
+      "url": "https://github.com/flutter/flutter"
     },
     {
-      "name": "Robbyant/lingbot-map",
-      "stars": 17783,
+      "name": "pytorch/pytorch",
+      "stars": 104183,
       "lang": "Python",
-      "description": "[ECCV 2026 Best Paper Award Candidate] LingBot-Map: Geometric Context Transformer for Streaming 3D Reconstruction",
-      "url": "https://github.com/Robbyant/lingbot-map"
+      "description": "Tensors and Dynamic neural networks in Python with strong GPU acceleration",
+      "url": "https://github.com/pytorch/pytorch"
+    },
+    {
+      "name": "tensorflow/tensorflow",
+      "stars": 200770,
+      "lang": "C++",
+      "description": "An Open Source Machine Learning Framework for Everyone",
+      "url": "https://github.com/tensorflow/tensorflow"
+    },
+    {
+      "name": "hugohe3/ppt-master",
+      "stars": 59658,
+      "lang": "Python",
+      "description": "AI turns documents or topics into real, native PowerPoint decks—with native shapes, transitions and animations, data-backed charts and tables on demand, audio narration from speaker notes, and support for your own .pptx templates. · by Hugo He",
+      "url": "https://github.com/hugohe3/ppt-master"
     }
   ],
-  "date": "2026-10-10"
+  "date": "2026-10-11"
 }
