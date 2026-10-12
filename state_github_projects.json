@@ -1,33 +1,12 @@
 {
   "projects": [
     {
-      "name": "flutter/flutter",
-      "stars": 179600,
-      "lang": "Dart",
-      "description": "Flutter makes it easy and fast to build beautiful apps for mobile and beyond",
-      "url": "https://github.com/flutter/flutter"
-    },
-    {
-      "name": "pytorch/pytorch",
-      "stars": 104183,
-      "lang": "Python",
-      "description": "Tensors and Dynamic neural networks in Python with strong GPU acceleration",
-      "url": "https://github.com/pytorch/pytorch"
-    },
-    {
-      "name": "tensorflow/tensorflow",
-      "stars": 200770,
-      "lang": "C++",
-      "description": "An Open Source Machine Learning Framework for Everyone",
-      "url": "https://github.com/tensorflow/tensorflow"
-    },
-    {
-      "name": "hugohe3/ppt-master",
-      "stars": 59658,
-      "lang": "Python",
-      "description": "AI turns documents or topics into real, native PowerPoint decks—with native shapes, transitions and animations, data-backed charts and tables on demand, audio narration from speaker notes, and support for your own .pptx templates. · by Hugo He",
-      "url": "https://github.com/hugohe3/ppt-master"
+      "name": "bilawalsidhu/gods-eye-view",
+      "stars": 52037,
+      "lang": "JavaScript",
+      "description": "A spy satellite simulator in your browser, except the data is real. Live open source spatial intelligence on a photorealistic 3D globe.",
+      "url": "https://github.com/bilawalsidhu/gods-eye-view"
     }
   ],
-  "date": "2026-10-11"
+  "date": "2026-10-12"
 }
