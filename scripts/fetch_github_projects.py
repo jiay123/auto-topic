@@ -420,7 +420,7 @@ def main():
     rotation = load_hot_rotation()
     if rotation.get("week") != WEEK_MONDAY or len(rotation.get("pushed", [])) >= 10:
         rotation = {"week": WEEK_MONDAY, "pushed": []}
-    hot_chosen, rotation = pick_hot(hot_pool, rotation, count=2)
+    hot_chosen, rotation = pick_hot(hot_pool, rotation, count=3)
 
     hot_names = {r["full_name"] for r in hot_chosen}
     scored = []
@@ -436,8 +436,9 @@ def main():
     used_cats = set()
     all_items = []
     candidates = [r for _, r in scored] + hot_chosen
+    # 10/12 老贾定：每天推 5 个（原来 6 个上限 / 只标 2 个推荐）
     for r in candidates:
-        if len(all_items) >= 6:
+        if len(all_items) >= 5:
             break
         if not r.get("full_name") or r["full_name"] in seen_names:
             continue
@@ -448,10 +449,10 @@ def main():
         seen_names.add(r["full_name"])
         all_items.append(r)
 
-    # 推荐2个写公众号（从已选项目里挑，分类不重复）
+    # 10/12 老贾定：5 个全部列入推荐（小叮当自己总结完给老贾，不让老贾挑）
     recommends = []
     for r in all_items:
-        if len(recommends) >= 2:
+        if len(recommends) >= 5:
             break
         card_title = get_category(r) or r.get("name", "")
         recommends.append({"name": r["full_name"], "title": card_title, "url": r.get("html_url", "")})

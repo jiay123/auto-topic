@@ -3,17 +3,24 @@ name: 每日推送
 # 🔥 2026-10-06 老贾定：每天只发两条（AI 资讯 + GitHub 项目），去掉了 06:00 的待办提醒。
 #    原因：06:00 那条要读老贾本机的视频台账路径，GitHub runner 上根本不存在，
 #    实际从来没推送成功过，属于白占一条。
+#
+# 🔇 2026-10-12 关掉云端定时（老贾发来截图说"推的一模一样"）：
+#    病根 = 本机 Windows 任务（run-0800-news.bat / run-0900-topics.bat）
+#           和这个 workflow 跑的是**同一批脚本**，于是每条推送发两遍。
+#    10/12 实测时间轴：07:00:05（本机，准时）→ 10:08:50（云端 ai-news 延迟3h）
+#                      → 13:08:51（云端 github-projects 延迟5h），前两条内容一模一样。
+#    现在只留本机 07:00 / 09:00 准时推；云端保留 workflow_dispatch 作应急手动补发。
 on:
-  schedule:
-    # 07:00 北京时间 = 23:00 UTC —— AI 热点速递
-    - cron: '0 23 * * *'
-    # 08:00 北京时间 = 00:00 UTC —— GitHub 开源项目推荐
-    - cron: '0 0 * * *'
+  # schedule:
+  #   # 07:00 北京时间 = 23:00 UTC —— AI 热点速递
+  #   - cron: '0 23 * * *'
+  #   # 08:00 北京时间 = 00:00 UTC —— GitHub 开源项目推荐
+  #   - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
   github-projects:
-    if: ${{ github.event.schedule == '0 0 * * *' || github.event_name == 'workflow_dispatch' }}
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -39,7 +46,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   ai-news:
-    if: ${{ github.event.schedule == '0 23 * * *' || github.event_name == 'workflow_dispatch' }}
+    # 🔇 10/12：云端定时已关（见文件头），这里只留手动应急补发。
+    #    平时由本机 Jia-AiNews-0700 在 07:00 准时推。
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
