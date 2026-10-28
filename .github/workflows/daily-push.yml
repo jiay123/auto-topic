@@ -1,27 +1,28 @@
 name: 每日推送
 
 # 🔥 2026-10-06 老贾定：每天只发两条（AI 资讯 + GitHub 项目），去掉了 06:00 的待办提醒。
-#    原因：06:00 那条要读老贾本机的视频台账路径，GitHub runner 上根本不存在，
-#    实际从来没推送成功过，属于白占一条。
 #
-# 🔇 2026-10-12 关掉云端定时（老贾发来截图说"推的一模一样"）：
-#    病根 = 本机 Windows 任务（run-0800-news.bat / run-0900-topics.bat）
-#           和这个 workflow 跑的是**同一批脚本**，于是每条推送发两遍。
-#    10/12 实测时间轴：07:00:05（本机，准时）→ 10:08:50（云端 ai-news 延迟3h）
-#                      → 13:08:51（云端 github-projects 延迟5h），前两条内容一模一样。
-#    现在只留本机 07:00 / 09:00 准时推；云端保留 workflow_dispatch 作应急手动补发。
+# 🔧 2026-10-28 修复（10/28 下午微信推送连续两天没送达）：
+#    病根1 = 本机 Windows 计划任务（Jia-News-0700 / Jia-Topics-0900）当时根本没注册成功，
+#            schtasks 查不到，老贾以为"修好了"其实一次都没跑。
+#    病根2 = 云端 schedule 被注释掉（10/12 为了避免和本机重复推送而关的），
+#            结果本机一挂就彻底没人推了 —— 两条腿断了一条还把另一条也拆了。
+#    现在改成双保险：
+#      本机 07:00 / 09:00（StartWhenAvailable，错过开机补跑）+ 云端 11:00 / 13:00 兜底。
+#    防重复 = push_marker.json（当天已推过就跳过），本机和云端都读它。
 on:
-  # schedule:
-  #   # 07:00 北京时间 = 23:00 UTC —— AI 热点速递
-  #   - cron: '0 23 * * *'
-  #   # 08:00 北京时间 = 00:00 UTC —— GitHub 开源项目推荐
-  #   - cron: '0 0 * * *'
+  schedule:
+    # 11:00 北京时间 = 03:00 UTC —— AI 资讯兜底
+    - cron: '0 3 * * *'
+    # 13:00 北京时间 = 05:00 UTC —— GitHub 项目兜底
+    - cron: '0 5 * * *'
   workflow_dispatch:
 
 jobs:
   github-projects:
-    if: ${{ github.event_name == 'workflow_dispatch' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.schedule == '0 5 * * *' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     permissions:
       contents: write
     steps:
@@ -30,6 +31,8 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install requests
+      - name: 拉取最新状态（含 push_marker）
+        run: git pull --ff-only origin main || true
       - run: python scripts/fetch_github_projects.py
         env:
           SENDKEY: ${{ secrets.SENDKEY }}
@@ -38,7 +41,7 @@ jobs:
         run: |
           git config user.email "bot@auto-topic.local"
           git config user.name "auto-topic-bot"
-          git add recommended_history.json hot_rotation.json state_github_projects.json
+          git add recommended_history.json hot_rotation.json state_github_projects.json push_marker.json
           git commit -m "chore: 更新推荐状态 $(date +%F)" || echo "no changes"
           git pull --rebase origin main || true
           git push
@@ -46,10 +49,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   ai-news:
-    # 🔇 10/12：云端定时已关（见文件头），这里只留手动应急补发。
-    #    平时由本机 Jia-AiNews-0700 在 07:00 准时推。
-    if: ${{ github.event_name == 'workflow_dispatch' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.schedule == '0 3 * * *' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     permissions:
       contents: write
     steps:
@@ -58,6 +60,18 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install requests
+      - name: 拉取最新状态（含 push_marker）
+        run: git pull --ff-only origin main || true
       - run: python scripts/fetch_ai_news.py
         env:
           SENDKEY: ${{ secrets.SENDKEY }}
+      - name: 提交去重状态
+        run: |
+          git config user.email "bot@auto-topic.local"
+          git config user.name "auto-topic-bot"
+          git add state_news_dedup.json push_marker.json
+          git commit -m "chore: 更新新闻去重状态 $(date +%F)" || echo "no changes"
+          git pull --rebase origin main || true
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

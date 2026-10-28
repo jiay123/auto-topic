@@ -212,19 +212,75 @@ def build_message(articles):
     lines.append("以上资讯由小叮当整理，每条均附摘要。点个赞 👍 支持一下")
     return title, "\n".join(lines)
 
+MARKER_FILE = os.path.join(BASE_DIR, "push_marker.json")
+
+def load_marker():
+    try:
+        if os.path.exists(MARKER_FILE):
+            with open(MARKER_FILE, encoding="utf-8") as f:
+                return json.load(f)
+    except Exception:
+        pass
+    try:
+        import subprocess as _sp
+        _sp.run(["git", "-C", BASE_DIR, "fetch", "origin", "main"],
+                check=False, stdout=_sp.DEVNULL, stderr=_sp.DEVNULL, timeout=30)
+        out = _sp.run(["git", "-C", BASE_DIR, "show", "origin/main:push_marker.json"],
+                       check=False, capture_output=True, timeout=20)
+        if out.returncode == 0 and out.stdout:
+            return json.loads(out.stdout.decode("utf-8"))
+    except Exception:
+        pass
+    return {}
+
+def save_marker(kind):
+    try:
+        m = load_marker()
+        m[kind] = today
+        with open(MARKER_FILE, "w", encoding="utf-8") as f:
+            json.dump(m, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"marker 写入失败: {e}")
+
+def already_pushed(kind):
+    return load_marker().get(kind) == today
+
+def commit_marker():
+    try:
+        _git("add", "push_marker.json")
+        _git("commit", "-m", f"chore: push marker {today}")
+        _git("push")
+        print("marker 已提交到远端")
+    except Exception:
+        pass
+
 def send_wechat(title, content):
     if not SENDKEY:
         print("SENDKEY 未设定，无法推送")
-        return
+        return False
     url = f"https://sctapi.ftqq.com/{SENDKEY}.send"
     try:
         r = requests.post(url, data={"title": title, "desp": content}, timeout=10)
         print(r.text[:200])
+        try:
+            data = r.json()
+            ok = data.get("code") == 0
+        except Exception:
+            ok = r.status_code == 200
+        if ok:
+            save_marker("news")
+            commit_marker()
+        return ok
     except Exception as e:
         print(f"推送失败: {e}")
+        return False
 
 def main():
     print(f"抓取AI资讯热点 ({yesterday} 至 {today})...")
+
+    if already_pushed("news"):
+        print(f"今天 ({today}) 已推送过 AI 资讯，跳过（防止本机+云端重复）")
+        return
 
     dedup_titles = load_dedup()
     all_articles = []

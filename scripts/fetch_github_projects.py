@@ -365,20 +365,81 @@ def pick_hot(hot_pool, rotation, count=2):
     rotation["updated"] = today.strftime("%Y-%m-%d")
     return chosen, rotation
 
+MARKER_FILE = os.path.join(BASE, "push_marker.json")
+
+def _git(*args):
+    try:
+        subprocess.run(["git", "-C", BASE] + list(args), check=False,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=60)
+    except Exception:
+        pass
+
+def load_marker():
+    try:
+        if os.path.exists(MARKER_FILE):
+            with open(MARKER_FILE, encoding="utf-8") as f:
+                return json.load(f)
+    except Exception:
+        pass
+    try:
+        subprocess.run(["git", "-C", BASE, "fetch", "origin", "main"],
+                       check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=30)
+        out = subprocess.run(["git", "-C", BASE, "show", "origin/main:push_marker.json"],
+                             check=False, capture_output=True, timeout=20)
+        if out.returncode == 0 and out.stdout:
+            return json.loads(out.stdout.decode("utf-8"))
+    except Exception:
+        pass
+    return {}
+
+def save_marker(kind):
+    try:
+        m = load_marker()
+        m[kind] = today.strftime("%Y-%m-%d")
+        with open(MARKER_FILE, "w", encoding="utf-8") as f:
+            json.dump(m, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"marker 写入失败: {e}")
+
+def already_pushed(kind):
+    return load_marker().get(kind) == today.strftime("%Y-%m-%d")
+
+def commit_marker():
+    try:
+        _git("add", "push_marker.json")
+        _git("commit", "-m", f"chore: push marker {today.strftime('%Y-%m-%d')}")
+        _git("push")
+        print("marker 已提交到远端")
+    except Exception:
+        pass
+
 def send_wechat(title, content):
     if not SENDKEY:
         print("SENDKEY 未设定，跳过推送")
-        return
+        return False
     url = f"https://sctapi.ftqq.com/{SENDKEY}.send"
     try:
         r = requests.post(url, data={"title": title, "desp": content}, timeout=10)
         print("推送结果:", r.text[:200])
+        try:
+            ok = r.json().get("code") == 0
+        except Exception:
+            ok = r.status_code == 200
+        if ok:
+            save_marker("topics")
+            commit_marker()
+        return ok
     except Exception as e:
         print("推送失败:", e)
+        return False
 
 def main():
     dry_run = "--dry-run" in sys.argv
     print(f"GitHub 项目推荐 ({today.strftime('%Y-%m-%d')})...")
+
+    if not dry_run and already_pushed("topics"):
+        print(f"今天 ({today.strftime('%Y-%m-%d')}) 已推送过 GitHub 项目，跳过（防止本机+云端重复）")
+        return
 
     queries = [
         f"job OR career OR resume OR interview stars:>300 pushed:>{DATE_30D}",
