@@ -1,26 +1,12 @@
 {
   "projects": [
     {
-      "name": "expo/skills",
-      "stars": 3776,
-      "lang": "Shell",
-      "description": "A collection of AI agent skills for working with Expo projects and Expo Application Services",
-      "url": "https://github.com/expo/skills"
-    },
-    {
-      "name": "Renhuai123/ziwei-doushu",
-      "stars": 10723,
-      "lang": "TypeScript",
-      "description": "紫微斗数开源排盘引擎 — 基于倪海厦《天纪》体系，含完整排盘算法、四化系统、格局知识库、古籍原文数据",
-      "url": "https://github.com/Renhuai123/ziwei-doushu"
-    },
-    {
-      "name": "pingdotgg/t3code",
-      "stars": 32245,
-      "lang": "TypeScript",
-      "description": "",
-      "url": "https://github.com/pingdotgg/t3code"
+      "name": "pbakaus/impeccable",
+      "stars": 97604,
+      "lang": "Rust",
+      "description": "The design vocabulary for your coding agent. Steer with polish and bolder, review with critique and audit, catch AI slop before it ships.",
+      "url": "https://github.com/pbakaus/impeccable"
     }
   ],
-  "date": "2026-10-30"
+  "date": "2026-10-31"
 }
