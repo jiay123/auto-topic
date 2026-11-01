@@ -1,12 +1,33 @@
 {
   "projects": [
     {
-      "name": "pbakaus/impeccable",
-      "stars": 97604,
-      "lang": "Rust",
-      "description": "The design vocabulary for your coding agent. Steer with polish and bolder, review with critique and audit, catch AI slop before it ships.",
-      "url": "https://github.com/pbakaus/impeccable"
+      "name": "beenuar/AiSOC",
+      "stars": 5850,
+      "lang": "Python",
+      "description": "Open-source AI Security Operations Center: alert fusion, LLM-agent triage, MITRE ATT&amp;CK investigation, and a replayable decision ledger for every agent step. Self-hostable, runs with no API keys, MIT licensed. Ships an MCP server for Claude, Cursor and Continue.",
+      "url": "https://github.com/beenuar/AiSOC"
+    },
+    {
+      "name": "public-apis/public-apis",
+      "stars": 493973,
+      "lang": "Python",
+      "description": "A collective list of free APIs",
+      "url": "https://github.com/public-apis/public-apis"
+    },
+    {
+      "name": "lightpanda-io/browser",
+      "stars": 39590,
+      "lang": "Zig",
+      "description": "Lightpanda: the headless browser designed for AI and automation",
+      "url": "https://github.com/lightpanda-io/browser"
+    },
+    {
+      "name": "shiyu-coder/Kronos",
+      "stars": 44916,
+      "lang": "Python",
+      "description": "Kronos: A Foundation Model for the Language of Financial Markets",
+      "url": "https://github.com/shiyu-coder/Kronos"
     }
   ],
-  "date": "2026-10-31"
+  "date": "2026-11-01"
 }
