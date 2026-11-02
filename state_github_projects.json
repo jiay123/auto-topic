@@ -1,33 +1,33 @@
 {
   "projects": [
     {
-      "name": "beenuar/AiSOC",
-      "stars": 5850,
+      "name": "FlashML-org/FreeToken",
+      "stars": 15790,
       "lang": "Python",
-      "description": "Open-source AI Security Operations Center: alert fusion, LLM-agent triage, MITRE ATT&amp;CK investigation, and a replayable decision ledger for every agent step. Self-hostable, runs with no API keys, MIT licensed. Ships an MCP server for Claude, Cursor and Continue.",
-      "url": "https://github.com/beenuar/AiSOC"
+      "description": "FreeToken brings datacenter-scale model serving to your desktop. Run massive models locally, fast and efficiently.",
+      "url": "https://github.com/FlashML-org/FreeToken"
     },
     {
-      "name": "public-apis/public-apis",
-      "stars": 493973,
-      "lang": "Python",
-      "description": "A collective list of free APIs",
-      "url": "https://github.com/public-apis/public-apis"
+      "name": "vercel-labs/agent-desktop",
+      "stars": 8103,
+      "lang": "Rust",
+      "description": "Agent Desktop gives any agent reliable computer use on the desktop. Built with Rust, it sees any app's real UI structure through OS accessibility trees and operates it — refs stay stable and actions stay safe to retry, instead of guessing from pixels.",
+      "url": "https://github.com/vercel-labs/agent-desktop"
     },
     {
-      "name": "lightpanda-io/browser",
-      "stars": 39590,
-      "lang": "Zig",
-      "description": "Lightpanda: the headless browser designed for AI and automation",
-      "url": "https://github.com/lightpanda-io/browser"
+      "name": "JustVugg/colibri",
+      "stars": 46210,
+      "lang": "C",
+      "description": "Run frontier MoE models on hardware you already own — pure C, zero deps, experts streamed from disk. Tiny engine, immense model. 🐦",
+      "url": "https://github.com/JustVugg/colibri"
     },
     {
-      "name": "shiyu-coder/Kronos",
-      "stars": 44916,
-      "lang": "Python",
-      "description": "Kronos: A Foundation Model for the Language of Financial Markets",
-      "url": "https://github.com/shiyu-coder/Kronos"
+      "name": "hyprwm/Hyprland",
+      "stars": 39662,
+      "lang": "C++",
+      "description": "Hyprland is an independent, highly customizable, dynamic tiling Wayland compositor that doesn't sacrifice on its looks.",
+      "url": "https://github.com/hyprwm/Hyprland"
     }
   ],
-  "date": "2026-11-01"
+  "date": "2026-11-02"
 }
