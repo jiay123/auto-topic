@@ -1,33 +1,33 @@
 {
   "projects": [
     {
-      "name": "FlashML-org/FreeToken",
-      "stars": 15790,
+      "name": "p-e-w/heretic",
+      "stars": 38477,
       "lang": "Python",
-      "description": "FreeToken brings datacenter-scale model serving to your desktop. Run massive models locally, fast and efficiently.",
-      "url": "https://github.com/FlashML-org/FreeToken"
+      "description": "Training-free language model modification: Remove censorship, suppress slop, reduce sycophancy, and more",
+      "url": "https://github.com/p-e-w/heretic"
     },
     {
-      "name": "vercel-labs/agent-desktop",
-      "stars": 8103,
+      "name": "Usagi-org/ai-goofish-monitor",
+      "stars": 16134,
+      "lang": "Python",
+      "description": "基于 Playwright 和AI实现的闲鱼多任务实时/定时监控与智能分析系统，配备了功能完善的后台管理UI。帮助用户从闲鱼海量商品中，找到心仪产品。",
+      "url": "https://github.com/Usagi-org/ai-goofish-monitor"
+    },
+    {
+      "name": "max-sixty/worktrunk",
+      "stars": 10263,
       "lang": "Rust",
-      "description": "Agent Desktop gives any agent reliable computer use on the desktop. Built with Rust, it sees any app's real UI structure through OS accessibility trees and operates it — refs stay stable and actions stay safe to retry, instead of guessing from pixels.",
-      "url": "https://github.com/vercel-labs/agent-desktop"
+      "description": "Worktrunk is a CLI for Git worktree management, designed for parallel AI agent workflows",
+      "url": "https://github.com/max-sixty/worktrunk"
     },
     {
-      "name": "JustVugg/colibri",
-      "stars": 46210,
-      "lang": "C",
-      "description": "Run frontier MoE models on hardware you already own — pure C, zero deps, experts streamed from disk. Tiny engine, immense model. 🐦",
-      "url": "https://github.com/JustVugg/colibri"
-    },
-    {
-      "name": "hyprwm/Hyprland",
-      "stars": 39662,
-      "lang": "C++",
-      "description": "Hyprland is an independent, highly customizable, dynamic tiling Wayland compositor that doesn't sacrifice on its looks.",
-      "url": "https://github.com/hyprwm/Hyprland"
+      "name": "spotify/portal-ai-plugins",
+      "stars": 2922,
+      "lang": "TypeScript",
+      "description": "",
+      "url": "https://github.com/spotify/portal-ai-plugins"
     }
   ],
-  "date": "2026-11-02"
+  "date": "2026-11-03"
 }
