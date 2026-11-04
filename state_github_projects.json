@@ -1,33 +1,26 @@
 {
   "projects": [
     {
-      "name": "p-e-w/heretic",
-      "stars": 38477,
+      "name": "harry0703/MoneyPrinterTurbo",
+      "stars": 138579,
       "lang": "Python",
-      "description": "Training-free language model modification: Remove censorship, suppress slop, reduce sycophancy, and more",
-      "url": "https://github.com/p-e-w/heretic"
+      "description": "利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or keyword with an automated AI workflow.",
+      "url": "https://github.com/harry0703/MoneyPrinterTurbo"
     },
     {
-      "name": "Usagi-org/ai-goofish-monitor",
-      "stars": 16134,
-      "lang": "Python",
-      "description": "基于 Playwright 和AI实现的闲鱼多任务实时/定时监控与智能分析系统，配备了功能完善的后台管理UI。帮助用户从闲鱼海量商品中，找到心仪产品。",
-      "url": "https://github.com/Usagi-org/ai-goofish-monitor"
-    },
-    {
-      "name": "max-sixty/worktrunk",
-      "stars": 10263,
-      "lang": "Rust",
-      "description": "Worktrunk is a CLI for Git worktree management, designed for parallel AI agent workflows",
-      "url": "https://github.com/max-sixty/worktrunk"
-    },
-    {
-      "name": "spotify/portal-ai-plugins",
-      "stars": 2922,
+      "name": "garrytan/gstack",
+      "stars": 139048,
       "lang": "TypeScript",
-      "description": "",
-      "url": "https://github.com/spotify/portal-ai-plugins"
+      "description": "Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager, Doc Engineer, and QA",
+      "url": "https://github.com/garrytan/gstack"
+    },
+    {
+      "name": "github/spec-kit",
+      "stars": 146937,
+      "lang": "Python",
+      "description": "💫 Toolkit to help you get started with SDD or any other process!",
+      "url": "https://github.com/github/spec-kit"
     }
   ],
-  "date": "2026-11-03"
+  "date": "2026-11-04"
 }
