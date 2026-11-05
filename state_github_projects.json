@@ -1,26 +1,19 @@
 {
   "projects": [
     {
-      "name": "harry0703/MoneyPrinterTurbo",
-      "stars": 138579,
+      "name": "google/skills",
+      "stars": 22123,
       "lang": "Python",
-      "description": "利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or keyword with an automated AI workflow.",
-      "url": "https://github.com/harry0703/MoneyPrinterTurbo"
+      "description": "Agent Skills for Google products and technologies",
+      "url": "https://github.com/google/skills"
     },
     {
-      "name": "garrytan/gstack",
-      "stars": 139048,
-      "lang": "TypeScript",
-      "description": "Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager, Doc Engineer, and QA",
-      "url": "https://github.com/garrytan/gstack"
-    },
-    {
-      "name": "github/spec-kit",
-      "stars": 146937,
-      "lang": "Python",
-      "description": "💫 Toolkit to help you get started with SDD or any other process!",
-      "url": "https://github.com/github/spec-kit"
+      "name": "lz4/lz4",
+      "stars": 12240,
+      "lang": "C",
+      "description": "Extremely Fast Compression algorithm",
+      "url": "https://github.com/lz4/lz4"
     }
   ],
-  "date": "2026-11-04"
+  "date": "2026-11-05"
 }

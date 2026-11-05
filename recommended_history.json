@@ -1,21 +1,5 @@
 [
   {
-    "name": "CopilotKit/OpenBot",
-    "date": "2026-10-29"
-  },
-  {
-    "name": "togg53192-cmd/jailbreaks",
-    "date": "2026-10-29"
-  },
-  {
-    "name": "JetBrains/thinkrail",
-    "date": "2026-10-29"
-  },
-  {
-    "name": "HKUDS/DeepTutor",
-    "date": "2026-10-29"
-  },
-  {
     "name": "expo/skills",
     "date": "2026-10-30"
   },
@@ -90,5 +74,13 @@
   {
     "name": "garrytan/gstack",
     "date": "2026-11-04"
+  },
+  {
+    "name": "lz4/lz4",
+    "date": "2026-11-05"
+  },
+  {
+    "name": "google/skills",
+    "date": "2026-11-05"
   }
 ]
