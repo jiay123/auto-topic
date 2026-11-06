@@ -1,19 +1,40 @@
 {
   "projects": [
     {
-      "name": "google/skills",
-      "stars": 22123,
-      "lang": "Python",
-      "description": "Agent Skills for Google products and technologies",
-      "url": "https://github.com/google/skills"
+      "name": "react/react",
+      "stars": 252053,
+      "lang": "JavaScript",
+      "description": "The library for web and native user interfaces.",
+      "url": "https://github.com/react/react"
     },
     {
-      "name": "lz4/lz4",
-      "stars": 12240,
-      "lang": "C",
-      "description": "Extremely Fast Compression algorithm",
-      "url": "https://github.com/lz4/lz4"
+      "name": "rails/rails",
+      "stars": 58897,
+      "lang": "Ruby",
+      "description": "Ruby on Rails",
+      "url": "https://github.com/rails/rails"
+    },
+    {
+      "name": "NVIDIA/auto-ontology",
+      "stars": 8353,
+      "lang": "Python",
+      "description": "Auto Ontology is a Python framework for building semantic, graph-based reasoning layers over data. It enables deterministic query generation, better context retrieval, and more explainable AI for LLM and agent workflows.",
+      "url": "https://github.com/NVIDIA/auto-ontology"
+    },
+    {
+      "name": "angular/angular",
+      "stars": 101149,
+      "lang": "TypeScript",
+      "description": "Deliver web apps with confidence 🚀",
+      "url": "https://github.com/angular/angular"
+    },
+    {
+      "name": "symfony/symfony",
+      "stars": 31256,
+      "lang": "PHP",
+      "description": "The Symfony PHP framework",
+      "url": "https://github.com/symfony/symfony"
     }
   ],
-  "date": "2026-11-05"
+  "date": "2026-11-06"
 }

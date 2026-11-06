@@ -1,17 +1,5 @@
 [
   {
-    "name": "expo/skills",
-    "date": "2026-10-30"
-  },
-  {
-    "name": "pingdotgg/t3code",
-    "date": "2026-10-30"
-  },
-  {
-    "name": "Renhuai123/ziwei-doushu",
-    "date": "2026-10-30"
-  },
-  {
     "name": "pbakaus/impeccable",
     "date": "2026-10-31"
   },
@@ -82,5 +70,25 @@
   {
     "name": "google/skills",
     "date": "2026-11-05"
+  },
+  {
+    "name": "rails/rails",
+    "date": "2026-11-06"
+  },
+  {
+    "name": "angular/angular",
+    "date": "2026-11-06"
+  },
+  {
+    "name": "symfony/symfony",
+    "date": "2026-11-06"
+  },
+  {
+    "name": "NVIDIA/auto-ontology",
+    "date": "2026-11-06"
+  },
+  {
+    "name": "react/react",
+    "date": "2026-11-06"
   }
 ]
