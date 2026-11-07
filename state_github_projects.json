@@ -1,40 +1,33 @@
 {
   "projects": [
     {
-      "name": "react/react",
-      "stars": 252053,
-      "lang": "JavaScript",
-      "description": "The library for web and native user interfaces.",
-      "url": "https://github.com/react/react"
-    },
-    {
-      "name": "rails/rails",
-      "stars": 58897,
-      "lang": "Ruby",
-      "description": "Ruby on Rails",
-      "url": "https://github.com/rails/rails"
-    },
-    {
-      "name": "NVIDIA/auto-ontology",
-      "stars": 8353,
+      "name": "anthropics/skills",
+      "stars": 188343,
       "lang": "Python",
-      "description": "Auto Ontology is a Python framework for building semantic, graph-based reasoning layers over data. It enables deterministic query generation, better context retrieval, and more explainable AI for LLM and agent workflows.",
-      "url": "https://github.com/NVIDIA/auto-ontology"
+      "description": "Public repository for Agent Skills",
+      "url": "https://github.com/anthropics/skills"
     },
     {
-      "name": "angular/angular",
-      "stars": 101149,
-      "lang": "TypeScript",
-      "description": "Deliver web apps with confidence 🚀",
-      "url": "https://github.com/angular/angular"
+      "name": "sherlock-project/sherlock",
+      "stars": 99300,
+      "lang": "Python",
+      "description": "Hunt down social media accounts by username across social networks",
+      "url": "https://github.com/sherlock-project/sherlock"
     },
     {
-      "name": "symfony/symfony",
-      "stars": 31256,
-      "lang": "PHP",
-      "description": "The Symfony PHP framework",
-      "url": "https://github.com/symfony/symfony"
+      "name": "astral-sh/ruff",
+      "stars": 50805,
+      "lang": "Rust",
+      "description": "An extremely fast Python linter and code formatter, written in Rust.",
+      "url": "https://github.com/astral-sh/ruff"
+    },
+    {
+      "name": "prometheus/prometheus",
+      "stars": 67285,
+      "lang": "Go",
+      "description": "The Prometheus monitoring system and time series database.",
+      "url": "https://github.com/prometheus/prometheus"
     }
   ],
-  "date": "2026-11-06"
+  "date": "2026-11-07"
 }

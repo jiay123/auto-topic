@@ -1,9 +1,5 @@
 [
   {
-    "name": "pbakaus/impeccable",
-    "date": "2026-10-31"
-  },
-  {
     "name": "public-apis/public-apis",
     "date": "2026-11-01"
   },
@@ -90,5 +86,21 @@
   {
     "name": "react/react",
     "date": "2026-11-06"
+  },
+  {
+    "name": "prometheus/prometheus",
+    "date": "2026-11-07"
+  },
+  {
+    "name": "anthropics/skills",
+    "date": "2026-11-07"
+  },
+  {
+    "name": "astral-sh/ruff",
+    "date": "2026-11-07"
+  },
+  {
+    "name": "sherlock-project/sherlock",
+    "date": "2026-11-07"
   }
 ]
