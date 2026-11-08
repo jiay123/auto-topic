@@ -1,33 +1,4 @@
 {
-  "projects": [
-    {
-      "name": "anthropics/skills",
-      "stars": 188343,
-      "lang": "Python",
-      "description": "Public repository for Agent Skills",
-      "url": "https://github.com/anthropics/skills"
-    },
-    {
-      "name": "sherlock-project/sherlock",
-      "stars": 99300,
-      "lang": "Python",
-      "description": "Hunt down social media accounts by username across social networks",
-      "url": "https://github.com/sherlock-project/sherlock"
-    },
-    {
-      "name": "astral-sh/ruff",
-      "stars": 50805,
-      "lang": "Rust",
-      "description": "An extremely fast Python linter and code formatter, written in Rust.",
-      "url": "https://github.com/astral-sh/ruff"
-    },
-    {
-      "name": "prometheus/prometheus",
-      "stars": 67285,
-      "lang": "Go",
-      "description": "The Prometheus monitoring system and time series database.",
-      "url": "https://github.com/prometheus/prometheus"
-    }
-  ],
-  "date": "2026-11-07"
+  "projects": [],
+  "date": "2026-11-08"
 }
