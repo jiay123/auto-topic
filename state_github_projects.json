@@ -1,4 +1,33 @@
 {
-  "projects": [],
-  "date": "2026-11-08"
+  "projects": [
+    {
+      "name": "ZhuLinsen/daily_stock_analysis",
+      "stars": 68516,
+      "lang": "Python",
+      "description": "LLM 驱动的多市场股票智能分析系统：多源行情、实时新闻、决策看板与自动推送，支持零成本定时运行。 LLM-powered multi-market stock analysis system with multi-source market data, real-time news, decision dashboard, automated notifications, and cost-free scheduled runs.",
+      "url": "https://github.com/ZhuLinsen/daily_stock_analysis"
+    },
+    {
+      "name": "anthropics/claude-quickstarts",
+      "stars": 19767,
+      "lang": "Python",
+      "description": "A collection of projects designed to help developers quickly get started with building deployable applications using the Claude API",
+      "url": "https://github.com/anthropics/claude-quickstarts"
+    },
+    {
+      "name": "google-deepmind/mujoco",
+      "stars": 16752,
+      "lang": "C++",
+      "description": "Multi-Joint dynamics with Contact. A general purpose physics simulator.",
+      "url": "https://github.com/google-deepmind/mujoco"
+    },
+    {
+      "name": "ruvnet/RuView",
+      "stars": 103190,
+      "lang": "Rust",
+      "description": "π RuView turns commodity WiFi signals into real-time spatial intelligence, vital sign monitoring, and presence detection — all without a single pixel of video.",
+      "url": "https://github.com/ruvnet/RuView"
+    }
+  ],
+  "date": "2026-11-09"
 }

@@ -1,21 +1,5 @@
 [
   {
-    "name": "FlashML-org/FreeToken",
-    "date": "2026-11-02"
-  },
-  {
-    "name": "hyprwm/Hyprland",
-    "date": "2026-11-02"
-  },
-  {
-    "name": "vercel-labs/agent-desktop",
-    "date": "2026-11-02"
-  },
-  {
-    "name": "JustVugg/colibri",
-    "date": "2026-11-02"
-  },
-  {
     "name": "Usagi-org/ai-goofish-monitor",
     "date": "2026-11-03"
   },
@@ -86,5 +70,21 @@
   {
     "name": "sherlock-project/sherlock",
     "date": "2026-11-07"
+  },
+  {
+    "name": "google-deepmind/mujoco",
+    "date": "2026-11-09"
+  },
+  {
+    "name": "anthropics/claude-quickstarts",
+    "date": "2026-11-09"
+  },
+  {
+    "name": "ZhuLinsen/daily_stock_analysis",
+    "date": "2026-11-09"
+  },
+  {
+    "name": "ruvnet/RuView",
+    "date": "2026-11-09"
   }
 ]
