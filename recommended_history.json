@@ -1,21 +1,5 @@
 [
   {
-    "name": "Usagi-org/ai-goofish-monitor",
-    "date": "2026-11-03"
-  },
-  {
-    "name": "max-sixty/worktrunk",
-    "date": "2026-11-03"
-  },
-  {
-    "name": "spotify/portal-ai-plugins",
-    "date": "2026-11-03"
-  },
-  {
-    "name": "p-e-w/heretic",
-    "date": "2026-11-03"
-  },
-  {
     "name": "harry0703/MoneyPrinterTurbo",
     "date": "2026-11-04"
   },
@@ -86,5 +70,13 @@
   {
     "name": "ruvnet/RuView",
     "date": "2026-11-09"
+  },
+  {
+    "name": "homeassistant-ai/ha-mcp",
+    "date": "2026-11-10"
+  },
+  {
+    "name": "we-promise/sure",
+    "date": "2026-11-10"
   }
 ]
