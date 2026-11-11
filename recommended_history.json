@@ -1,17 +1,5 @@
 [
   {
-    "name": "harry0703/MoneyPrinterTurbo",
-    "date": "2026-11-04"
-  },
-  {
-    "name": "github/spec-kit",
-    "date": "2026-11-04"
-  },
-  {
-    "name": "garrytan/gstack",
-    "date": "2026-11-04"
-  },
-  {
     "name": "lz4/lz4",
     "date": "2026-11-05"
   },
@@ -78,5 +66,21 @@
   {
     "name": "we-promise/sure",
     "date": "2026-11-10"
+  },
+  {
+    "name": "GoogleChrome/modern-web-guidance-src",
+    "date": "2026-11-11"
+  },
+  {
+    "name": "openai/codex-security",
+    "date": "2026-11-11"
+  },
+  {
+    "name": "meta/astryx",
+    "date": "2026-11-11"
+  },
+  {
+    "name": "TheAlgorithms/Java",
+    "date": "2026-11-11"
   }
 ]
