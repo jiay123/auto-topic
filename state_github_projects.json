@@ -1,33 +1,26 @@
 {
   "projects": [
     {
-      "name": "openai/codex-security",
-      "stars": 11411,
+      "name": "QwenLM/qwen-code",
+      "stars": 29585,
       "lang": "TypeScript",
-      "description": "OpenAI's Codex Security CLI and TypeScript SDK for finding, validating, and fixing security vulnerabilities. npm: https://www.npmjs.com/package/@openai/codex-security",
-      "url": "https://github.com/openai/codex-security"
+      "description": "An open-source AI coding agent that lives in your terminal.",
+      "url": "https://github.com/QwenLM/qwen-code"
     },
     {
-      "name": "meta/astryx",
-      "stars": 24189,
-      "lang": "TypeScript",
-      "description": "An open source design system that's fully customizable and agent ready",
-      "url": "https://github.com/meta/astryx"
+      "name": "nvm-sh/nvm",
+      "stars": 95936,
+      "lang": "Shell",
+      "description": "Node Version Manager - POSIX-compliant bash script to manage multiple active node.js versions.",
+      "url": "https://github.com/nvm-sh/nvm"
     },
     {
-      "name": "TheAlgorithms/Java",
-      "stars": 66863,
-      "lang": "Java",
-      "description": "All Algorithms implemented in Java",
-      "url": "https://github.com/TheAlgorithms/Java"
-    },
-    {
-      "name": "GoogleChrome/modern-web-guidance-src",
-      "stars": 1432,
-      "lang": "TypeScript",
-      "description": "",
-      "url": "https://github.com/GoogleChrome/modern-web-guidance-src"
+      "name": "pookjw/HermesEnabler",
+      "stars": 1376,
+      "lang": "Objective-C",
+      "description": "Enable Hermès Watch Faces on any Apple Watch devices",
+      "url": "https://github.com/pookjw/HermesEnabler"
     }
   ],
-  "date": "2026-11-11"
+  "date": "2026-11-12"
 }

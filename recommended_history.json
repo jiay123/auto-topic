@@ -1,13 +1,5 @@
 [
   {
-    "name": "lz4/lz4",
-    "date": "2026-11-05"
-  },
-  {
-    "name": "google/skills",
-    "date": "2026-11-05"
-  },
-  {
     "name": "rails/rails",
     "date": "2026-11-06"
   },
@@ -82,5 +74,17 @@
   {
     "name": "TheAlgorithms/Java",
     "date": "2026-11-11"
+  },
+  {
+    "name": "pookjw/HermesEnabler",
+    "date": "2026-11-12"
+  },
+  {
+    "name": "nvm-sh/nvm",
+    "date": "2026-11-12"
+  },
+  {
+    "name": "QwenLM/qwen-code",
+    "date": "2026-11-12"
   }
 ]
