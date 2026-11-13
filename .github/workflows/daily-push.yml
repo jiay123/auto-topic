@@ -8,12 +8,19 @@ name: 每日推送
 #    病根2 = 云端 schedule 被注释掉（10/12 为了避免和本机重复推送而关的），
 #            结果本机一挂就彻底没人推了 —— 两条腿断了一条还把另一条也拆了。
 #    现在改成双保险：
-#      本机 07:00 / 09:00（StartWhenAvailable，错过开机补跑）+ 云端 11:00 / 13:00 兜底。
+#      本机 07:00 / 09:00（StartWhenAvailable，错过开机补跑）+ 云端 06:30 / 13:00 兜底。
 #    防重复 = push_marker.json（当天已推过就跳过），本机和云端都读它。
+#
+# 🔧 2026-11-13 老贾定（老贾白天上班不在电脑前，也要能在手机上看）：
+#    1) 云端 AI 资讯从 11:00 提前到 **06:30**（cron 22:30 UTC，前一天）——
+#       老贾 7 点发视频号之前，手机上就已经有当天的资讯 + 今日热点选题。
+#    2) 资讯那条里并进「今日热点选题」（知乎热搜榜，抓取脚本 = scripts/fetch_zhihu_hot.py），
+#       **不额外占 Server酱 名额**（老贾每天只有 5 次免费推送：现在 2 次日常 + ≤2 次额度报警 + 1 次余量）。
+#    3) 13:00 的 GitHub 项目那条保留作兜底（万一 6:30 那次网络失败没推成）。
 on:
   schedule:
-    # 11:00 北京时间 = 03:00 UTC —— AI 资讯兜底
-    - cron: '0 3 * * *'
+    # 06:30 北京时间 = 22:30 UTC（前一天）—— AI 资讯 + 今日热点选题
+    - cron: '30 22 * * *'
     # 13:00 北京时间 = 05:00 UTC —— GitHub 项目兜底
     - cron: '0 5 * * *'
   workflow_dispatch:
@@ -49,7 +56,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   ai-news:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.schedule == '0 3 * * *' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.schedule == '30 22 * * *' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -62,14 +69,19 @@ jobs:
       - run: pip install requests
       - name: 拉取最新状态（含 push_marker）
         run: git pull --ff-only origin main || true
+      - name: 抓知乎热点选题（纯脚本，不推微信，只写文件）
+        run: python scripts/fetch_zhihu_hot.py
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - run: python scripts/fetch_ai_news.py
         env:
           SENDKEY: ${{ secrets.SENDKEY }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: 提交去重状态
         run: |
           git config user.email "bot@auto-topic.local"
           git config user.name "auto-topic-bot"
-          git add state_news_dedup.json push_marker.json
+          git add state_news_dedup.json push_marker.json zhihu_hot.json
           git commit -m "chore: 更新新闻去重状态 $(date +%F)" || echo "no changes"
           git pull --rebase origin main || true
           git push
