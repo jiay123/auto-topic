@@ -41,14 +41,21 @@ def main():
     topics_ok, topics_file = touched_today(TOPICS_STATE)
     lines.append("news_ok=%s (%s)" % (news_ok, news_file))
     lines.append("topics_ok=%s (%s)" % (topics_ok, topics_file))
-    if not news_ok:
-        lines.append("ACTION: retry news")
-        run("fetch_ai_news.py", "news")
-    if not topics_ok:
-        lines.append("ACTION: retry topics")
-        run("fetch_github_projects.py", "topics")
-    if news_ok and topics_ok:
-        lines.append("ACTION: none needed")
+    # 老贾 11/13 定：Server酱每天只有 5 次免费推送。开机自启触发自检会补推 2 条，
+    # 白白吃掉额度 → 只允许在 9:20-9:40 窗口内补推，其余时间只记日志不推。
+    hhmm = (datetime.datetime.now().hour, datetime.datetime.now().minute)
+    in_win = (9, 20) <= hhmm <= (9, 40)
+    if not in_win:
+        lines.append("ACTION: skipped retry (不在 9:20-9:40 补推窗口, 省 Server酱 额度)")
+    else:
+        if not news_ok:
+            lines.append("ACTION: retry news")
+            run("fetch_ai_news.py", "news")
+        if not topics_ok:
+            lines.append("ACTION: retry topics")
+            run("fetch_github_projects.py", "topics")
+        if news_ok and topics_ok:
+            lines.append("ACTION: none needed")
     with open(outp, "a", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
     print("\n".join(lines))
