@@ -313,6 +313,17 @@ def main():
     save_dedup(seen)
 
     title, content = build_message(articles)
+    # 今日热点选题（知乎热搜）—— 老贾 11/13 立：不单独推微信（Server酱每天只有5次免费名额），
+    # 并进这条 7 点推送里，老贾发视频号前手机上就能看到"今天能拍什么"。抓不到就不贴，不影响主推送。
+    try:
+        zp = os.path.join(BASE_DIR, "zhihu_hot.json")
+        if os.path.exists(zp):
+            zd = json.load(open(zp, encoding="utf-8"))
+            if zd.get("date") == today and zd.get("text"):
+                content = content + "\n\n" + zd["text"]
+                print("已并入今日热点选题 %d 条" % len(zd.get("items") or []))
+    except Exception as e:
+        print("热点选题并入跳过: %s" % e)
     send_wechat(title, content)
     print(f"推送完成：{len(articles)} 条")
 
