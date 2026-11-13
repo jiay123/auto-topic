@@ -1,25 +1,5 @@
 [
   {
-    "name": "rails/rails",
-    "date": "2026-11-06"
-  },
-  {
-    "name": "angular/angular",
-    "date": "2026-11-06"
-  },
-  {
-    "name": "symfony/symfony",
-    "date": "2026-11-06"
-  },
-  {
-    "name": "NVIDIA/auto-ontology",
-    "date": "2026-11-06"
-  },
-  {
-    "name": "react/react",
-    "date": "2026-11-06"
-  },
-  {
     "name": "prometheus/prometheus",
     "date": "2026-11-07"
   },
@@ -86,5 +66,21 @@
   {
     "name": "QwenLM/qwen-code",
     "date": "2026-11-12"
+  },
+  {
+    "name": "alibaba/open-code-review",
+    "date": "2026-11-13"
+  },
+  {
+    "name": "block/buzz",
+    "date": "2026-11-13"
+  },
+  {
+    "name": "tradermonty/claude-trading-skills",
+    "date": "2026-11-13"
+  },
+  {
+    "name": "tailscale/tailcat",
+    "date": "2026-11-13"
   }
 ]
