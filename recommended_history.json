@@ -1,21 +1,5 @@
 [
   {
-    "name": "prometheus/prometheus",
-    "date": "2026-11-07"
-  },
-  {
-    "name": "anthropics/skills",
-    "date": "2026-11-07"
-  },
-  {
-    "name": "astral-sh/ruff",
-    "date": "2026-11-07"
-  },
-  {
-    "name": "sherlock-project/sherlock",
-    "date": "2026-11-07"
-  },
-  {
     "name": "google-deepmind/mujoco",
     "date": "2026-11-09"
   },
@@ -82,5 +66,9 @@
   {
     "name": "tailscale/tailcat",
     "date": "2026-11-13"
+  },
+  {
+    "name": "backnotprop/plannotator",
+    "date": "2026-11-14"
   }
 ]

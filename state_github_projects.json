@@ -1,33 +1,12 @@
 {
   "projects": [
     {
-      "name": "alibaba/open-code-review",
-      "stars": 50195,
-      "lang": "Go",
-      "description": "Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI &amp; Anthropic compatible.",
-      "url": "https://github.com/alibaba/open-code-review"
-    },
-    {
-      "name": "tradermonty/claude-trading-skills",
-      "stars": 3892,
-      "lang": "Python",
-      "description": "Claude Code skills for equity investors and traders — market analysis, technical charting, economic calendars, screeners, and trading strategy development.",
-      "url": "https://github.com/tradermonty/claude-trading-skills"
-    },
-    {
-      "name": "tailscale/tailcat",
-      "stars": 9207,
-      "lang": "Go",
-      "description": "like netcat, but over Tailscale's data plane, without Tailscale's control plane",
-      "url": "https://github.com/tailscale/tailcat"
-    },
-    {
-      "name": "block/buzz",
-      "stars": 37165,
-      "lang": "Rust",
-      "description": "A hive mind communication platform",
-      "url": "https://github.com/block/buzz"
+      "name": "backnotprop/plannotator",
+      "stars": 10667,
+      "lang": "TypeScript",
+      "description": "The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click.",
+      "url": "https://github.com/backnotprop/plannotator"
     }
   ],
-  "date": "2026-11-13"
+  "date": "2026-11-14"
 }
