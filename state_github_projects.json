@@ -1,12 +1,12 @@
 {
   "projects": [
     {
-      "name": "backnotprop/plannotator",
-      "stars": 10667,
+      "name": "dream-num/univer",
+      "stars": 25227,
       "lang": "TypeScript",
-      "description": "The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click.",
-      "url": "https://github.com/backnotprop/plannotator"
+      "description": "Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core.",
+      "url": "https://github.com/dream-num/univer"
     }
   ],
-  "date": "2026-11-14"
+  "date": "2026-11-15"
 }
