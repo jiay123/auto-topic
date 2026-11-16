@@ -1,21 +1,5 @@
 [
   {
-    "name": "google-deepmind/mujoco",
-    "date": "2026-11-09"
-  },
-  {
-    "name": "anthropics/claude-quickstarts",
-    "date": "2026-11-09"
-  },
-  {
-    "name": "ZhuLinsen/daily_stock_analysis",
-    "date": "2026-11-09"
-  },
-  {
-    "name": "ruvnet/RuView",
-    "date": "2026-11-09"
-  },
-  {
     "name": "homeassistant-ai/ha-mcp",
     "date": "2026-11-10"
   },
@@ -74,5 +58,17 @@
   {
     "name": "dream-num/univer",
     "date": "2026-11-15"
+  },
+  {
+    "name": "google-labs-code/stitch-skills",
+    "date": "2026-11-16"
+  },
+  {
+    "name": "DeanChensj/jiangshan-map",
+    "date": "2026-11-16"
+  },
+  {
+    "name": "getarcaneapp/arcane",
+    "date": "2026-11-16"
   }
 ]
