@@ -1,13 +1,5 @@
 [
   {
-    "name": "homeassistant-ai/ha-mcp",
-    "date": "2026-11-10"
-  },
-  {
-    "name": "we-promise/sure",
-    "date": "2026-11-10"
-  },
-  {
     "name": "GoogleChrome/modern-web-guidance-src",
     "date": "2026-11-11"
   },
@@ -70,5 +62,17 @@
   {
     "name": "getarcaneapp/arcane",
     "date": "2026-11-16"
+  },
+  {
+    "name": "cursor/plugins",
+    "date": "2026-11-17"
+  },
+  {
+    "name": "mvanhorn/last30days-skill",
+    "date": "2026-11-17"
+  },
+  {
+    "name": "Tencent/LoopForge",
+    "date": "2026-11-17"
   }
 ]
