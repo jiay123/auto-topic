@@ -1,26 +1,19 @@
 {
   "projects": [
     {
-      "name": "Tencent/LoopForge",
-      "stars": 2859,
-      "lang": "Go",
-      "description": "Self-hosted workflows for coding-agent delivery. Orchestrate CodeBuddy, Codex and Claude Code with scripts and human approval gates. Includes Local workflows for coding assistants.",
-      "url": "https://github.com/Tencent/LoopForge"
-    },
-    {
-      "name": "mvanhorn/last30days-skill",
-      "stars": 68638,
+      "name": "HKUDS/CLI-Anything",
+      "stars": 59382,
       "lang": "Python",
-      "description": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary",
-      "url": "https://github.com/mvanhorn/last30days-skill"
+      "description": "\"CLI-Anything: Making ALL Software Agent-Native\" -- CLI-Hub: https://clianything.cc/",
+      "url": "https://github.com/HKUDS/CLI-Anything"
     },
     {
-      "name": "cursor/plugins",
-      "stars": 16764,
-      "lang": "TypeScript",
-      "description": "Cursor plugin specification and official plugins",
-      "url": "https://github.com/cursor/plugins"
+      "name": "astral-sh/uv",
+      "stars": 92139,
+      "lang": "Rust",
+      "description": "An extremely fast Python package and project manager, written in Rust.",
+      "url": "https://github.com/astral-sh/uv"
     }
   ],
-  "date": "2026-11-17"
+  "date": "2026-11-18"
 }

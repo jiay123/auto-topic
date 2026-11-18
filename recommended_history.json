@@ -1,21 +1,5 @@
 [
   {
-    "name": "GoogleChrome/modern-web-guidance-src",
-    "date": "2026-11-11"
-  },
-  {
-    "name": "openai/codex-security",
-    "date": "2026-11-11"
-  },
-  {
-    "name": "meta/astryx",
-    "date": "2026-11-11"
-  },
-  {
-    "name": "TheAlgorithms/Java",
-    "date": "2026-11-11"
-  },
-  {
     "name": "pookjw/HermesEnabler",
     "date": "2026-11-12"
   },
@@ -74,5 +58,13 @@
   {
     "name": "Tencent/LoopForge",
     "date": "2026-11-17"
+  },
+  {
+    "name": "astral-sh/uv",
+    "date": "2026-11-18"
+  },
+  {
+    "name": "HKUDS/CLI-Anything",
+    "date": "2026-11-18"
   }
 ]
