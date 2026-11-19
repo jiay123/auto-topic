@@ -1,17 +1,5 @@
 [
   {
-    "name": "pookjw/HermesEnabler",
-    "date": "2026-11-12"
-  },
-  {
-    "name": "nvm-sh/nvm",
-    "date": "2026-11-12"
-  },
-  {
-    "name": "QwenLM/qwen-code",
-    "date": "2026-11-12"
-  },
-  {
     "name": "alibaba/open-code-review",
     "date": "2026-11-13"
   },
@@ -66,5 +54,21 @@
   {
     "name": "HKUDS/CLI-Anything",
     "date": "2026-11-18"
+  },
+  {
+    "name": "nginx/nginx",
+    "date": "2026-11-19"
+  },
+  {
+    "name": "firecrawl/firecrawl",
+    "date": "2026-11-19"
+  },
+  {
+    "name": "openvinotoolkit/openvino",
+    "date": "2026-11-19"
+  },
+  {
+    "name": "jingyaogong/minimind",
+    "date": "2026-11-19"
   }
 ]

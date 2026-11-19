@@ -1,19 +1,33 @@
 {
   "projects": [
     {
-      "name": "HKUDS/CLI-Anything",
-      "stars": 59382,
-      "lang": "Python",
-      "description": "\"CLI-Anything: Making ALL Software Agent-Native\" -- CLI-Hub: https://clianything.cc/",
-      "url": "https://github.com/HKUDS/CLI-Anything"
+      "name": "firecrawl/firecrawl",
+      "stars": 203682,
+      "lang": "TypeScript",
+      "description": "Knowledge infrastructure to make your agents smarter. Search, scrape and 550+ data providers through one API.",
+      "url": "https://github.com/firecrawl/firecrawl"
     },
     {
-      "name": "astral-sh/uv",
-      "stars": 92139,
-      "lang": "Rust",
-      "description": "An extremely fast Python package and project manager, written in Rust.",
-      "url": "https://github.com/astral-sh/uv"
+      "name": "jingyaogong/minimind",
+      "stars": 66678,
+      "lang": "Python",
+      "description": "🧠 两小时从 0 训出你的 64M 大模型。Train your own 64M LLM from scratch in 2 hours.",
+      "url": "https://github.com/jingyaogong/minimind"
+    },
+    {
+      "name": "openvinotoolkit/openvino",
+      "stars": 11474,
+      "lang": "C++",
+      "description": "OpenVINO™ is an open source toolkit for optimizing and deploying AI inference",
+      "url": "https://github.com/openvinotoolkit/openvino"
+    },
+    {
+      "name": "nginx/nginx",
+      "stars": 32246,
+      "lang": "C",
+      "description": "The official NGINX Open Source repository.",
+      "url": "https://github.com/nginx/nginx"
     }
   ],
-  "date": "2026-11-18"
+  "date": "2026-11-19"
 }
