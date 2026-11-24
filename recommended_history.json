@@ -1,17 +1,5 @@
 [
   {
-    "name": "cursor/plugins",
-    "date": "2026-11-17"
-  },
-  {
-    "name": "mvanhorn/last30days-skill",
-    "date": "2026-11-17"
-  },
-  {
-    "name": "Tencent/LoopForge",
-    "date": "2026-11-17"
-  },
-  {
     "name": "astral-sh/uv",
     "date": "2026-11-18"
   },
@@ -34,5 +22,13 @@
   {
     "name": "jingyaogong/minimind",
     "date": "2026-11-19"
+  },
+  {
+    "name": "cursor/plugins",
+    "date": "2026-11-24"
+  },
+  {
+    "name": "mvanhorn/last30days-skill",
+    "date": "2026-11-24"
   }
 ]
