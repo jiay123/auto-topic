@@ -1,13 +1,5 @@
 [
   {
-    "name": "astral-sh/uv",
-    "date": "2026-11-18"
-  },
-  {
-    "name": "HKUDS/CLI-Anything",
-    "date": "2026-11-18"
-  },
-  {
     "name": "nginx/nginx",
     "date": "2026-11-19"
   },
@@ -30,5 +22,9 @@
   {
     "name": "mvanhorn/last30days-skill",
     "date": "2026-11-24"
+  },
+  {
+    "name": "HKUDS/CLI-Anything",
+    "date": "2026-11-25"
   }
 ]

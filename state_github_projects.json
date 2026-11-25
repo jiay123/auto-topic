@@ -1,19 +1,12 @@
 {
   "projects": [
     {
-      "name": "mvanhorn/last30days-skill",
-      "stars": 73929,
+      "name": "HKUDS/CLI-Anything",
+      "stars": 65455,
       "lang": "Python",
-      "description": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary",
-      "url": "https://github.com/mvanhorn/last30days-skill"
-    },
-    {
-      "name": "cursor/plugins",
-      "stars": 19079,
-      "lang": "TypeScript",
-      "description": "Cursor plugin specification and official plugins",
-      "url": "https://github.com/cursor/plugins"
+      "description": "\"CLI-Anything: Making ALL Software Agent-Native\" -- CLI-Hub: https://clianything.cc/",
+      "url": "https://github.com/HKUDS/CLI-Anything"
     }
   ],
-  "date": "2026-11-24"
+  "date": "2026-11-25"
 }
