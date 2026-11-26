@@ -1,12 +1,33 @@
 {
   "projects": [
     {
-      "name": "HKUDS/CLI-Anything",
-      "stars": 65455,
+      "name": "jingyaogong/minimind",
+      "stars": 71483,
       "lang": "Python",
-      "description": "\"CLI-Anything: Making ALL Software Agent-Native\" -- CLI-Hub: https://clianything.cc/",
-      "url": "https://github.com/HKUDS/CLI-Anything"
+      "description": "🧠 两小时从 0 训出你的 64M 大模型。Train your own 64M LLM from scratch in 2 hours.",
+      "url": "https://github.com/jingyaogong/minimind"
+    },
+    {
+      "name": "firecrawl/firecrawl",
+      "stars": 210621,
+      "lang": "TypeScript",
+      "description": "Knowledge infrastructure to make your agents smarter. Search, scrape and access 550+ data providers through one API.",
+      "url": "https://github.com/firecrawl/firecrawl"
+    },
+    {
+      "name": "openvinotoolkit/openvino",
+      "stars": 12757,
+      "lang": "C++",
+      "description": "OpenVINO™ is an open source toolkit for optimizing and deploying AI inference",
+      "url": "https://github.com/openvinotoolkit/openvino"
+    },
+    {
+      "name": "nginx/nginx",
+      "stars": 33465,
+      "lang": "C",
+      "description": "The official NGINX Open Source repository.",
+      "url": "https://github.com/nginx/nginx"
     }
   ],
-  "date": "2026-11-25"
+  "date": "2026-11-26"
 }

@@ -1,21 +1,5 @@
 [
   {
-    "name": "nginx/nginx",
-    "date": "2026-11-19"
-  },
-  {
-    "name": "firecrawl/firecrawl",
-    "date": "2026-11-19"
-  },
-  {
-    "name": "openvinotoolkit/openvino",
-    "date": "2026-11-19"
-  },
-  {
-    "name": "jingyaogong/minimind",
-    "date": "2026-11-19"
-  },
-  {
     "name": "cursor/plugins",
     "date": "2026-11-24"
   },
@@ -26,5 +10,21 @@
   {
     "name": "HKUDS/CLI-Anything",
     "date": "2026-11-25"
+  },
+  {
+    "name": "openvinotoolkit/openvino",
+    "date": "2026-11-26"
+  },
+  {
+    "name": "jingyaogong/minimind",
+    "date": "2026-11-26"
+  },
+  {
+    "name": "firecrawl/firecrawl",
+    "date": "2026-11-26"
+  },
+  {
+    "name": "nginx/nginx",
+    "date": "2026-11-26"
   }
 ]
